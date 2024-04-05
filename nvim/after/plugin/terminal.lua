@@ -28,7 +28,7 @@ local function run_code()
 		end,
 		['m' or 'matlab'] = function ()
 			filename = vim.fn.fnamemodify(filename, ":t:r")
-			local cmd = 'matlab -nosplash -nodesktop  -r ' .. filename .. ' -logfile c:\\temp\\logfile'
+			local cmd = 'matlab -nosplash -nodesktop  -r ' .. filename
 			terminal.run(cmd, {layout = { open_cmd = "botright new"}} )
 		end,
 		['default'] = function ()

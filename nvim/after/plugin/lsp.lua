@@ -4,7 +4,7 @@ local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 local lsp = require'lspconfig'
-local capabilities = require'cmp_nvim_lsp'.default_capabilities
+local capabilities = require'cmp_nvim_lsp'.default_capabilities()
 -- General lsp mappings
 lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
@@ -19,6 +19,7 @@ lsp_zero.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.formatting() end, opts)
 end)
 -- Tab complete
 cmp.setup({
@@ -78,6 +79,7 @@ lsp.ocamllsp.setup({
     cmd = { "ocamllsp" },
     filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
     root_dir = lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+	capabilities = capabilities
 })
 -- MATLAB configuration
 require('mason-lspconfig').setup({

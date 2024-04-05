@@ -10,7 +10,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Yank stuff in void register
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "dd", [["_dd]])
 
 -- Append the tex below the cursor to the current line
 vim.keymap.set("n", "J", "mzJ`z")
