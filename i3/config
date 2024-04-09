@@ -25,12 +25,12 @@ font pango:Segoe UI 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+ exec --no-startup-id xss-lock /home/john/.config/i3/scripts/lock.sh 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
-# exec --no-startup-id blueman-applet &
+ exec --no-startup-id nm-applet
+ exec --no-startup-id blueman-applet &
 
 # GET DEM BORDERS OUT OF HEREc:w
 
@@ -43,10 +43,16 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 exec systemctl start bluetooth.service
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Media player controls 
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause 
+bindsym XF86AudioNext exec playerctl next 
+bindsym XF86AudioPrev exec playerctl previous
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -180,7 +186,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-		tray_output none
+		tray_output primary
 }
 
 # layouts manager very useful
@@ -213,36 +219,36 @@ for_window [class="TelegramDesktop"] move to workspace $ws5
 # >>> Plasma Integration <<<
 # Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
 
-exec --no-startup-id wmctrl -c Plasma
+#exec --no-startup-id wmctrl -c Plasma
 
-for_window [class="plasmashell" title="Desktop"] kill
+#for_window [class="plasmashell" title="Desktop"] kill
 
 # Compositor (Animations, Shadows, Transparency)
-exec --no-startup-id picom -cCFb
+#exec --no-startup-id picom -cCFb
 
 # >>> Window rules <<<
 # >>> Avoid tiling Plasma popups, dropdown windows, etc. <<<
 # For the first time, manually resize them, i3 will remember the setting for floating windows
-for_window [class="yakuake"] floating enable;
-for_window [class="lattedock"] floating enable;
-for_window [class="plasmashell"] floating enable;
-for_window [class="Kmix"] floating enable; border none
-for_window [class="kruler"] floating enable; border none
-for_window [class="Plasma"] floating enable; border none
-for_window [class="Klipper"] floating enable; border none
-for_window [class="krunner"] floating enable; border none
-for_window [class="Plasmoidviewer"] floating enable; border none
-for_window [title="plasma-desktop"] floating enable; border none
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1550px 20px
-no_focus [class="plasmashell" window_type="notification"] 
+#for_window [class="yakuake"] floating enable;
+#for_window [class="lattedock"] floating enable;
+#for_window [class="plasmashell"] floating enable;
+#for_window [class="Kmix"] floating enable; border none
+#for_window [class="kruler"] floating enable; border none
+#for_window [class="Plasma"] floating enable; border none
+#for_window [class="Klipper"] floating enable; border none
+#for_window [class="krunner"] floating enable; border none
+#for_window [class="Plasmoidviewer"] floating enable; border none
+#for_window [title="plasma-desktop"] floating enable; border none
+#for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1550px 20px
+#no_focus [class="plasmashell" window_type="notification"] 
 
 # >>> Avoid tiling for non-Plasma stuff <<<
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_role="About"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
-for_window [instance="__scratchpad"] floating enable
+#for_window [window_role="pop-up"] floating enable
+#for_window [window_role="bubble"] floating enable
+#for_window [window_role="task_dialog"] floating enable
+#for_window [window_role="Preferences"] floating enable
+#for_window [window_role="About"] floating enable
+#for_window [window_type="dialog"] floating enable
+#for_window [window_type="menu"] floating enable
+#for_window [instance="__scratchpad"] floating enable
 
