@@ -7,4 +7,4 @@ ln -s /home/john/.dotfiles/nvim /home/john/.config/
 ln -s /home/john/.dotfiles/scripts /home/john/
 ln -s /home/john/.dotfiles/Pictures /home/john/
 ln -s ~/.dotfiles/starship.toml ~/.config/starship.toml
-ln -s ~/.dotfiles/rofi ~.config/ 
+ln -s .dotfiles/dunst/ .config/
