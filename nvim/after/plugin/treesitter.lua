@@ -8,7 +8,7 @@ ts.setup {
     },
     indent = {
         enable = true,
-        disable = {},
+        disable = {"ocaml"},
     },
     ensure_installed = {
         "ocaml",

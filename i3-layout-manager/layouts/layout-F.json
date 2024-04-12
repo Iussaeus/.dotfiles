@@ -5,58 +5,48 @@
 		"fullscreen_mode": 0,
 		"layout": "splith",
 		"marks": [],
-		"percent": 0.2,
+		"percent": null,
 		"type": "con",
 		"nodes": [
 		{
-			"border": "normal",
+			"border": "pixel",
+			"current_border_width": 2,
 			"floating": "auto_off",
-			"layout": "splith",
-			"marks": [],
-			"percent": 1,
-			"type": "con",
-			"nodes": [
-			{
-				"border": "pixel",
-				"current_border_width": 2,
-				"floating": "auto_off",
-				"geometry": {
-					"height": 1033,
-					"width": 506,
-					"x": 0,
-					"y": 0
-				},
-				"marks": [],
-				"name": "Gwenview",
-				"percent": 0.236458333333333,
-				"swallows": [
-				{
-					"instance": "^gwenview$"
-				}
-				],
-				"type": "con"
+			"geometry": {
+				"height": 1033,
+				"width": 497,
+				"x": 2,
+				"y": 22
 			},
+			"marks": [],
+			"name": "Folder view",
+			"percent": 0.234375,
+			"swallows": [
 			{
-				"border": "pixel",
-				"current_border_width": 2,
-				"floating": "auto_off",
-				"geometry": {
-					"height": 1053,
-					"width": 1916,
-					"x": 2,
-					"y": 20
-				},
-				"marks": [],
-				"name": "Krita",
-				"percent": 0.763541666666667,
-				"swallows": [
-				{
-					"instance": "^krita$"
-				}
-				],
-				"type": "con"
+				"instance": "^qimgv$"
 			}
-			]
+			],
+			"type": "con"
+		},
+		{
+			"border": "pixel",
+			"current_border_width": 2,
+			"floating": "auto_off",
+			"geometry": {
+				"height": 1053,
+				"width": 1916,
+				"x": 2,
+				"y": 20
+			},
+			"marks": [],
+			"name": "Krita",
+			"percent": 0.765625,
+			"swallows": [
+			{
+				"instance": "^krita$"
+			}
+			],
+			"type": "con"
 		}
 		]
 },
@@ -85,7 +75,7 @@
 			"y": 22
 		},
 		"marks": [],
-		"name": "Line of Action — Mozilla Firefox",
+		"name": "Practice Tools for Artists - Line of Action — Mozilla Firefox",
 		"percent": 1,
 		"swallows": [
 		{

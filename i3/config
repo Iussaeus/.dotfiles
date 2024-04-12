@@ -196,12 +196,15 @@ exec_always feh --bg-fill /home/john/Pictures/Wallpapers/2017-prey-game-hd-4k.jp
 # keyboard layouts
 exec_always setxkbmap -layout ro,ru;setxkbmap -option grp:alt_shift_toggle
 
+# layout for code
+exec_always --no-startup-id i3-msg 'workspace $ws7; layout tabbed'
+
 # Apps that open on system startup
 exec --no-startup-id kitty
 exec --no-startup-id firefox
 exec --no-startup-id spotify-launcher
 exec --no-startup-id telegram-desktop
-exec --no-startup-id gwenview
+exec --no-startup-id qimgv /home/john/gd/NSFW-REF/
 exec --no-startup-id krita --nosplash
 exec --no-startup-id jetbrains-toolbox
 exec --no-startup-id /home/john/Downloads/Mozilla/GaomonTablet_LinuxDriver_v16.0.0.12.x86_64/gaomon/gaomontablet/gaomontablet.sh
@@ -212,12 +215,15 @@ exec --no-startup-id caffeine
 # Attaching apps to workpaces
 for_window [class="kitty"] move to workspace $ws1
 for_window [class="firefox"] move to workspace $ws2
-for_window [class="gwenview"] move to workspace $ws3
+for_window [class="qimgv"] move to workspace $ws3
 for_window [class="krita"] move to workspace $ws3
 for_window [title="Line of Action — Mozilla Firefox"] move to workspace $ws3,
 for_window [title="Artstation — Mozilla Firefox"] move to workspace $ws3,
 for_window [class="Spotify"] move to workspace $ws4
 for_window [class="TelegramDesktop"] move to workspace $ws5
+for_window [class="jetbrains-rider"] move to workspace $ws7
+for_window [class="VSCodium"] move to workspace $ws7
+for_window [class="Godot"] move to workspace $ws7
 
 # Some rules for floating windows that should stay floating
 for_window [window_role="About"] floating enable
