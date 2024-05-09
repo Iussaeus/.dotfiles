@@ -3,6 +3,8 @@
 #
 
 # If not running interactively, don't do anything
+set -o vi
+
 [[ $- != *i* ]] && return
 
 eval "$(starship init bash)"
@@ -36,4 +38,5 @@ function yy() {
 alias yazi=yy
 
 export PATH=/home/john/.local/bin:$PATH
-set -o vi
+
+export PATH=$PATH:/home/john/.spicetify

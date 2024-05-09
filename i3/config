@@ -43,8 +43,8 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 exec systemctl start bluetooth.service
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -55,8 +55,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl set 15%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 15%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -197,7 +198,7 @@ exec_always feh --bg-fill /home/john/Pictures/Wallpapers/2017-prey-game-hd-4k.jp
 exec_always setxkbmap -layout ro,ru;setxkbmap -option grp:alt_shift_toggle
 
 # layout for code
-exec_always --no-startup-id i3-msg 'workspace $ws7; layout tabbed'
+exec --no-startup-id i3-msg 'workspace $ws7; layout tabbed'
 
 # Apps that open on system startup
 exec --no-startup-id kitty
@@ -221,9 +222,14 @@ for_window [title="Line of Action — Mozilla Firefox"] move to workspace $ws3,
 for_window [title="Artstation — Mozilla Firefox"] move to workspace $ws3,
 for_window [class="Spotify"] move to workspace $ws4
 for_window [class="TelegramDesktop"] move to workspace $ws5
+for_window [class="discord"] move to workspace $ws5
+for_window [class="steam"] move to workspace $ws6
+for_window [class="dota2"] move to workspace $ws6
 for_window [class="jetbrains-rider"] move to workspace $ws7
 for_window [class="VSCodium"] move to workspace $ws7
 for_window [class="Godot"] move to workspace $ws7
+for_window [class="unityhub"] move to workspace $ws7
+for_window [class="Unity"] move to workspace $ws7
 
 # Some rules for floating windows that should stay floating
 for_window [window_role="About"] floating enable
