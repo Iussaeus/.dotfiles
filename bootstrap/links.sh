@@ -1,13 +1,13 @@
 #!/bin/bash
 
-ln -s /home/john/.dotfiles/i3 /home/john/.config/
-ln -s /home/john/.dotfiles/i3-layout-manager /home/john/.config/
-ln -s /home/john/.dotfiles/kitty /home/john/.config/
-ln -s /home/john/.dotfiles/nvim /home/john/.config/
-ln -s /home/john/.dotfiles/scripts /home/john/
-ln -s /home/john/.dotfiles/Pictures /home/john/
-ln -s /home/john/.dotfiles/starship.toml /home/john/.config/starship.toml
-ln -s /home/john/.dotfiles/dunst/ .config/
-ln -s /home/john/.dotfiles/.gitconfig /home/john/
-ln -s /home/john/.dotfiles/.bashrc /home/john/
-ln -s /home/john/.dotfiles/.bash_profile /home/john/
+ln -s $HOME/.dotfiles/i3 $HOME/.config/
+ln -s $HOME/.dotfiles/i3-layout-manager $HOME/.config/
+ln -s $HOME/.dotfiles/kitty $HOME/.config/
+ln -s $HOME/.dotfiles/nvim $HOME/.config/
+ln -s $HOME/.dotfiles/scripts $HOME
+ln -s $HOME/.dotfiles/Pictures $HOME
+ln -s $HOME/.dotfiles/starship.toml $HOME/.config/starship.toml
+ln -s $HOME/.dotfiles/dunst/ $HOME/.config/
+ln -s $HOME/.dotfiles/.gitconfig $HOME
+ln -s $HOME/.dotfiles/.bashrc $HOME
+ln -s $HOME/.dotfiles/.bash_profile $HOME
