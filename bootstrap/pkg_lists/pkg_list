@@ -1,6 +1,5 @@
 base-devel
 linux-headers
-git
 i3
 sddm
 network-manager-applet
@@ -54,3 +53,4 @@ ark
 qbittorrent
 caffeine
 cronie
+rclone
