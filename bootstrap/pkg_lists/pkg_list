@@ -1,5 +1,6 @@
 base-devel
 linux-headers
+xorg
 i3
 sddm
 network-manager-applet

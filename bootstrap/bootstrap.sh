@@ -28,16 +28,32 @@ do
 done
 
 # Install tablet drivers
+echo -e "[${Cya}+${Whi}] Installing tablet driver"
+
 driver_link="$(python ./scrape_me_daddy.py)"
 
-echo $driver_link
+sudo pacman -S -noconfirm --needed python-beautifulsoup4
+
 curl -O "$driver_link"
 mkdir ./driver
 tar -xf "$(find . -type f -name Gaomon*)" -C ./driver
 sh "$(find . -type f -name install.sh)"
 
+sudo pacman -R -noconfirm -needed python-beautifulsoup4
+
 # Put the cron into it's place
-crontab ../crontab
+crontab ./crontab
 
 # Make those linky-links
-./links.sh
+ln -sf $HOME/.dotfiles/i3 $HOME/.config/
+ln -sf $HOME/.dotfiles/i3-layout-manager $HOME/.config/
+ln -sf $HOME/.dotfiles/kitty $HOME/.config/
+ln -sf $HOME/.dotfiles/nvim $HOME/.config/
+ln -sf $HOME/.dotfiles/scripts $HOME
+ln -sf $HOME/.dotfiles/Pictures $HOME
+ln -sf $HOME/.dotfiles/starship.toml $HOME/.config/starship.toml
+ln -sf $HOME/.dotfiles/dunst/ $HOME/.config/
+ln -sf $HOME/.dotfiles/.gitconfig $HOME
+ln -sf $HOME/.dotfiles/.bashrc $HOME
+ln -sf $HOME/.dotfiles/.bash_profile $HOME
+
