@@ -32,14 +32,10 @@ echo -e "[${Cya}+${Whi}] Installing tablet driver"
 
 driver_link="$(python ./scrape_me_daddy.py)"
 
-sudo pacman -S -noconfirm --needed python-beautifulsoup4
-
 curl -O "$driver_link"
 mkdir ./driver
 tar -xf "$(find . -type f -name Gaomon*)" -C ./driver
-sh "$(find . -type f -name install.sh)"
-
-sudo pacman -R -noconfirm -needed python-beautifulsoup4
+sudo sh "$(find . -type f -name install.sh)"
 
 # Put the cron into it's place
 crontab $HOME/.dotfiles/crontab
@@ -56,4 +52,3 @@ ln -sf $HOME/.dotfiles/dunst/ $HOME/.config/
 ln -sf $HOME/.dotfiles/.gitconfig $HOME
 ln -sf $HOME/.dotfiles/.bashrc $HOME
 ln -sf $HOME/.dotfiles/.bash_profile $HOME
-
