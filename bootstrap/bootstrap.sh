@@ -42,7 +42,7 @@ sh "$(find . -type f -name install.sh)"
 sudo pacman -R -noconfirm -needed python-beautifulsoup4
 
 # Put the cron into it's place
-crontab ./crontab
+crontab $HOME/.dotfiles/crontab
 
 # Make those linky-links
 ln -sf $HOME/.dotfiles/i3 $HOME/.config/
