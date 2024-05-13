@@ -1,0 +1,8 @@
+# sudo cat $HOME/.dotfiles/30-touchpad.conf.back > /etc/X11/xorg.conf.d/30-touchpad.conf use this to copy to touchpad conf
+Section "InputClass"
+    Identifier "touchpad catchall"
+ 	MatchIsTouchpad "true"
+	MatchDriver "libinput"
+	Option "NaturalScrolling" "true"
+	Option "Tapping" "on"
+EndSection
