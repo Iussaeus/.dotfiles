@@ -29,8 +29,6 @@ qt5gtk2
 lxappearance
 lxinput
 btop++
-unzip
-unrar
 ttf-cascadia-mono-nerd
 kitty
 neovim
@@ -41,7 +39,6 @@ telegram-desktop
 spotify
 krita
 qimv
-dolphin
 steam
 wine
 lutris
@@ -49,9 +46,6 @@ firefox
 discord
 yazi
 libreoffice
-kcalc
-ark
 qbittorrent
-caffeine
 cronie
 rclone

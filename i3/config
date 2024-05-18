@@ -207,8 +207,6 @@ exec --no-startup-id spotify-launcher
 exec --no-startup-id telegram-desktop
 exec --no-startup-id qimgv /home/john/gd/NSFW-REF/
 exec --no-startup-id krita --nosplash
-exec --no-startup-id jetbrains-toolbox
-exec --no-startup-id /home/john/Downloads/Mozilla/GaomonTablet_LinuxDriver_v16.0.0.12.x86_64/gaomon/gaomontablet/gaomontablet.sh
 exec --no-startup-id pasystray
 exec --no-startup-id dunst
 exec --no-startup-id caffeine
