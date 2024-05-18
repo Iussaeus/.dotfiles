@@ -22,23 +22,36 @@ done
 
 # Install pkgs from the AUR
 echo -e "[${Cya}+${Whi}] Installing AUR packages"
-for aur_pkg in $(cat ~/.dotfiles/.assets/pkg_lists/aur_pkg_list)
+for aur_pkg in $(cat ~/.dotfiles/bootstrap/pkg_lists/aur_pkg_list)
 do
 	sudo yay -S --noconfirm --needed $aur_pkg
 done
 
+# Copy touchpad config file
+cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
+# Copy rofi theme
+cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
+# Get the pc speaker tf out
+cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
+
 # Install tablet drivers
 echo -e "[${Cya}+${Whi}] Installing tablet driver"
 
-driver_link="$(python ./scrape_me_daddy.py)"
+script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
+driver_link="$(python $scrip_dir)"
 
+mkdir $HOME/driver
+cd $HOME/driver
 curl -O "$driver_link"
-mkdir ./driver
-tar -xf "$(find . -type f -name Gaomon*)" -C ./driver
+tar -xf "$(find . -type f -name Gaomon*)" 
 sudo sh "$(find . -type f -name install.sh)"
+rm "$(find . -type f -name Gaomon*)"
 
 # Put the cron into it's place
 crontab $HOME/.dotfiles/crontab
+
+# Create directory for gdisk
+mkdir $HOME/gd
 
 # Make those linky-links
 ln -sf $HOME/.dotfiles/i3 $HOME/.config/
@@ -52,3 +65,10 @@ ln -sf $HOME/.dotfiles/dunst/ $HOME/.config/
 ln -sf $HOME/.dotfiles/.gitconfig $HOME
 ln -sf $HOME/.dotfiles/.bashrc $HOME
 ln -sf $HOME/.dotfiles/.bash_profile $HOME
+
+# Copy touchpad config file
+cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
+# Copy rofi theme
+cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
+# Get the pc speaker tf out
+cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/

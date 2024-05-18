@@ -24,11 +24,9 @@ feh
 breeze5
 qt5ct
 qt6ct
-qt6gtk2
-qt5gtk2
 lxappearance
 lxinput
-btop++
+btop
 ttf-cascadia-mono-nerd
 kitty
 neovim
@@ -49,3 +47,5 @@ libreoffice
 qbittorrent
 cronie
 rclone
+xcip
+oxygen5
