@@ -65,6 +65,9 @@ ln -sf $HOME/.dotfiles/dunst/ $HOME/.config/
 ln -sf $HOME/.dotfiles/.gitconfig $HOME
 ln -sf $HOME/.dotfiles/.bashrc $HOME
 ln -sf $HOME/.dotfiles/.bash_profile $HOME
+ln -sf $HOME/.dotfiles/kritadisplayrc $HOME/.config
+ln -sf $HOME/.dotfiles/kritarc $HOME/.config
+ln -sf $HOME/.dotfiles/kritashortcutsrc $HOME/.config
 
 # Copy touchpad config file
 cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
