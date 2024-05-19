@@ -27,13 +27,6 @@ do
 	sudo yay -S --noconfirm --needed $aur_pkg
 done
 
-# Copy touchpad config file
-cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
-# Copy rofi theme
-cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
-# Get the pc speaker tf out
-cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
-
 # Install tablet drivers
 echo -e "[${Cya}+${Whi}] Installing tablet driver"
 
