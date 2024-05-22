@@ -30,7 +30,7 @@ exec --no-startup-id dex --autostart --environment i3
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
  exec --no-startup-id nm-applet
- exec --no-startup-id blueman-applet &
+ exec --no-startup-id blueberry-tray &
 
 # GET DEM BORDERS OUT OF HEREc:w
 
@@ -185,7 +185,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+	font pango:Segoe UI 10
+        status_command i3blocks
 }
 
 # layouts manager very useful

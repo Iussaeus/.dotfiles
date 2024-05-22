@@ -1,0 +1,29 @@
+[MUSIC]
+command=~/.config/i3blocks/spotify/spotify.sh
+interval=1
+
+[DISK]
+command=df -h / | awk '/\//{ printf(" /: %4s \n", $4, $2) }'
+interval=2
+color=#C9E3DB
+
+[BATTERY]
+command=~/.config/i3blocks/battery/battery_info.sh
+interval=3
+
+[CPU]
+full_text= CPU:  0.00% 
+command=~/.config/i3blocks/cpu/cpu_info.sh
+interval=repeat
+
+[USEDMEM]
+command=free -h | awk '/Mem:/ { printf(" U:%5s \n",$3) }'
+interval=1
+
+[FREEMEM]
+command=free -h | awk '/Mem:/ { printf(" F:%5s \n",$4) }'
+interval=1
+
+[TIME_DATE]
+command=date +"%H:%M  %A, %B %d, %Y "
+interval=1
