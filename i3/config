@@ -203,6 +203,7 @@ exec --no-startup-id i3-msg 'workspace $ws7; layout tabbed'
 
 # Apps that open on system startup
 exec --no-startup-id kitty
+exec --no-startup-id pureref
 exec --no-startup-id firefox
 exec --no-startup-id spotify-launcher
 exec --no-startup-id telegram-desktop

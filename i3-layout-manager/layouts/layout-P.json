@@ -5,54 +5,84 @@
 		"fullscreen_mode": 0,
 		"layout": "splith",
 		"marks": [],
-		"percent": null,
+		"percent": 0.2,
 		"type": "con",
 		"nodes": [
 		{
 			"border": "normal",
 			"floating": "auto_off",
-			"layout": "tabbed",
+			"layout": "splith",
 			"marks": [],
-			"percent": 0.247916666666667,
+			"percent": 1,
 			"type": "con",
 			"nodes": [
 			{
 				"border": "normal",
 				"floating": "auto_off",
-				"layout": "splith",
+				"layout": "tabbed",
 				"marks": [],
-				"percent": 0.5,
+				"percent": 0.247916666666667,
 				"type": "con",
 				"nodes": [
 				{
-					"border": "normal",
+					"border": "pixel",
+					"current_border_width": 2,
 					"floating": "auto_off",
-					"layout": "splith",
+					"geometry": {
+						"height": 1033,
+						"width": 497,
+						"x": 2,
+						"y": 22
+					},
 					"marks": [],
-					"percent": 1,
-					"type": "con",
-					"nodes": [
+					"name": "Folder view",
+					"percent": 0.333333333333333,
+					"swallows": [
 					{
-						"border": "pixel",
-						"current_border_width": 2,
-						"floating": "user_off",
-						"geometry": {
-							"height": 1033,
-							"width": 506,
-							"x": 0,
-							"y": 22
-						},
-						"marks": [],
-						"name": "Practice Tools for Artists - Line of Action — Mozilla Firefox",
-						"percent": 1,
-						"swallows": [
-						{
-							"instance": "^Navigator$"
-						}
-						],
-						"type": "con"
+						"instance": "^qimgv$"
 					}
-					]
+					],
+					"type": "con"
+				},
+				{
+					"border": "pixel",
+					"current_border_width": 2,
+					"floating": "auto_off",
+					"geometry": {
+						"height": 1053,
+						"width": 636,
+						"x": 300,
+						"y": 0
+					},
+					"marks": [],
+					"name": "marci - PureRef - /home/john/gd/purr-scenes/marci.pur",
+					"percent": 0.333333333333333,
+					"swallows": [
+					{
+						"instance": "^pureref$"
+					}
+					],
+					"type": "con"
+				},
+				{
+					"border": "pixel",
+					"current_border_width": 2,
+					"floating": "user_off",
+					"geometry": {
+						"height": 1033,
+						"width": 506,
+						"x": 0,
+						"y": 22
+					},
+					"marks": [],
+					"name": "Art - Practice Tools for Artists - Line of Action — Mozilla Firefox",
+					"percent": 0.333333333333333,
+					"swallows": [
+					{
+						"instance": "^Navigator$"
+					}
+					],
+					"type": "con"
 				}
 				]
 			},
@@ -61,42 +91,22 @@
 				"current_border_width": 2,
 				"floating": "auto_off",
 				"geometry": {
-					"height": 1033,
-					"width": 497,
+					"height": 1053,
+					"width": 1916,
 					"x": 2,
-					"y": 22
+					"y": 20
 				},
 				"marks": [],
-				"name": "Folder view",
-				"percent": 0.5,
+				"name": "Krita",
+				"percent": 0.752083333333333,
 				"swallows": [
 				{
-					"instance": "^qimgv$"
+					"instance": "^krita$"
 				}
 				],
 				"type": "con"
 			}
 			]
-		},
-		{
-			"border": "pixel",
-			"current_border_width": 2,
-			"floating": "auto_off",
-			"geometry": {
-				"height": 1053,
-				"width": 1916,
-				"x": 2,
-				"y": 20
-			},
-			"marks": [],
-			"name": "Krita",
-			"percent": 0.752083333333333,
-			"swallows": [
-			{
-				"instance": "^krita$"
-			}
-			],
-			"type": "con"
 		}
 		]
 }

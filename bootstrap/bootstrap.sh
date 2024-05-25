@@ -42,6 +42,7 @@ rm "$(find . -type f -name Gaomon*)"
 
 # Put the cron into it's place
 crontab $HOME/.dotfiles/crontab
+sudo systemctl enable cronie
 
 # Create directory for gdisk
 mkdir $HOME/gd

@@ -17,24 +17,54 @@
 			"type": "con",
 			"nodes": [
 			{
-				"border": "pixel",
-				"current_border_width": 2,
+				"border": "normal",
 				"floating": "auto_off",
-				"geometry": {
-					"height": 1033,
-					"width": 497,
-					"x": 2,
-					"y": 22
-				},
+				"layout": "tabbed",
 				"marks": [],
-				"name": "Folder view",
-				"percent": 0.234375,
-				"swallows": [
+				"percent": 0.235416666666667,
+				"type": "con",
+				"nodes": [
 				{
-					"instance": "^qimgv$"
+					"border": "pixel",
+					"current_border_width": 2,
+					"floating": "auto_off",
+					"geometry": {
+						"height": 1053,
+						"width": 636,
+						"x": 300,
+						"y": 0
+					},
+					"marks": [],
+					"name": "marci - PureRef - /home/john/gd/purr-scenes/marci.pur",
+					"percent": 0.680851063829787,
+					"swallows": [
+					{
+						"instance": "^pureref$"
+					}
+					],
+					"type": "con"
+				},
+				{
+					"border": "pixel",
+					"current_border_width": 2,
+					"floating": "auto_off",
+					"geometry": {
+						"height": 1033,
+						"width": 497,
+						"x": 2,
+						"y": 22
+					},
+					"marks": [],
+					"name": "Folder view",
+					"percent": 0.319148936170213,
+					"swallows": [
+					{
+						"instance": "^qimgv$"
+					}
+					],
+					"type": "con"
 				}
-				],
-				"type": "con"
+				]
 			},
 			{
 				"border": "pixel",
@@ -48,7 +78,7 @@
 				},
 				"marks": [],
 				"name": "Krita",
-				"percent": 0.765625,
+				"percent": 0.764583333333333,
 				"swallows": [
 				{
 					"instance": "^krita$"
