@@ -24,16 +24,14 @@ done
 echo -e "[${Cya}+${Whi}] Installing AUR packages"
 for aur_pkg in $(cat ~/.dotfiles/bootstrap/pkg_lists/aur_pkg_list)
 do
-	sudo yay -S --noconfirm --needed $aur_pkg
+	 yay -S --noconfirm --needed $aur_pkg
 done
 
 # Install tablet drivers
 echo -e "[${Cya}+${Whi}] Installing tablet driver"
 
-chsh -s "$(which zsh)"
-
 script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
-driver_link="$(python $scrip_dir)"
+driver_link="$(python $script_dir)"
 
 mkdir $HOME/driver
 cd $HOME/driver
@@ -73,3 +71,5 @@ sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.c
 sudo cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
 # Get the pc speaker tf out
 sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
+
+sudo chsh -s $(which zsh)

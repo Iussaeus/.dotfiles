@@ -1,5 +1,3 @@
-base-devel
-linux-headers
 xorg
 i3
 sddm
@@ -20,7 +18,8 @@ perl-anyevent-i3
 xorg-server-devel
 indent
 feh
-breeze5
+breeze-icons
+breeze-gtk
 qt5ct
 qt6ct
 lxappearance
@@ -31,7 +30,6 @@ kitty
 neovim
 dotnet
 starship
-spotify
 krita
 qimv
 steam
@@ -44,7 +42,12 @@ libreoffice
 qbittorrent
 cronie
 rclone
-xcip
+xclip
 oxygen5
 xss-lock
 zsh
+spotify-launcher
+flameshot
+acpi
+sysstat
+playerctl
