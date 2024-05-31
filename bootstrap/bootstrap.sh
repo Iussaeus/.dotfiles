@@ -48,6 +48,7 @@ sudo systemctl enable cronie
 mkdir $HOME/gd
 
 # Make those linky-links
+ln -sf $HOME/.dotfiles/.xinitrc $HOME
 ln -sf $HOME/.dotfiles/i3 $HOME/.config/
 ln -sf $HOME/.dotfiles/i3blocks $HOME/.config/
 ln -sf $HOME/.dotfiles/i3-layout-manager $HOME/.config/

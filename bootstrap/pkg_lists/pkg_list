@@ -1,4 +1,7 @@
 xorg
+xorg-xinit
+polkit
+polkit-gnome
 i3
 sddm
 networkmanager
@@ -51,3 +54,5 @@ flameshot
 acpi
 sysstat
 playerctl
+noto-fonts-cjk
+noto-fonts-emoji
