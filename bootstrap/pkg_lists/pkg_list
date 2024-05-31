@@ -3,17 +3,16 @@ linux-headers
 xorg
 i3
 sddm
-network-manager-applet
 networkmanager
-blueman
+network-manager-applet
 bluez
+blueman
 pipewire
 pipewire-jack
 pipewire-pulse
 pipewire-session-manager
 pasystray
 dunst
-bash-completion
 jq
 rofi
 xdotool
@@ -31,9 +30,7 @@ ttf-cascadia-mono-nerd
 kitty
 neovim
 dotnet
-vscodium
 starship
-telegram-desktop
 spotify
 krita
 qimv
@@ -50,3 +47,4 @@ rclone
 xcip
 oxygen5
 xss-lock
+zsh

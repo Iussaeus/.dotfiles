@@ -11,7 +11,6 @@ command=~/.config/i3blocks/battery/battery_info.sh
 interval=3
 
 [CPU]
-full_text= CPU:  0.00% 
 command=~/.config/i3blocks/cpu/cpu_info.sh
 interval=repeat
 

@@ -30,6 +30,8 @@ done
 # Install tablet drivers
 echo -e "[${Cya}+${Whi}] Installing tablet driver"
 
+chsh -s "$(which zsh)"
+
 script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
 driver_link="$(python $scrip_dir)"
 
@@ -59,14 +61,15 @@ ln -sf $HOME/.dotfiles/starship.toml $HOME/.config/starship.toml
 ln -sf $HOME/.dotfiles/dunst/ $HOME/.config/
 ln -sf $HOME/.dotfiles/.gitconfig $HOME
 ln -sf $HOME/.dotfiles/.bashrc $HOME
+ln -sf $HOME/.dotfiles/.zshrc $HOME
 ln -sf $HOME/.dotfiles/.bash_profile $HOME
 ln -sf $HOME/.dotfiles/kritadisplayrc $HOME/.config
 ln -sf $HOME/.dotfiles/kritarc $HOME/.config
 ln -sf $HOME/.dotfiles/kritashortcutsrc $HOME/.config
 
 # Copy touchpad config file
-cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
+sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
 # Copy rofi theme
-cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
+sudo cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
 # Get the pc speaker tf out
-cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
+sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
