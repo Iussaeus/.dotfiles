@@ -13,6 +13,8 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 neofetch
 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"

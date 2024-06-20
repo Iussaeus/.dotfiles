@@ -39,6 +39,7 @@ curl -O "$driver_link"
 tar -xf "$(find . -type f -name Gaomon*)" 
 sudo sh "$(find . -type f -name install.sh)"
 rm "$(find . -type f -name Gaomon*)"
+rm -rf $HOME/driver
 
 # Put the cron into it's place
 crontab $HOME/.dotfiles/crontab
