@@ -1,4 +1,3 @@
-
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/john/.zshrc'
 
@@ -33,3 +32,6 @@ export EDITOR=nvim
 export PATH=/home/john/.local/bin:$PATH
 
 eval "$(starship init zsh)"
+
+# opam configuration
+[[ ! -r /home/john/.opam/opam-init/init.zsh ]] || source /home/john/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

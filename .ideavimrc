@@ -1,0 +1,110 @@
+set multiple-cursors
+set commentary
+set surround
+set ideajoin
+set NERDTree
+
+nmap <S-Enter> O<Esc>
+
+" Set leader key
+let mapleader = " "
+
+set ignorecase
+set incsearch
+set hlsearch
+
+" Move code in visual mode
+vmap J :m '>+1<CR>gv=gv
+vmap K :m '<-2<CR>gv=gv
+
+" Yank stuff in void register when pasting
+xmap <leader>p "_dP
+
+" Center the cursor when navigating the code
+nmap <C-d> <C-d>zz
+nmap <C-u> <C-u>zz
+nmap j jzz
+nmap k kzz
+
+nmap n nzzzv
+nmap N Nzzzv
+
+
+" Copy stuff to + register (clipboard)
+nmap <leader>y "+y
+vmap <leader>y "+y
+nmap <leader>Y "+Y
+
+" Change all occurrences of the current word at the cursor
+
+nmap <leader>h <action>(PreviousTab)
+nmap <leader>l <action>(NextTab)
+
+" actions
+nmap <leader>h <action>(PreviousTab)
+nmap <leader>l <action>(NextTab)
+nmap <leader>bd <action>(CloseEditor)
+nmap <leader>i <action>(Generate)
+nmap <leader>m <action>(Git.Menu)
+map <leader>vd <action>(ShowErrorDescription)
+nmap <leader>e <action>(GotoNextError)
+nmap <leader>s <action>(Switcher)
+map <leader>rn <Action>(RenameElement)
+
+" Pane navigation
+nnoremap <A-h> <C-w>h
+nnoremap <A-l> <C-w>l
+nnoremap <A-k> <C-w>k
+nnoremap <A-j> <C-w>j
+
+" Open NERDTree (use q to exit)
+map <leader>pv :NERDTreeToggle<CR>
+
+" Go to code
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gy <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gu <Action>(ShowUsages)
+nmap <leader>gt <Action>(GotoTest)
+
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-s> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+
+let g:h_isSet = 0
+let g:j_isSet = 0
+let g:k_isSet = 0
+let g:l_isSet = 0
+
+function! PlaceMark()
+	if g:h_isSet == 0
+		let g:h_isSet = 1
+		let g:j_isSet = 0
+		execute "normal mH"
+	elseif g:j_isSet == 0
+		let g:j_isSet = 1
+	 	let g:k_isSet = 0
+		execute "normal mJ"
+	elseif g:k_isSet == 0
+		let g:k_isSet = 1
+		let g:l_isSet = 0
+		execute "normal mK"
+	elseif g:l_isSet == 0
+		let g:l_isSet = 1
+		let g:h_isSet = 0
+		execute "normal mL"
+	endif
+endfunction
+
+nmap <leader>a :call PlaceMark()<CR>
+
+nmap <A-H> 'Hzz
+nmap <A-J> 'Jzz
+nmap <A-K> 'Kzz
+nmap <A-L> 'Lzz

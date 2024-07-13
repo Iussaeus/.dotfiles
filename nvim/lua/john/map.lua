@@ -1,8 +1,11 @@
--- Classic cursor
+-- Leader key
 vim.g.mapleader = " "
 
 -- Go to Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- Get the hell out
+vim.keymap.set("n", "q:", "<NOP>")
 
 -- Move code in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
