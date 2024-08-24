@@ -30,6 +30,7 @@ alias vim=nvim
 export EDITOR=nvim
 
 export PATH=/home/john/.local/bin:$PATH
+export PATH=/home/john/.local/share/JetBrains/Toolbox/scripts/:$PATH
 
 eval "$(starship init zsh)"
 

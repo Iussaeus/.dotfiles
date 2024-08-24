@@ -3,15 +3,15 @@ set commentary
 set surround
 set ideajoin
 set NERDTree
+set relativenumber
+set ignorecase
+set incsearch
 
 nmap <S-Enter> O<Esc>
 
 " Set leader key
 let mapleader = " "
 
-set ignorecase
-set incsearch
-set hlsearch
 
 " Move code in visual mode
 vmap J :m '>+1<CR>gv=gv
@@ -35,17 +35,12 @@ nmap <leader>y "+y
 vmap <leader>y "+y
 nmap <leader>Y "+Y
 
-" Change all occurrences of the current word at the cursor
-
-nmap <leader>h <action>(PreviousTab)
-nmap <leader>l <action>(NextTab)
-
 " actions
 nmap <leader>h <action>(PreviousTab)
 nmap <leader>l <action>(NextTab)
 nmap <leader>bd <action>(CloseEditor)
 nmap <leader>i <action>(Generate)
-nmap <leader>m <action>(Git.Menu)
+nmap <leader>g <action>(Git.Menu)
 map <leader>vd <action>(ShowErrorDescription)
 nmap <leader>e <action>(GotoNextError)
 nmap <leader>s <action>(Switcher)
@@ -77,34 +72,25 @@ xmap <C-p> <Plug>RemoveOccurrence
 nmap <leader><C-n> <Plug>AllWholeOccurrences
 xmap <leader><C-n> <Plug>AllWholeOccurrences
 
-let g:h_isSet = 0
-let g:j_isSet = 0
-let g:k_isSet = 0
-let g:l_isSet = 0
+" Execute last recorded macro on q register
+nmap Q @q
 
-function! PlaceMark()
-	if g:h_isSet == 0
-		let g:h_isSet = 1
-		let g:j_isSet = 0
-		execute "normal mH"
-	elseif g:j_isSet == 0
-		let g:j_isSet = 1
-	 	let g:k_isSet = 0
-		execute "normal mJ"
-	elseif g:k_isSet == 0
-		let g:k_isSet = 1
-		let g:l_isSet = 0
-		execute "normal mK"
-	elseif g:l_isSet == 0
-		let g:l_isSet = 1
-		let g:h_isSet = 0
-		execute "normal mL"
-	endif
-endfunction
+" Harpoon
+nmap <leader>a <Action>(AddToHarpoon)
+nmap <C-e> <Action>(ShowHarpoon)
 
-nmap <leader>a :call PlaceMark()<CR>
+nmap <A-h> <Action>(GotoHarpoon1)
+nmap <A-j> <Action>(GotoHarpoon2)
+nmap <A-k> <Action>(GotoHarpoon3)
+nmap <A-l> <Action>(GotoHarpoon4)
 
-nmap <A-H> 'Hzz
-nmap <A-J> 'Jzz
-nmap <A-K> 'Kzz
-nmap <A-L> 'Lzz
+" Convenient shortcuts for terminal and other stuff
+nmap <leader>r <Action>(Run)
+nmap <leader>tr <Action>(ActivateRunToolWindow)
+nmap <leader>t <Action>(ActivateTerminalToolWindow)
+nmap <leader>H <Action>(HideActiveWindow)
+
+" Telescope-ish
+map <Leader>pf <action>(com.mituuz.fuzzier.Fuzzier)
+map <Leader>mf <action>(com.mituuz.fuzzier.FuzzyMover)
+map <Leader>gf <action>(com.mituuz.fuzzier.FuzzierVCS)

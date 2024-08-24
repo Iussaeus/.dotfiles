@@ -12,10 +12,9 @@ return{
 				},
 				indent = {
 					enable = true,
-					disable = {"ocaml"},
 				},
 				ensure_installed = {
-					"ocaml",
+					"ocaml", "gdscript", "c_sharp", "vimdoc",
 				},
 				sync_install = true,
 				autotag = {

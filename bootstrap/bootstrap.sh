@@ -67,6 +67,7 @@ ln -sf $HOME/.dotfiles/kritadisplayrc $HOME/.config
 ln -sf $HOME/.dotfiles/kritarc $HOME/.config
 ln -sf $HOME/.dotfiles/kritashortcutsrc $HOME/.config
 ln -s $HOME/.dotfiles/.ideavimrc $HOME/
+ln -s $HOME/.dotfiles/kanata $HOME/.config
 
 # Copy touchpad config file
 sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf

@@ -95,13 +95,13 @@ return {
 			vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 			vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
 			vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-			vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-			vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-			vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-			vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-			vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-			vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-			vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+			vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.goto_next() end, opts)
+			vim.keymap.set("n", "<leader>e", function() vim.diagnostic.goto_next() end, opts)
+			vim.keymap.set("n", "<leader>pe", function() vim.diagnostic.goto_prev() end, opts)
+			vim.keymap.set("n", "<A-CR>", function() vim.lsp.buf.code_action() end, opts)
+			vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end, opts)
+			vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
+			vim.keymap.set("i", "<A-h>", function() vim.lsp.buf.signature_help() end, opts)
 			vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
 		end)
 
@@ -116,9 +116,6 @@ return {
 		require('lspconfig').lua_ls.setup(lua_opts)
 
 		-- Gdscript configuration
-		local port = os.getenv('GDScript_Port') or '6005'
-		local cmd = {'ncat', '127.0.0.1', port}
-		local pipe = [[\\.\pipe\godot.pipe]]
 		local lsp_flags = {
 			-- This is the default in Nvim 0.7+
 			debounce_text_changes = 150,
@@ -126,12 +123,26 @@ return {
 		-- Note: There's no need to download the lsp since it's started with the editor
 		lsp.gdscript.setup{
 			flags = lsp_flags,
-			cmd = cmd,
 			filetypes = { "gd", "gdscript", "gdscript3" },
-			on_attach = function(client, bufnr)
-				vim.api.nvim_command([[echo serverstart(']] .. pipe .. [[')]])
-			end
-		}
+			}
+
+		local shader_group = vim.api.nvim_create_augroup("shader", { clear = true })
+
+		vim.api.nvim_create_autocmd("BufEnter",
+			{
+					command = ":lua Gdshader()",
+					group = shader_group,
+					pattern = {"*.gdshader"},
+			})
+
+		function Gdshader()
+			vim.lsp.start {
+				name = "gdshader",
+				cmd ={ "gdshader-lsp" },
+				capabilities = capabilities,
+			}
+		end
+
 			-- Kotlin deez nuts
 		lsp.kotlin_language_server.setup{
 			filetypes = {"kt"},
@@ -140,8 +151,9 @@ return {
 				AutomaticWorkspaceInit = true
 			}
 		}
+
 		-- C# configuration
-		lsp.csharp_ls.setup{
+		lsp.omnisharp.setup{
 			filetypes = {"cs"},
 			cmd = {'omnisharp'},
 			root_dir = lsp.util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git'),
