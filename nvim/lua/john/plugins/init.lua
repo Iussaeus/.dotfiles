@@ -31,6 +31,7 @@ return{
 			todo.setup()
 
 	 		vim.keymap.set("n", "<leader>tdf", ":TodoTelescope<CR>")
+	 		vim.keymap.set("n", "<leader>tdl", ":TodoLocList<CR>")
 	 		vim.keymap.set("n", "<leader>tdn", function() todo.jump_next() end)
 	 		vim.keymap.set("n", "<leader>tdp", function() todo.jump_prev() end)
 		end

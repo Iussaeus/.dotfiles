@@ -11,6 +11,10 @@ vim.keymap.set("n", "q:", "<NOP>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- Move code in visual mode
+vim.keymap.set("n", "j", "jzz")
+vim.keymap.set("n", "k", "kzz")
+
 -- Yank stuff in void register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -29,3 +33,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Change all ocurences of the current word at the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- go special
+vim.keymap.set("n", "<leader>en", "iif err != nil {<CR>return err<CR>}<ESC>k_v$h")

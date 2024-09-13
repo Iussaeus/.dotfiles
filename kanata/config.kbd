@@ -8,59 +8,16 @@ linux-dev-names-include (
   caps
   lalt
   ralt
-  a
-  s
-  d
-  f
-  j
-  k
-  l
-  ;
-  bspc
 )
 
 (defalias
   escctrl (tap-hold 150 100 esc lctl)
   altenter (tap-hold 100 100 enter lalt)
   altbackspace (tap-hold 100 100 bspc ralt)
-  amod (tap-hold 170 150 a lmet)
-  smod (tap-hold 170 150 s lalt)
-  dmod (tap-hold 170 150 d lsft)
-  fmod (tap-hold 170 150 f lctl)
-  jmod (tap-hold 170 150 j rctl)
-  kmod (tap-hold 170 150 k rshift)
-  lmod (tap-hold 170 150 l ralt)
-  semicolonmod (tap-hold 170 150 ; rmet)
-  gayminglayer (layer-switch gayming)
-  baselayer (layer-switch base)
 )
 
 (deflayer base
   @escctrl
   @altenter
   @altbackspace
-  @amod
-  @smod
-  @dmod
-  @fmod
-  @jmod
-  @kmod
-  @lmod
-  @semicolonmod
-  @gayminglayer
-)
-
-(deflayer gayming
-  @escctrl
-  @altenter
-  @altbackspace
-  a
-  s
-  d
-  f
-  j
-  k
-  l
-  ;
-  @baselayer
 )
