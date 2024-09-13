@@ -5,7 +5,7 @@
 		"fullscreen_mode": 0,
 		"layout": "splith",
 		"marks": [],
-		"percent": null,
+		"percent": 0.2,
 		"type": "con",
 		"nodes": [
 		{
@@ -27,91 +27,72 @@
 				{
 					"border": "normal",
 					"floating": "auto_off",
-					"layout": "splith",
+					"layout": "tabbed",
 					"marks": [],
-					"percent": 1,
+					"percent": 0.235416666666667,
 					"type": "con",
 					"nodes": [
 					{
-						"border": "normal",
+						"border": "pixel",
+						"current_border_width": 2,
 						"floating": "auto_off",
-						"layout": "splith",
-						"marks": [],
-						"percent": 1,
-						"type": "con",
-						"nodes": [
-						{
-							"border": "normal",
-							"floating": "auto_off",
-							"layout": "tabbed",
-							"marks": [],
-							"percent": 0.235416666666667,
-							"type": "con",
-							"nodes": [
-							{
-								"border": "pixel",
-								"current_border_width": 2,
-								"floating": "auto_off",
-								"geometry": {
-									"height": 1053,
-									"width": 636,
-									"x": 300,
-									"y": 0
-								},
-								"marks": [],
-								"name": "PureRef",
-								"percent": 0.680851063829787,
-								"swallows": [
-								{
-								}
-								],
-								"type": "con"
-							},
-							{
-								"border": "pixel",
-								"current_border_width": 2,
-								"floating": "auto_off",
-								"geometry": {
-									"height": 1033,
-									"width": 497,
-									"x": 2,
-									"y": 22
-								},
-								"marks": [],
-								"name": "Folder view",
-								"percent": 0.319148936170213,
-								"swallows": [
-								{
-									"instance": "^qimgv$"
-								}
-								],
-								"type": "con"
-							}
-							]
+						"geometry": {
+							"height": 1053,
+							"width": 636,
+							"x": 300,
+							"y": 0
 						},
+						"marks": [],
+						"name": "PureRef",
+						"percent": 0.680851063829787,
+						"swallows": [
 						{
-							"border": "pixel",
-							"current_border_width": 2,
-							"floating": "auto_off",
-							"geometry": {
-								"height": 1053,
-								"width": 1916,
-								"x": 2,
-								"y": 20
-							},
-							"marks": [],
-							"name": "Krita",
-							"percent": 0.764583333333333,
-							"swallows": [
-							{
-								"instance": "^krita$"
-							}
-							],
-							"type": "con"
+							"instance": "^pureref$"
 						}
-						]
+						],
+						"type": "con"
+					},
+					{
+						"border": "pixel",
+						"current_border_width": 2,
+						"floating": "auto_off",
+						"geometry": {
+							"height": 1033,
+							"width": 497,
+							"x": 2,
+							"y": 22
+						},
+						"marks": [],
+						"name": "Folder view",
+						"percent": 0.319148936170213,
+						"swallows": [
+						{
+							"instance": "^qimgv$"
+						}
+						],
+						"type": "con"
 					}
 					]
+				},
+				{
+					"border": "pixel",
+					"current_border_width": 2,
+					"floating": "auto_off",
+					"geometry": {
+						"height": 1053,
+						"width": 1916,
+						"x": 2,
+						"y": 20
+					},
+					"marks": [],
+					"name": "Krita",
+					"percent": 0.764583333333333,
+					"swallows": [
+					{
+						"instance": "^krita$"
+					}
+					],
+					"type": "con"
 				}
 				]
 			}
@@ -126,9 +107,9 @@
 	"marks": [],
 	"percent": null,
 	"rect": {
-		"height": 637,
+		"height": 755,
 		"width": 454,
-		"x": -1,
+		"x": 0,
 		"y": 0
 	},
 	"type": "floating_con",
@@ -144,7 +125,7 @@
 			"y": 22
 		},
 		"marks": [],
-		"name": "‍LoA-1536015229-studysize.jpg (JPEG Image, 558 × 800 pixels) — Scaled (76%) — Mozilla Firefox",
+		"name": "Art - Practice Tools for Artists - Line of Action — Mozilla Firefox",
 		"percent": 1,
 		"swallows": [
 		{

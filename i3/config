@@ -237,6 +237,7 @@ for_window [class="VSCodium"] move to workspace $ws7
 for_window [class="Godot"] move to workspace $ws7
 for_window [class="unityhub"] move to workspace $ws7
 for_window [class="Unity"] move to workspace $ws7
+for_window [title="tmux a"] move to workspace $ws7
 
 # Some rules for floating windows that should stay floating
 for_window [window_role="About"] floating enable
