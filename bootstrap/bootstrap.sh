@@ -1,3 +1,4 @@
+#! /bin/bash
 Red='\e[0;31m';
 Gre='\e[0;32m';
 Cya='\e[0;36m';
@@ -27,29 +28,9 @@ do
 	 yay -S --noconfirm --needed $aur_pkg
 done
 
-# Install tablet drivers
-echo -e "[${Cya}+${Whi}] Installing tablet driver"
-
-script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
-driver_link="$(python $script_dir)"
-
-mkdir $HOME/driver
-cd $HOME/driver
-curl -O "$driver_link"
-tar -xf "$(find . -type f -name Gaomon*)" 
-sudo sh "$(find . -type f -name install.sh)"
-rm "$(find . -type f -name Gaomon*)"
-rm -rf $HOME/driver
-
-# Put the cron into it's place
-crontab $HOME/.dotfiles/crontab
-sudo systemctl enable cronie
-
-# Create directory for gdisk
-mkdir $HOME/gd
-
 # Make those linky-links
 ln -sf $HOME/.dotfiles/.xinitrc $HOME
+ln -sf $HOME/.dotfiles/.gtkrc-2.0$HOME
 ln -sf $HOME/.dotfiles/i3 $HOME/.config/
 ln -sf $HOME/.dotfiles/i3blocks $HOME/.config/
 ln -sf $HOME/.dotfiles/i3-layout-manager $HOME/.config/
@@ -66,14 +47,35 @@ ln -sf $HOME/.dotfiles/.bash_profile $HOME
 ln -sf $HOME/.dotfiles/kritadisplayrc $HOME/.config
 ln -sf $HOME/.dotfiles/kritarc $HOME/.config
 ln -sf $HOME/.dotfiles/kritashortcutsrc $HOME/.config
-ln -s $HOME/.dotfiles/.ideavimrc $HOME/
-ln -s $HOME/.dotfiles/kanata $HOME/.config
+ln -sf $HOME/.dotfiles/.ideavimrc $HOME/
+ln -sf $HOME/.dotfiles/kanata $HOME/.config
+ln -sf $HOME/.dotfiles/bin/tmux-sessionizer $HOME/.local/bin/tmux-sessionizer
 
 # Copy touchpad config file
 sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
+
 # Copy rofi theme
 sudo cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
+
 # Get the pc speaker tf out
 sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
 
+# Change the shell to zsh
 sudo chsh -s $(which zsh)
+
+# Remove everything but the stuff form the good_guys filter file
+./remove_useless.sh ~
+
+# Install tablet drivers
+echo -e "[${Cya}+${Whi}] Installing tablet driver"
+
+script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
+driver_link="$(python $script_dir)"
+
+mkdir $HOME/driver
+cd $HOME/driver
+curl -O "$driver_link"
+tar -xf "$(find . -type f -name Gaomon*)" 
+sudo sh "$(find . -type f -name install.sh)"
+rm "$(find . -type f -name Gaomon*)"
+rm -rf $HOME/driver

@@ -38,12 +38,10 @@ qimv
 steam
 wine
 lutris
-firefox
+zen-browser
+tmux
 discord
-yazi
-libreoffice
 qbittorrent
-cronie
 rclone
 xclip
 oxygen5
@@ -56,3 +54,7 @@ sysstat
 playerctl
 noto-fonts-cjk
 noto-fonts-emoji
+volumeicon
+gnome-disk-utility
+yazi
+npm
