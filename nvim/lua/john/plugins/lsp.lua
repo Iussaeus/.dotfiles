@@ -17,6 +17,7 @@ return {
 			})
 		end
 	},
+
 	{
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v3.x',
@@ -39,6 +40,7 @@ return {
 		config = function()
 			-- Here is where you configure the autocompletion settings.
 			local lsp_zero = require('lsp-zero')
+			lsp_zero.preset("recommended")
 			lsp_zero.extend_cmp()
 
 			-- And you can configure cmp even more, if you want to.
@@ -102,7 +104,13 @@ return {
 				vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
 				vim.keymap.set("i", "<A-h>", function() vim.lsp.buf.signature_help() end, opts)
 				vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, opts)
+				vim.keymap.set("n", '<leader>i',
+					function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+					end
+				)
 			end)
+
 
 			require('mason').setup({})
 			require('mason-lspconfig').setup({
@@ -115,10 +123,13 @@ return {
 			local lua_opts = lsp_zero.nvim_lua_ls()
 			require('lspconfig').lua_ls.setup(lua_opts)
 
-			-- Note: There's no need to download the lsp since it's started with the editor
 			lsp.gdscript.setup {
 				filetypes = { "gd", "gdscript", "gdscript3" },
 			}
+
+			function Inlay()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+			end
 
 			local shader_group = vim.api.nvim_create_augroup("shader", { clear = true })
 
@@ -136,6 +147,24 @@ return {
 					capabilities = capabilities,
 				}
 			end
+
+			require 'lspconfig'.clangd.setup {
+				filetypes = { "c", "cpp", "cc", "mpp", "ixx", "conf" },
+				cmd = {
+					"clangd",
+					"--background-index",
+					"-j=10",
+					-- "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
+					"--clang-tidy",
+					"--clang-tidy-checks=*",
+					"--all-scopes-completion",
+					"--cross-file-rename",
+					-- "--completion-style=detailed",
+					-- "--header-insertion-decorators",
+					-- "--header-insertion=iwyu",
+					-- "--pch-storage=memory",
+				}
+			}
 
 			-- Kotlin deez nuts
 			lsp.kotlin_language_server.setup {
@@ -155,86 +184,25 @@ return {
 			lsp.omnisharp.setup {
 				filetypes = { "cs" },
 				cmd = { 'omnisharp' },
-				init = function()
-					require("lazyvim.util").on_attach(function(client, _)
-						if client.name == "omnisharp" then
-							client.server_capabilities.semanticTokensProvider = {
-								full = vim.empty_dict(),
-								legend = {
-									tokenModifiers = { "static_symbol" },
-									tokenTypes = {
-										"comment",
-										"excluded_code",
-										"identifier",
-										"keyword",
-										"keyword_control",
-										"number",
-										"operator",
-										"operator_overloaded",
-										"preprocessor_keyword",
-										"string",
-										"whitespace",
-										"text",
-										"static_symbol",
-										"preprocessor_text",
-										"punctuation",
-										"string_verbatim",
-										"string_escape_character",
-										"class_name",
-										"delegate_name",
-										"enum_name",
-										"interface_name",
-										"module_name",
-										"struct_name",
-										"type_parameter_name",
-										"field_name",
-										"enum_member_name",
-										"constant_name",
-										"local_name",
-										"parameter_name",
-										"method_name",
-										"extension_method_name",
-										"property_name",
-										"event_name",
-										"namespace_name",
-										"label_name",
-										"xml_doc_comment_attribute_name",
-										"xml_doc_comment_attribute_quotes",
-										"xml_doc_comment_attribute_value",
-										"xml_doc_comment_cdata_section",
-										"xml_doc_comment_comment",
-										"xml_doc_comment_delimiter",
-										"xml_doc_comment_entity_reference",
-										"xml_doc_comment_name",
-										"xml_doc_comment_processing_instruction",
-										"xml_doc_comment_text",
-										"xml_literal_attribute_name",
-										"xml_literal_attribute_quotes",
-										"xml_literal_attribute_value",
-										"xml_literal_cdata_section",
-										"xml_literal_comment",
-										"xml_literal_delimiter",
-										"xml_literal_embedded_expression",
-										"xml_literal_entity_reference",
-										"xml_literal_name",
-										"xml_literal_processing_instruction",
-										"xml_literal_text",
-										"regex_comment",
-										"regex_character_class",
-										"regex_anchor",
-										"regex_quantifier",
-										"regex_grouping",
-										"regex_alternation",
-										"regex_text",
-										"regex_self_escaped_character",
-										"regex_other_escape",
-									},
-								},
-								range = true,
-							}
-						end
-					end)
-				end,
+				settings = {
+					RoslynExtensionsOptions = {
+						InlayHintsOptions = {
+							EnableForParameters = true,
+							ForLiteralParameters = true,
+							ForIndexerParameters = true,
+							ForObjectCreationParameters = true,
+							ForOtherParameters = true,
+							SuppressForParametersThatDifferOnlyBySuffix = false,
+							SuppressForParametersThatMatchMethodIntent = false,
+							SuppressForParametersThatMatchArgumentName = false,
+							EnableForTypes = true,
+							-- ForImplicitVariableTypes = true,
+							ForLambdaParameterTypes = true,
+							-- ForImplicitObjectCreatio = true,
+						},
+					},
+				},
+				on_attach = Inlay(),
 				root_dir = lsp.util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git'),
 			}
 
@@ -248,16 +216,25 @@ return {
 				},
 				capabilities = capabilities,
 			})
+
 			-- Ocaml configuration
 			lsp.ocamllsp.setup({
 				cmd = { "ocamllsp" },
 				filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
 				root_dir = lsp.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project",
 					"dune-workspace"),
-				capabilities = capabilities
+				capabilities = capabilities,
+				settings = {
+					codelens = { enable = true },
+					inlayHints = { enable = true },
+					syntaxDocumentation = { enable = true },
+				},
+				on_attach = Inlay(),
 			})
+
 			-- Diagnostics
 			vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+
 				vim.lsp.diagnostic.on_publish_diagnostics,
 				{
 					virtual_text = true,
@@ -265,6 +242,49 @@ return {
 					update_in_insert = true,
 					underline = true,
 				})
+
+			lsp.gopls.setup({
+				settings = {
+					gopls = {
+						hints = {
+							rangeVariableTypes = true,
+							parameterNames = true,
+							constantValues = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							functionTypeParameters = true,
+						},
+					}
+				},
+				on_attach = Inlay(),
+			})
+
+			-- Diagnostics
+			vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+
+				vim.lsp.diagnostic.on_publish_diagnostics,
+				{
+					virtual_text = true,
+					signs = true,
+					update_in_insert = true,
+					underline = true,
+				})
+
+			lsp.gopls.setup({
+				settings = {
+					gopls = {
+						hints = {
+							rangeVariableTypes = true,
+							parameterNames = true,
+							constantValues = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							functionTypeParameters = true,
+						},
+					}
+				},
+				on_attach = Inlay(),
+			})
 		end
-	}
+	},
 }

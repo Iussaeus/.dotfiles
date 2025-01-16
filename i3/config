@@ -45,8 +45,8 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 exec systemctl start bluetooth.service
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -100,6 +100,9 @@ bindsym $mod+u split h
 
 # split in vertical orientation
 bindsym $mod+v split v
+
+# make the current container sticky aka pin it
+bindsym $mod+p sticky toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -210,34 +213,40 @@ exec --no-startup-id i3-msg 'workspace $ws7; layout tabbed; workspace $ws1'
 
 # Apps that open on system startup
 exec --no-startup-id kitty
-exec --no-startup-id firefox
+exec --no-startup-id zen-browser 
 exec --no-startup-id spotify-launcher
 exec --no-startup-id 64gram-desktop
 exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/
-exec --no-startup-id $HOME/.local/bin/pureref
+exec --no-startup-id PureRef
 exec --no-startup-id krita --nosplash
 exec --no-startup-id dunst
+exec --no-startup-id volumeicon
 exec --no-startup-id megasync && megasync
 
 # Attaching apps to workpaces
 for_window [class="kitty"] move to workspace $ws1
-for_window [class="firefox"] move to workspace $ws2
+for_window [class="zen-alpha"] move to workspace $ws2
 for_window [class="qimgv"] move to workspace $ws3
 for_window [class="krita"] move to workspace $ws3
 for_window [class="PureRef"] move to workspace $ws3
-for_window [title="Line of Action — Mozilla Firefox"] move to workspace $ws3,
-for_window [title="Artstation — Mozilla Firefox"] move to workspace $ws3,
+for_window [title="Line of Action — Zen Browser"] move to workspace $ws3,
+for_window [title="Artstation — Zen Browser"] move to workspace $ws3,
 for_window [class="Spotify"] move to workspace $ws4
 for_window [class="64Gram"] move to workspace $ws5
 for_window [class="discord"] move to workspace $ws5
 for_window [class="steam"] move to workspace $ws6
 for_window [class="dota2"] move to workspace $ws6
 for_window [class="jetbrains-rider"] move to workspace $ws7
+for_window [class="jetbrains-clion"] move to workspace $ws7
 for_window [class="VSCodium"] move to workspace $ws7
 for_window [class="Godot"] move to workspace $ws7
 for_window [class="unityhub"] move to workspace $ws7
 for_window [class="Unity"] move to workspace $ws7
 for_window [title="tmux a"] move to workspace $ws7
+
+# rules for picture in picture to be sticky and floating
+for_window [window_role="PictureInPicture"] floating enable
+for_window [window_role="PictureInPicture"] sticky enable
 
 # Some rules for floating windows that should stay floating
 for_window [window_role="About"] floating enable

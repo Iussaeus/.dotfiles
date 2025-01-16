@@ -1,1 +1,0 @@
-0 * * * * /home/john/scripts/gdrivecron.sh > /home/john/scripts/glogs/glogs.log 2>&1

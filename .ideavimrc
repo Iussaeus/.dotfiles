@@ -12,10 +12,9 @@ nmap <S-Enter> O<Esc>
 " Set leader key
 let mapleader = " "
 
-
 " Move code in visual mode
-vmap J :m '>+1<CR>gv=gv
-vmap K :m '<-2<CR>gv=gv
+vmap J <action>(MoveLineDown)
+vmap K <action>(MoveLineUp)
 
 " Yank stuff in void register when pasting
 xmap <leader>p "_dP
@@ -36,15 +35,14 @@ vmap <leader>y "+y
 nmap <leader>Y "+Y
 
 " actions
-nmap <leader>h <action>(PreviousTab)
-nmap <leader>l <action>(NextTab)
-nmap <leader>bd <action>(CloseEditor)
-nmap <leader>i <action>(Generate)
 nmap <leader>g <action>(Git.Menu)
 map <leader>vd <action>(ShowErrorDescription)
 nmap <leader>e <action>(GotoNextError)
 nmap <leader>s <action>(Switcher)
 map <leader>rn <Action>(RenameElement)
+map <leader>f <Action>(ReformatCode)
+map <leader>rf <Action>(RefactoringMenu)
+map <leader>b <Action>(Build)
 
 " Pane navigation
 nnoremap <A-h> <C-w>h
@@ -56,11 +54,11 @@ nnoremap <A-j> <C-w>j
 map <leader>pv :NERDTreeToggle<CR>
 
 " Go to code
-nmap <leader>gd <Action>(GotoDeclaration)
-nmap <leader>gy <Action>(GotoTypeDeclaration)
-nmap <leader>gi <Action>(GotoImplementation)
-nmap <leader>gu <Action>(ShowUsages)
-nmap <leader>gt <Action>(GotoTest)
+vmap <leader>gd <Action>(GotoTypeDeclaration)
+vmap <leader>gy <Action>(GotoDeclaration)
+vmap <leader>gi <Action>(GotoImplementation)
+vmap <leader>gu <Action>(ShowUsages)
+vmap <leader>gt <Action>(GotoTest)
 
 " Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
@@ -88,7 +86,8 @@ nmap <A-l> <Action>(GotoHarpoon4)
 nmap <leader>r <Action>(Run)
 nmap <leader>tr <Action>(ActivateRunToolWindow)
 nmap <leader>t <Action>(ActivateTerminalToolWindow)
-nmap <leader>H <Action>(HideActiveWindow)
+nmap <leader>h <Action>(HideAllWindows)
+nmap <leader>gc <Action>(Generate)
 
 " Telescope-ish
 map <Leader>pf <action>(com.mituuz.fuzzier.Fuzzier)
