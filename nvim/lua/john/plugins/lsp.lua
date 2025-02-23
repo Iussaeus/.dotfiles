@@ -1,5 +1,5 @@
 return {
-	{ 'williamboman/mason.nvim' },
+	{ 'williamboman/mason.nvim', },
 	{
 		'williamboman/mason-lspconfig.nvim',
 		config = function()
@@ -49,9 +49,10 @@ return {
 
 			cmp.setup({
 				sources = {
-					{ name = 'nvim_lua' },
 					{ name = 'nvim_lsp' },
+					{ name = 'vsnip' },
 					{ name = 'path' },
+					{ name = 'buffer' },
 				},
 
 				formatting = lsp_zero.cmp_format({ details = true }),
@@ -97,6 +98,7 @@ return {
 				vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
 				vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
 				vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.goto_next() end, opts)
+				vim.keymap.set("n", "<leader>ad", function() vim.diagnostic.setloclist() end)
 				vim.keymap.set("n", "<leader>e", function() vim.diagnostic.goto_next() end, opts)
 				vim.keymap.set("n", "<leader>pe", function() vim.diagnostic.goto_prev() end, opts)
 				vim.keymap.set("n", "<A-CR>", function() vim.lsp.buf.code_action() end, opts)
@@ -285,6 +287,20 @@ return {
 				},
 				on_attach = Inlay(),
 			})
-		end
+
+			lsp.rust_analyzer.setup {
+				settings = {
+					['rust-analyzer'] = {
+						check = {
+							command = "clippy",
+						},
+						diagnostics = {
+							enable = true,
+						}
+					}
+				}
+			}
+		end,
+
 	},
 }

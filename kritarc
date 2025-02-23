@@ -1,13 +1,13 @@
 AntialiasSelectionOutline=false
 ArtColorSel.ColorSpace=0
 ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0.4486044044043666
+ArtColorSel.Light=0
 ArtColorSel.LightPieces=11
 ArtColorSel.NumRings=7
 ArtColorSel.RingPieces=12
 ArtColorSel.SelColorH=0
 ArtColorSel.SelColorS=0
-ArtColorSel.SelColorX=0.4486044044043666
+ArtColorSel.SelColorX=0
 ArtColorSel.defaultHueSteps=12
 ArtColorSel.defaultSaturationSteps=7
 ArtColorSel.defaultValueScaleSteps=11
@@ -45,11 +45,11 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.168627455830574" b="0.0705882385373116" g="0.0705882385373116"/>\n</LastBackGroundColor>\n
-LastEraser_-1=a) Eraser Soft
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.450980395078659" b="0.450980395078659" g="0.450980395078659"/>\n</LastForeGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="0.0705882385373116" b="0.0705882385373116" r="0.168627455830574" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastEraser_-1=d) Ink-3 Gpen Copy
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0" b="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
 LastPreset=d) Ink-3 Gpen Copy
-LastPreset_-1=f) Bristles-4 Glaze hard egde square
+LastPreset_-1=d) Ink-3 Gpen Copy
 LineSmoothingDelayDistance=50
 LineSmoothingDistance=16.8
 LineSmoothingFinishStabilizedCurve=true
@@ -125,7 +125,7 @@ enableProgressReporting=true
 eraserCursorMaincColor=128,255,128
 eraserCursorStyle=9
 eraserOutlineStyle=2
-filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\xbc\x00\x00\x01y\x00\x00\x03\xec\x00\x00\x03x\x00\x00\x01\xbe\x00\x00\x01{\x00\x00\x03\xea\x00\x00\x03v\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x01\xbe\x00\x00\x01{\x00\x00\x03\xea\x00\x00\x03v
+filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01\xbe\x00\x00\x01\x8f\x00\x00\x03\xee\x00\x00\x03\x8e\x00\x00\x01\xc0\x00\x00\x01\x91\x00\x00\x03\xec\x00\x00\x03\x8c\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x01\xc0\x00\x00\x01\x91\x00\x00\x03\xec\x00\x00\x03\x8c
 filterdialog/rememberlastpreset=false
 forceAlwaysFullSizedEraserOutline=false
 forceAlwaysFullSizedOutline=false
@@ -179,8 +179,8 @@ memorySoftLimitPercent=2
 monitorProfile=sRGB-elle-V2-srgbtrc.icc
 monitorProfile/OverrideX11=false
 monitorProfileBOE__=sRGB-elle-V2-srgbtrc.icc
-moveToolChangedValueX=-355
-moveToolChangedValueY=18
+moveToolChangedValueX=14
+moveToolChangedValueY=2
 moveToolUnit=0
 newCursorStyle=5
 newOutlineStyle=2
@@ -244,7 +244,7 @@ popuppalette/useDynamicSlotCount=true
 popuppalette/usevisualcolorselector=false
 presetChooserViewMode=0
 presetIconSize=63
-presethistory=a) Eraser Soft,b) Basic-5 Size Opacity,c) Pencil-2 Custom Copy,b) Basic-4 Flow Opacity,c) Pencil-2 Custom,f) Bristles-1 Details,d) Ink-3 Gpen Copy,f) Bristles-4 Glaze hard egde square,f) Charcoal Rock Soft,f) Bristles-4 Glaze\s
+presethistory=c) Pencil-2 Custom Copy,b) Basic-4 Flow Opacity,c) Pencil-2 Custom,f) Bristles-1 Details,d) Ink-3 Gpen Copy,f) Bristles-4 Glaze hard egde square,f) Charcoal Rock Soft,f) Bristles-4 Glaze ,b) Airbrush Soft,a) Eraser Soft
 renameMergedLayers=true
 renamePastedLayers=true
 renderIntent=0
@@ -291,8 +291,8 @@ zoomSteps=2
 [File Dialogs]
 Choose the resource library to import=/home/john/MEGA/KritaConfiguration
 DontUseNativeFileDialog=false
-OpenDocument=/home/john/MEGA/ART/Painting/SFW
-SaveAs=/home/john/MEGA/ART/Drawing/SFW
+OpenDocument=/home/john/MEGA/ART/Random
+SaveAs=/home/john/MEGA/ART/Drawing/NSFW
 
 [GradientChooser]
 global/itemSize=medium
@@ -639,18 +639,22 @@ yPosition=20
 pinControls=true
 
 [RecentFiles]
-File1[$e]=$HOME/MEGA/ART/Drawing/NSFW/drawing_practice.kra
-File2[$e]=$HOME/MEGA/ART/Game/CityGame.kra
-File3[$e]=$HOME/MEGA/ART/Random/face.kra
+File1[$e]=$HOME/MEGA/ART/Game/CityGame.kra
+File2[$e]=$HOME/MEGA/ART/Random/face.kra
+File3[$e]=$HOME/MEGA/ART/Painting/SFW/Paint training.kra
 File4[$e]=$HOME/MEGA/ART/Painting/SFW/body.kra
-File5[$e]=$HOME/MEGA/ART/Drawing/SFW/1min studies.kra
-File6[$e]=$HOME/MEGA/ART/Painting/SFW/Paint training.kra
-Name1=drawing_practice.kra
-Name2=CityGame.kra
-Name3=face.kra
+File5[$e]=$HOME/MEGA/ART/Random/STD.kra
+File6[$e]=$HOME/MEGA/ART/Random/random.kra
+File7[$e]=$HOME/MEGA/ART/Drawing/NSFW/drawing_practice.kra
+File8[$e]=$HOME/MEGA/ART/Drawing/SFW/1min studies.kra
+Name1=CityGame.kra
+Name2=face.kra
+Name3=Paint training.kra
 Name4=body.kra
-Name5=1min studies.kra
-Name6=Paint training.kra
+Name5=STD.kra
+Name6=random.kra
+Name7=drawing_practice.kra
+Name8=1min studies.kra
 maxRecentFileItems=100
 
 [SelectedTags]
@@ -709,4 +713,4 @@ ToolPluginsDisabled=
 Theme=Krita dark
 
 [tool_color_sampler]
-ColorSamplerDefaultActivation=<!DOCTYPE params>\n<params>\n <param type="internal" name="addPalette">false</param>\n <param type="internal" name="blend">100</param>\n <param type="internal" name="normaliseValues">false</param>\n <param type="internal" name="radius">1</param>\n <param type="internal" name="sampleMerged">true</param>\n <param type="internal" name="toForegroundColor">true</param>\n <param type="internal" name="updateColor">true</param>\n</params>\n
+ColorSamplerDefaultActivation=<!DOCTYPE params>\n<params>\n <param name="addPalette" type="internal">false</param>\n <param name="blend" type="internal">100</param>\n <param name="normaliseValues" type="internal">false</param>\n <param name="radius" type="internal">1</param>\n <param name="sampleMerged" type="internal">true</param>\n <param name="toForegroundColor" type="internal">true</param>\n <param name="updateColor" type="internal">true</param>\n</params>\n
