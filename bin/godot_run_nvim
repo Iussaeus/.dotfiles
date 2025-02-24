@@ -9,7 +9,7 @@ server_path="$HOME/.cache/nvim/godot-server.pipe"
 # Note: time in seconds
 server_startup_delay=0.2
 
-session_name=$(echo "$(basename $3)" | tr '.' '_')
+session_name=$(basename $3 | tr '.' '_')
 tmux_found=false
 
 check_kitty_children() {
@@ -33,9 +33,10 @@ check_kitty_children() {
 }
 
 start_server() {
-    tmux new-session -d -s "$session_name"
+    tmux new-session -d -s "$session_name" -c "$3"
 		tmux new-window -t "$session_name:1" "$nvim_exec --listen $server_path"
 		tmux new-window -t "$session_name:2" "lazygit"
+		tmux select-window -t 1
 }
 
 open_file_in_server() {
