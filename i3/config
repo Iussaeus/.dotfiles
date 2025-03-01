@@ -240,10 +240,9 @@ for_window [class="jetbrains-rider"] move to workspace $ws7
 for_window [class="jetbrains-clion"] move to workspace $ws7
 for_window [class="VSCodium"] move to workspace $ws7
 for_window [class="Godot"] move to workspace $ws7
-for_window [title="Godot"] move to workspace $ws7
+for_window [title="Godot" class="kitty"] move to workspace $ws7
 for_window [class="unityhub"] move to workspace $ws7
 for_window [class="Unity"] move to workspace $ws7
-for_window [title="nvim" class="kitty"] move to workspace $ws7
 
 # rules for picture in picture to be sticky and floating
 for_window [window_role="PictureInPicture"] floating enable

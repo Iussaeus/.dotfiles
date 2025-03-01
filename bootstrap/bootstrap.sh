@@ -49,7 +49,7 @@ ln -sf $HOME/.dotfiles/kritarc $HOME/.config
 ln -sf $HOME/.dotfiles/kritashortcutsrc $HOME/.config
 ln -sf $HOME/.dotfiles/.ideavimrc $HOME/
 ln -sf $HOME/.dotfiles/kanata $HOME/.config
-ln -sf $HOME/.dotfiles/bin/tmux-sessionizer $HOME/.local/bin/tmux-sessionizer
+ln -sf $HOME/.dotfiles/bin/tmux-sessionizer $HOME/.local/bin/
 
 # Copy touchpad config file
 sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
