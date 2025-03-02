@@ -641,20 +641,20 @@ pinControls=true
 [RecentFiles]
 File1[$e]=$HOME/MEGA/ART/Game/CityGame.kra
 File2[$e]=$HOME/MEGA/ART/Random/face.kra
-File3[$e]=$HOME/MEGA/ART/Painting/SFW/Paint training.kra
-File4[$e]=$HOME/MEGA/ART/Painting/SFW/body.kra
-File5[$e]=$HOME/MEGA/ART/Random/STD.kra
-File6[$e]=$HOME/MEGA/ART/Random/random.kra
-File7[$e]=$HOME/MEGA/ART/Drawing/NSFW/drawing_practice.kra
-File8[$e]=$HOME/MEGA/ART/Drawing/SFW/1min studies.kra
+File3[$e]=$HOME/MEGA/ART/Painting/SFW/body.kra
+File4[$e]=$HOME/MEGA/ART/Random/random.kra
+File5[$e]=$HOME/MEGA/ART/Drawing/SFW/1min studies.kra
+File6[$e]=$HOME/MEGA/ART/Painting/SFW/Paint training.kra
+File7[$e]=$HOME/MEGA/ART/Random/STD.kra
+File8[$e]=$HOME/MEGA/ART/Drawing/NSFW/drawing_practice.kra
 Name1=CityGame.kra
 Name2=face.kra
-Name3=Paint training.kra
-Name4=body.kra
-Name5=STD.kra
-Name6=random.kra
-Name7=drawing_practice.kra
-Name8=1min studies.kra
+Name3=body.kra
+Name4=random.kra
+Name5=1min studies.kra
+Name6=Paint training.kra
+Name7=STD.kra
+Name8=drawing_practice.kra
 maxRecentFileItems=100
 
 [SelectedTags]
