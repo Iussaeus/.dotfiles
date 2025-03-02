@@ -64,18 +64,18 @@ sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
 sudo chsh -s $(which zsh)
 
 # Remove everything but the stuff form the good_guys filter file
-./remove_useless.sh ~
+# ./remove_useless.sh ~
 
 # Install tablet drivers
-echo -e "[${Cya}+${Whi}] Installing tablet driver"
-
-script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
-driver_link="$(python $script_dir)"
-
-mkdir $HOME/driver
-cd $HOME/driver
-curl -O "$driver_link"
-tar -xf "$(find . -type f -name Gaomon*)" 
-sudo sh "$(find . -type f -name install.sh)"
-rm "$(find . -type f -name Gaomon*)"
-rm -rf $HOME/driver
+# echo -e "[${Cya}+${Whi}] Installing tablet driver"
+#
+# script_dir="$(sudo find $HOME -name scrape_me_daddy.py)"
+# driver_link="$(python $script_dir)"
+#
+# mkdir $HOME/driver
+# cd $HOME/driver
+# curl -O "$driver_link"
+# tar -xf "$(find . -type f -name Gaomon*)" 
+# sudo sh "$(find . -type f -name install.sh)"
+# rm "$(find . -type f -name Gaomon*)"
+# rm -rf $HOME/driver
