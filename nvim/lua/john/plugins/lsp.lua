@@ -112,36 +112,19 @@ return {
 				vim.keymap.set("n", "<leader>i",
 					function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 }) end, opts)
 
-				-- Diagnostics
-				-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-				-- 	vim.lsp.diagnostic.on_publish_diagnostics,
-				-- 	{
-				-- 		virtual_text = false,
-				-- 		signs = false,
-				-- 		update_in_insert = false,
-				-- 		underline = false,
-				-- 	})
+				local skill = vim.api.nvim_create_augroup("my_group", {});
 
-				local g = vim.api.nvim_create_augroup("my_group", {});
-
-				vim.api.nvim_create_autocmd("BufEnter", {
-					buffer = bufnr,
-					group = g,
-					callback = function()
-						vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-							vim.lsp.diagnostic.on_publish_diagnostics,
-							{
-								virtual_text = false,
-								signs = false,
-								update_in_insert = false,
-								underline = false,
-							})
-					end,
-				})
+				vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+					vim.lsp.diagnostic.on_publish_diagnostics,
+					{
+						virtual_text = true,
+						signs = true,
+						update_in_insert = false,
+						underline = true,
+					})
 
 				vim.api.nvim_create_autocmd("BufWritePost", {
-					buffer = bufnr,
-					group = g,
+					group = skill,
 					callback = function()
 						vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 							vim.lsp.diagnostic.on_publish_diagnostics,
@@ -154,9 +137,8 @@ return {
 					end
 				})
 
-				vim.api.nvim_create_autocmd("InsertEnter", {
-					buffer = bufnr,
-					group = g,
+				vim.api.nvim_create_autocmd("TextChanged", {
+					group = skill,
 					callback = function()
 						vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 							vim.lsp.diagnostic.on_publish_diagnostics,
@@ -170,8 +152,7 @@ return {
 				})
 
 				vim.api.nvim_create_autocmd("InsertLeave", {
-					buffer = bufnr,
-					group = g,
+					group = skill,
 					callback = function()
 						vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 							vim.lsp.diagnostic.on_publish_diagnostics,
@@ -183,27 +164,7 @@ return {
 							})
 					end,
 				})
-
-				local shader_group = vim.api.nvim_create_augroup("shader", { clear = true })
-
-				local function Gdshader()
-					vim.lsp.start {
-						name = "gdshader",
-						cmd = { "gdshader-lsp" },
-						capabilities = capabilities,
-					}
-				end
-
-				vim.api.nvim_create_autocmd("BufEnter",
-					{
-						callback = function()
-							Gdshader()
-						end,
-						group = shader_group,
-						pattern = { "*.gdshader" },
-					})
 			end)
-
 
 			require('mason').setup({})
 			require('mason-lspconfig').setup({
@@ -222,17 +183,16 @@ return {
 			}
 
 			require 'lspconfig'.clangd.setup {
-				filetypes = { "c", "cpp", "cc", "mpp", "ixx", "conf" },
+				filetypes = { "c", "cpp", "cc", "mpp", "ixx" },
 				cmd = {
 					"clangd",
 					"--background-index",
 					"-j=10",
-					-- "--query-driver=/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
+					"--experimental-modules-support",
 					"--clang-tidy",
-					"--clang-tidy-checks=*",
 					"--all-scopes-completion",
-					"--cross-file-rename",
-					-- "--completion-style=detailed",
+					"--completion-style=bundled",
+					"--enable-config"
 					-- "--header-insertion-decorators",
 					-- "--header-insertion=iwyu",
 					-- "--pch-storage=memory",
@@ -275,7 +235,6 @@ return {
 						},
 					},
 				},
-				on_attach = Inlay(),
 				root_dir = lsp.util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git'),
 			}
 
@@ -302,19 +261,7 @@ return {
 					inlayHints = { enable = true },
 					syntaxDocumentation = { enable = true },
 				},
-				on_attach = Inlay(),
 			})
-
-			-- Diagnostics
-			vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-
-				vim.lsp.diagnostic.on_publish_diagnostics,
-				{
-					virtual_text = true,
-					signs = true,
-					update_in_insert = true,
-					underline = true,
-				})
 
 			lsp.gopls.setup({
 				settings = {
@@ -329,7 +276,6 @@ return {
 						},
 					}
 				},
-				on_attach = Inlay(),
 			})
 
 
@@ -346,7 +292,6 @@ return {
 						},
 					}
 				},
-				on_attach = Inlay(),
 			})
 
 			lsp.rust_analyzer.setup {

@@ -41,10 +41,11 @@ return {
 		version = "*", -- Use the latest tagged version
 		opts = {},   -- This causes the plugin setup function to be called
 		keys = {
-			{ "<C-Up>",   "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
-			{ "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
-			{ "<C-n>",    "<Cmd>MultipleCursorsAddVisualArea<CR>",    mode = { "v" },           desc = "Add cursors to the lines of the visual area" },
-			{ "<C-n>",    "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "i" },      desc = "Add cursors to cword" },
+			{ "<C-Up>",   "<Cmd>MultipleCursorsAddUp<CR>",            mode = { "n", "i", "x" } },
+			{ "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>",          mode = { "n", "i", "x" } },
+			{ "<C-n>",    "<Cmd>MultipleCursorsAddVisualArea<CR>",    mode = { "v" } },
+			{ "<C-n>",    "<Cmd>MultipleCursorsAddJumpNextMatch<CR>", mode = { "n", "i" } },
+			{ "<C-S-N>",    "<Cmd>MultipleCursorsJumpNextMatch<CR>",    mode = { "n", "i" } },
 		},
 	},
 	{

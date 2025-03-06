@@ -21,6 +21,17 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- Append the tex below the cursor to the current line
 vim.keymap.set("n", "J", "mzJ`z")
 
+-- PAIN management
+vim.keymap.set("n", "<leader>F", "<C-W>500+<C-W>500>_")
+vim.keymap.set("n", "<leader>h", "<C-W>h_")
+vim.keymap.set("n", "<leader>j", "<C-W>j_")
+vim.keymap.set("n", "<leader>k", "<C-W>k_")
+vim.keymap.set("n", "<leader>l", "<C-W>l_")
+vim.keymap.set("n", "<leader>H", "<C-W>10<")
+vim.keymap.set("n", "<leader>J", "<C-W>10+")
+vim.keymap.set("n", "<leader>K", "<C-W>10-")
+vim.keymap.set("n", "<leader>L", "<C-W>10>")
+
 -- Center the cursor when navigating the code
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -28,7 +39,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Copy stuff to + register(clipboard)
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- Change all ocurences of the current word at the cursor
