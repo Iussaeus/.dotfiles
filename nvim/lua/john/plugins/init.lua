@@ -62,26 +62,4 @@ return {
 			vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
 		end,
 	},
-	{
-		"X3eRo0/dired.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		config = function()
-			require("dired").setup {
-				path_separator = "/",
-				show_banner = false,
-				show_icons = true,
-				show_hidden = true,
-				show_dot_dirs = true,
-				show_colors = true,
-
-				colors = {
-					DiredDimText = { link = {}, bg = "NONE", fg = "505050", gui = "NONE" },
-					DiredDirectoryName = { link = {}, bg = "NONE", fg = "9370DB", gui = "NONE" },
-					-- ... (define more colors as needed)
-					DiredMoveFile = { link = {}, bg = "NONE", fg = "ff3399", gui = "bold" },
-				},
-			}
-			vim.keymap.set("n", "<leader>pv", "<cmd>Dired<cr>")
-		end
-	}
 }
