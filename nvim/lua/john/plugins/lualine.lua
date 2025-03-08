@@ -23,7 +23,7 @@ return {
 				},
 				sections = {
 					lualine_a = { 'mode' },
-					lualine_b = { { 'branch', 'diff', 'diagnostics' }, { 'swenv', icon = '<icon>' } },
+					lualine_b = { { 'branch', 'diff', 'diagnostics' } },
 					lualine_c = { 'diagnostics', 'filename' },
 					lualine_x = { 'encoding', 'fileformat', 'filetype' },
 					lualine_y = { 'progress' },
