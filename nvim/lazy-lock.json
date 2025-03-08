@@ -26,11 +26,9 @@
   "oil.nvim": { "branch": "master", "commit": "548587d68b55e632d8a69c92cefd981f360634fa" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "render-markdown.nvim": { "branch": "main", "commit": "81374ffd26f9a9d5f44274a9e7e60547b5fd106f" },
-  "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "terminal.nvim": { "branch": "master", "commit": "95cdb0c22cd2d2f8c2b33a55ec07f0bcbd6cad9e" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "vim-fugitive": { "branch": "master", "commit": "4a745ea72fa93bb15dd077109afbb3d1809383f2" },
-  "vscode.nvim": { "branch": "main", "commit": "486c3c9c9fd40975a7b06bc6001ad84ffa704f76" },
-  "yazi.nvim": { "branch": "main", "commit": "cf1823330064945a48c117020ee40672758da235" }
+  "vscode.nvim": { "branch": "main", "commit": "486c3c9c9fd40975a7b06bc6001ad84ffa704f76" }
 }
