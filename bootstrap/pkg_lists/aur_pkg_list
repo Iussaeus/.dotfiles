@@ -1,6 +1,6 @@
 ttf-segoe-ui-variable
 64gram-desktop-bin
-godot-mono-bin
+godot-mono
 jetbrains-toolbox
 caffeine-ng
 qt6gtk2
@@ -20,3 +20,5 @@ neofetch
 i3lock-color
 pamac-all
 kanata-bin
+megasync-bin
+zen-browser-bin

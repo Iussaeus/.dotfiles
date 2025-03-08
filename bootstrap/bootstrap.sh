@@ -36,7 +36,6 @@ ln -sf $HOME/.dotfiles/i3blocks $HOME/.config/
 ln -sf $HOME/.dotfiles/i3-layout-manager $HOME/.config/
 ln -sf $HOME/.dotfiles/kitty $HOME/.config/
 ln -sf $HOME/.dotfiles/nvim $HOME/.config/
-ln -sf $HOME/.dotfiles/scripts $HOME
 ln -sf $HOME/.dotfiles/Pictures $HOME
 ln -sf $HOME/.dotfiles/starship.toml $HOME/.config/starship.toml
 ln -sf $HOME/.dotfiles/dunst/ $HOME/.config/
@@ -49,7 +48,7 @@ ln -sf $HOME/.dotfiles/kritarc $HOME/.config
 ln -sf $HOME/.dotfiles/kritashortcutsrc $HOME/.config
 ln -sf $HOME/.dotfiles/.ideavimrc $HOME/
 ln -sf $HOME/.dotfiles/kanata $HOME/.config
-ln -sf $HOME/.dotfiles/bin/tmux-sessionizer $HOME/.local/bin/
+ln -sf $HOME/.dotfiles/bin/ $HOME/.local/bin/
 
 # Copy touchpad config file
 sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -57,11 +56,16 @@ sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.c
 # Copy rofi theme
 sudo cp $HOME/.dotfiles/rofi/breeze-dark.rasi /usr/share/rofi/themes/
 
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 # Get the pc speaker tf out
 sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
 
+# enable services
+sudo systemctl enable bluetooth.service
+sudo systemctl enable sddm
+
 # Change the shell to zsh
-sudo chsh -s $(which zsh)
+sudo chsh -s $(which zsh) john
 
 # Remove everything but the stuff form the good_guys filter file
 # ./remove_useless.sh ~

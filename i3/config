@@ -47,7 +47,7 @@ set $refresh_i3status killall -SIGUSR1 i3status
 exec systemctl start bluetooth.service
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls 
@@ -221,11 +221,12 @@ exec --no-startup-id PureRef
 exec --no-startup-id krita --nosplash
 exec --no-startup-id dunst
 exec --no-startup-id volumeicon
+exec --no-startup-id caffein
 exec --no-startup-id megasync && megasync
 
 # Attaching apps to workpaces
 for_window [class="kitty"] move to workspace $ws1
-for_window [class="zen-alpha"] move to workspace $ws2
+for_window [class="zen"] move to workspace $ws2
 for_window [class="qimgv"] move to workspace $ws3
 for_window [class="krita"] move to workspace $ws3
 for_window [class="PureRef"] move to workspace $ws3
@@ -235,6 +236,7 @@ for_window [class="Spotify"] move to workspace $ws4
 for_window [class="64Gram"] move to workspace $ws5
 for_window [class="discord"] move to workspace $ws5
 for_window [class="steam"] move to workspace $ws6
+for_window [class="Lutris"] move to workspace $ws6
 for_window [class="dota2"] move to workspace $ws6
 for_window [class="jetbrains-rider"] move to workspace $ws7
 for_window [class="jetbrains-clion"] move to workspace $ws7

@@ -11,8 +11,7 @@ blueman
 pipewire
 pipewire-jack
 pipewire-pulse
-pipewire-session-manager
-pasystray
+wireplumber
 dunst
 jq
 rofi
@@ -28,7 +27,7 @@ qt6ct
 lxappearance
 lxinput
 btop
-ttf-cascadia-mono-nerd
+ttf-cascadia-code-nerd
 kitty
 neovim
 dotnet
@@ -38,12 +37,10 @@ qimv
 steam
 wine
 lutris
-zen-browser
 ripgrep
 tmux
 discord
 qbittorrent
-rclone
 xclip
 oxygen5
 xss-lock
@@ -59,3 +56,8 @@ volumeicon
 gnome-disk-utility
 yazi
 npm
+fzf
+github-cli
+lazygit
+xdg-desktop-portal
+xdg-desktop-portal-gtk
