@@ -38,14 +38,12 @@ return {
 			{ 'L3MON4D3/LuaSnip',
 				'teramako/cmp-cmdline-prompt.nvim',
 				'hrsh7th/cmp-buffer',
-				'amarakon/nvim-cmp-buffer-lines',
-				'teramako/cmp-cmdline-prompt.nvim',
 				'delphinus/cmp-ctags',
 			},
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
-			
+
 			local lsp_zero = require('lsp-zero')
 			lsp_zero.preset("recommended")
 			lsp_zero.extend_cmp()
@@ -62,12 +60,16 @@ return {
 			local cmp = require('cmp')
 			local cmp_action = lsp_zero.cmp_action()
 
+			cmp.setup.cmdline("@", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = 'cmdline-prompt' },
+				})
+			})
 			cmp.setup({
 				sources = {
 					{ name = 'nvim_lsp' },
 					{ name = 'buffer' },
-					{ name = 'buffer-lines' },
-					{ name = 'cmp-cmdline-prompt' },
 					{ name = 'ctags' },
 				},
 

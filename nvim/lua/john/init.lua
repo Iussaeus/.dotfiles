@@ -15,4 +15,5 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.cmd [[ set rtp^="/home/john/.opam/default/share/ocp-indent/vim" ]]
 require("lazy").setup('john.plugins')

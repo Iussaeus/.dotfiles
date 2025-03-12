@@ -3,6 +3,12 @@ return {
 	---@module 'oil'
 	---@type oil.SetupOpts
 	opts = {
+		keymaps = {
+			["<C-h>"] = false,
+			["<C-p"] = false,
+			["<C-l>"] = false,
+			["<leader>p"] = "actions.preview",
+		},
 		columns = {
 			"icon",
 			"permissions",
