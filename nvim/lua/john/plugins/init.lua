@@ -2,9 +2,11 @@ return {
 	'nvim-tree/nvim-web-devicons',
 	{
 		'windwp/nvim-autopairs',
-		init = function()
-			require 'nvim-autopairs'.setup()
-		end,
+		opts = {
+			map_bs = false,
+			map_c_h = false, -- map <C-h> key to delete a pair
+			map_c_w = false, -- map <C-w> to delete a pair
+		},
 	},
 	{
 		'numToStr/Comment.nvim',
@@ -33,18 +35,6 @@ return {
 		end
 	},
 	{
-		"brenton-leighton/multiple-cursors.nvim",
-		version = "*",
-		opts = {},
-		keys = {
-			{ "<C-Up>",   "<cmd>MultipleCursorsAddUp<cr>",            mode = { "n", "i", "x" } },
-			{ "<C-Down>", "<cmd>MultipleCursorsAddDown<cr>",          mode = { "n", "i", "x" } },
-			{ "<C-n>",    "<cmd>MultipleCursorsAddVisualArea<cr>",    mode = { "v" } },
-			{ "<C-n>",    "<cmd>MultipleCursorsAddJumpNextMatch<cr>", mode = { "n", "i" } },
-			{ "<C-S-N>",  "<cmd>MultipleCursorsJumpNextMatch<cr>",    mode = { "n", "i" } },
-		},
-	},
-	{
 		'MeanderingProgrammer/render-markdown.nvim',
 		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
 		opts = {},
@@ -53,9 +43,9 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "markdown",
 				callback = function()
-					vim.opt_local.formatoptions:append("r") -- `<CR>` in insert mode
+					vim.opt_local.formatoptions:append("r")
 					vim.opt_local.comments = {
-						"b:- [ ]",                       -- tasks
+						"b:- [ ]",
 						"b:-",
 					}
 				end,
@@ -119,5 +109,5 @@ return {
 		init = function()
 			vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 		end
-	}
+	},
 }

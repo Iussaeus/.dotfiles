@@ -12,9 +12,9 @@ return {
 			use_diagnostics = true,
 		}
 
-		vim.keymap.set("n", "<space>cm", "<cmd>:botright 10 :Compile<cr>")
-		vim.keymap.set("n", "<space>cr", "<cmd>:botright 10 :Recompile<cr>")
-		vim.keymap.set("n", "<space>cn", function() cm.next_error() end)
-		vim.keymap.set("n", "<space>cp", function() cm.prev_error() end)
+		vim.keymap.set("n", "<leader>cm", "<cmd>:botright 15 :Compile<cr>")
+		vim.keymap.set("n", "<leader>cr", "<cmd>:botright 15 :Recompile<cr>")
+		vim.keymap.set("n", "<leader>cn", require 'compile-mode'.next_error)
+		vim.keymap.set("n", "<leader>cp", require 'compile-mode'.prev_error)
 	end
 }

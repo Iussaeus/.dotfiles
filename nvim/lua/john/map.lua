@@ -1,6 +1,9 @@
 -- Leader key
 vim.g.mapleader = " "
 
+-- Go to Explorer
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
 -- Get the hell out
 vim.keymap.set("n", "q:", "<NOP>")
 
@@ -8,9 +11,6 @@ vim.keymap.set("n", "q:", "<NOP>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- Move code in visual mode
-vim.keymap.set("n", "j", "jzz")
-vim.keymap.set("n", "k", "kzz")
 
 -- Yank stuff in void register
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -19,10 +19,14 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Center the cursor when navigating the code
+vim.keymap.set("n", "k", "kzz")
+vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "gg", "ggzz")
+vim.keymap.set("n", "G", "Gzz")
 
 -- Copy stuff to + register(clipboard)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -35,7 +39,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>en", "iif err != nil {<CR>return err<CR>}<ESC>k_v$h")
 
 vim.keymap.set("n", "<leader>ff", "<C-W>500+<C-W>500>_")
-vim.keymap.set("n", "<leader>vs", "<cmd>vs<cr>")
+vim.keymap.set("n", "<leader>vs", "<cmd>vs<>")
 vim.keymap.set("n", "<leader>h", "<C-W>h_")
 vim.keymap.set("n", "<leader>j", "<C-W>j_")
 vim.keymap.set("n", "<leader>k", "<C-W>k_")
