@@ -4,7 +4,7 @@
 
 term_exec="kitty"
 nvim_exec="nvim"
-server_path="$HOME/.cache/nvim/godot-server.pipe"
+server_path="/tmp/nvim.pipe"
 
 # Note: time in seconds
 server_startup_delay=0.5
@@ -33,6 +33,7 @@ check_kitty_children() {
 }
 
 start_server() {
+		tmux & 
     tmux new-session -d -s "$session_name" -c "$3"
 		tmux new-window -t "$session_name:1" "$nvim_exec --listen $server_path"
 		tmux select-window -t 1

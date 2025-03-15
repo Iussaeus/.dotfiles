@@ -22,7 +22,7 @@ AutoSaveInterval=420
 BackgroundColorForNewImage=255,255,255
 BackgroundOpacityForNewImage=255
 BackgroundStyleForNewImage=0
-CanvasOnlyActive=false
+CanvasOnlyActive=true
 CanvasSize/ConstrainProportions=false
 CanvasSize/KeepAspectRatio=false
 ColorManagement/UseSystemMonitorProfile=false
@@ -291,7 +291,7 @@ zoomSteps=2
 [File Dialogs]
 Choose the resource library to import=/home/john/MEGA/KritaConfiguration
 DontUseNativeFileDialog=false
-OpenDocument=/home/john/MEGA/ART/Painting/SFW
+OpenDocument=/home/john/MEGA/ART/Drawing/SFW
 SaveAs=/home/john/MEGA/ART/Drawing/NSFW
 
 [GradientChooser]
@@ -643,10 +643,14 @@ File1[$e]=$HOME/MEGA/ART/Random/STD.kra
 File2[$e]=$HOME/MEGA/ART/Random/random.kra
 File3[$e]=$HOME/MEGA/ART/Drawing/NSFW/drawing_practice.kra
 File4[$e]=$HOME/MEGA/ART/Painting/SFW/Paint training.kra
+File5[$e]=$HOME/MEGA/ART/Painting/SFW/body.kra
+File6[$e]=$HOME/MEGA/ART/Drawing/SFW/1min studies.kra
 Name1=STD.kra
 Name2=random.kra
 Name3=drawing_practice.kra
 Name4=Paint training.kra
+Name5=body.kra
+Name6=1min studies.kra
 maxRecentFileItems=100
 
 [SelectedTags]
