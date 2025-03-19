@@ -213,6 +213,7 @@ exec --no-startup-id i3-msg 'workspace $ws7; layout tabbed; workspace $ws1'
 
 # Apps that open on system startup
 exec --no-startup-id kitty
+exec --no-startup-id kanata -c $HOME/.config/kanata/config.kbd
 exec --no-startup-id zen-browser 
 exec --no-startup-id spotify-launcher
 exec --no-startup-id 64gram-desktop

@@ -33,17 +33,18 @@ return {
 	-- Autocompletion
 	{
 		'hrsh7th/nvim-cmp',
-		event = 'InsertEnter',
+		event = 'BufEnter',
 		dependencies = {
 			{ 'L3MON4D3/LuaSnip',
+				'hrsh7th/cmp-cmdline',
 				'teramako/cmp-cmdline-prompt.nvim',
 				'hrsh7th/cmp-buffer',
 				'delphinus/cmp-ctags',
+				'hrsh7th/cmp-path',
 			},
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
-
 			local lsp_zero = require('lsp-zero')
 			lsp_zero.preset("recommended")
 			lsp_zero.extend_cmp()
@@ -60,12 +61,35 @@ return {
 			local cmp = require('cmp')
 			local cmp_action = lsp_zero.cmp_action()
 
+			cmp.setup.cmdline({ '/', '?' }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = 'buffer' }
+				}
+			})
+
+			cmp.setup.cmdline(':', {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = 'path' }
+				}, {
+					{
+						name = 'cmdline',
+						option = {
+							ignore_cmds = {},
+						}
+					}
+				}),
+			})
+
 			cmp.setup.cmdline("@", {
 				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
 					{ name = 'cmdline-prompt' },
+					{ name = 'path' },
 				})
 			})
+
 			cmp.setup({
 				sources = {
 					{ name = 'nvim_lsp' },
@@ -76,7 +100,7 @@ return {
 				formatting = lsp_zero.cmp_format({ details = true }),
 				mapping = cmp.mapping.preset.insert({
 					['<C-Space>'] = cmp.mapping.complete(),
-					['<Tab>'] = cmp.mapping.confirm({ select = true }),
+					['<C-y>'] = cmp.mapping.confirm({ select = true }),
 					['<C-n>'] = cmp_action.tab_complete(),
 					['<C-p>'] = cmp_action.select_prev_or_fallback(),
 				}),
@@ -84,6 +108,9 @@ return {
 					expand = function(args)
 						require('luasnip').lsp_expand(args.body)
 					end,
+				},
+				performance = {
+					max_view_entries = 15,
 				},
 			})
 		end
@@ -185,13 +212,9 @@ return {
 					"--background-index",
 					"-j=10",
 					"--experimental-modules-support",
-					"--clang-tidy",
 					"--all-scopes-completion",
 					"--completion-style=bundled",
 					"--enable-config"
-					-- "--header-insertion-decorators",
-					-- "--header-insertion=iwyu",
-					-- "--pch-storage=memory",
 				}
 			}
 
@@ -202,5 +225,19 @@ return {
 				root_dir = lsp.util.root_pattern('*.sln', '*.csproj', '*.fsproj', '.git'),
 			}
 		end,
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		opts = {
+			always_triger = false,
+			bind = true,
+			floating_window = false,
+			hint_enable = true, -- virtual hint enable
+			hint_prefix = " :: ",
+			handler_opts = {
+				border = "rounded"
+			},
+			toggle_key = "<C-s>",
+		},
 	},
 }

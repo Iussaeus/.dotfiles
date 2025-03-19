@@ -19,7 +19,11 @@ return {
 		version = "*",
 		event = "VeryLazy",
 		config = function()
-			require("nvim-surround").setup({})
+			require("nvim-surround").setup({
+				keymaps = {
+					normal = "s"
+				}
+			})
 		end
 	},
 	{
