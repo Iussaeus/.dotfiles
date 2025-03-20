@@ -45,8 +45,7 @@ open_file_in_server() {
     
     line_col="$2"
     
-		command="$nvim_exec --server $server_path --remote-send \"<C-\\><C-n>:e $filename<CR>:call cursor($line_col)<CR>\""
-		$nvim_exec --server $server_path --remote-send "<C-\\><C-n>:e $filename<CR>:call cursor($line_col)<CR>"
+		$nvim_exec --server $server_path --remote-send "<C-\\><C-n>:e $filename<CR>:call cursor($line_col)<cr>:cd '$3'<CR>)"
 
 		check_kitty_children
 

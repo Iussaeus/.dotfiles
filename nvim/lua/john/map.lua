@@ -11,7 +11,6 @@ vim.keymap.set("n", "q:", "<NOP>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-
 -- Yank stuff in void register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -40,7 +39,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>en", "iif err != nil {<CR>return err<CR>}<ESC>k_v$h")
 
 vim.keymap.set("n", "<leader>ff", "<C-W>500+<C-W>500>_")
-vim.keymap.set("n", "<leader>vs", "<cmd>vs<>")
+vim.keymap.set("n", "<leader>vs", "<cmd>vs<cr>")
 vim.keymap.set("n", "<leader>h", "<C-W>h_")
 vim.keymap.set("n", "<leader>j", "<C-W>j_")
 vim.keymap.set("n", "<leader>k", "<C-W>k_")

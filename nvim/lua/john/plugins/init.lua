@@ -63,14 +63,14 @@ return {
 
 			local term_map = require("terminal.mappings")
 			vim.keymap.set("n", "<leader>to", term_map.toggle)
-			vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
+			vim.keymap.set('t', '<esc><esc>', [[<C-\><C-n>]])
 		end,
 	},
 	{
 		"folke/snacks.nvim",
 		keys = {
-			{ "<leader>ss", function() Snacks.scratch.open({ name = "scratch", icon = "*", ft = "markdown" }) end },
-			{ "<leader>sb", function() Snacks.scratch.select() end },
+			{ "<leader>ss", function() require'snacks'.scratch.open({ name = "scratch", icon = "*", ft = "markdown" }) end },
+			{ "<leader>sb", function() require'snacks'scratch.select() end },
 		},
 		opts = {
 			{

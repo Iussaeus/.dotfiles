@@ -6,11 +6,12 @@ return {
 		{ "<leader>pf", "<cmd>Telescope find_files<cr>" },
 		{ "<leader>pg", "<cmd>Telescope live_grep<cr>" },
 		{ "<leader>pd", "<cmd>Telescope diagnostics<cr>" },
-		{ "<leader>vh", "<cmd>Telescope help_tags<cr>" },
-		{ "<leader>c", "<cmd>Telescope commands<cr>" },
-		{ "<leader>ct", "<cmd>Telescope current_buffer_tags<cr>" },
+		{ "<leader>th", "<cmd>Telescope help_tags<cr>" },
+		{ "<leader>tc", "<cmd>Telescope commands<cr>" },
+		{ "<leader>tt", "<cmd>Telescope current_buffer_tags<cr>" },
 		{ "<leader>tb", "<cmd>Telescope builtin<cr>" },
 	},
+
 	config = function()
 		require 'telescope'.setup {
 			defaults = {

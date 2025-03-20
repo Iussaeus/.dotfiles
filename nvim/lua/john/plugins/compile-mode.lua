@@ -8,31 +8,55 @@ return {
 	config = function()
 		vim.g.compile_mode = {
 			baleia_setup = true,
-			default_command = "",
 			use_diagnostics = true,
+			default_command = "",
 		}
 
-		local prev_cwd = ""
-		vim.api.nvim_create_autocmd("BufLeave", {
-			pattern = "compilation",
-			group = vim.api.nvim_create_augroup("compile-group", {}),
-			callback = function()
-				vim.cmd("cd " .. prev_cwd)
+		local split_opts = "botright 15"
+
+		local prev_wd = ""
+		local prev_fwd = ""
+		local prev_cmd = ""
+
+		local compile_in_fwd = function()
+			local file_cwd = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h')
+			local prefix = file_cwd:match("^(.*://)")
+
+			if prefix == "fugitive://" then
+				print("Don't execute in fugitive.")
+				return
 			end
-		})
 
-		local compile_in_file_cwd = function()
-			prev_cwd = vim.fn.getcwd()
-			local buf = vim.api.nvim_get_current_buf()
-			local current_file = vim.api.nvim_buf_get_name(buf)
-			local file_cwd = vim.fn.fnamemodify(current_file, ':h')
+			if prefix == "oil://" then
+				file_cwd = file_cwd:gsub(prefix, "")
+			end
 
-			vim.cmd("cd " .. file_cwd:gsub("oil://", ""))
-			vim.cmd [[botright 15 Compile]]
+			local input = vim.fn.input({ prompt = "Compile: ", completion = "shellcmd" })
+
+			if input == "" then return end
+
+			prev_wd = vim.fn.getcwd()
+			prev_fwd = file_cwd
+			prev_cmd = input
+
+			vim.cmd('cd ' .. file_cwd)
+			vim.cmd(split_opts .. ' Compile ' .. input)
+			vim.cmd('cd ' .. prev_wd)
 		end
 
-		vim.keymap.set("n", "<leader>cm", compile_in_file_cwd)
-		vim.keymap.set("n", "<leader>cr", "<cmd>:botright 15 :Recompile<cr>")
+		local recompile_in_prev_fwd = function()
+			if prev_fwd == "" or prev_wd == "" or prev_cmd == "" then
+				print("Nothing to Recompile.")
+				return
+			end
+
+			vim.cmd('cd ' .. prev_fwd)
+			vim.cmd(split_opts .. ' Recompile ')
+			vim.cmd('cd ' .. prev_wd)
+		end
+
+		vim.keymap.set("n", "<leader>cm", compile_in_fwd)
+		vim.keymap.set("n", "<leader>cr", recompile_in_prev_fwd)
 		vim.keymap.set("n", "<leader>cn", require 'compile-mode'.next_error)
 		vim.keymap.set("n", "<leader>cp", require 'compile-mode'.prev_error)
 	end
