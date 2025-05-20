@@ -70,7 +70,7 @@ post-install() {
 		"hyprland") stow -v -d $stow_wm_dir -t $HOME hyprland
 	esac
 
-	stow -v -d $stow_dir -t $HOME/test *
+	stow -v -d $stow_dir -t $HOME *
 
 	cd $old_pwd
 
