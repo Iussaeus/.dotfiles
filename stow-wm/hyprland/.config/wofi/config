@@ -1,0 +1,6 @@
+allow_images=true
+hide_scroll=true
+exec_search=true
+matching=fuzzy
+insesitive=true
+mode=drun
