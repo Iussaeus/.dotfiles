@@ -7,158 +7,158 @@
 // =============================================================================
 
 {
-    // -------------------------------------------------------------------------
-    // Global configuration
-    // -------------------------------------------------------------------------
+		// -------------------------------------------------------------------------
+		// Global configuration
 
-    "layer": "top",
+		"layer": "top",
 
-    "position": "bottom",
+		"position": "bottom",
 
-    // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
+		"height": 30,
 
-    "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/mode"
-    ],
-    "modules-center": [
-        "hyprland/window"
-    ],
-    "modules-right": [
-        "pulseaudio",
-        "memory",
-        "cpu",
-        "temperature",
-        "custom/keyboard-layout",
-        "battery",
-        "clock#date",
-        "clock#time",
-				"tray"
-    ],
+		"modules-left": [ "mpris", "pulseaudio", "pulseaudio/slider" ],
+		"modules-center": [ "hyprland/workspaces" ],
+		"modules-right": [
+			"disk",
+			"memory",
+			"cpu",
+			"power-profiles-daemon",
+			"battery",
+			"clock#date",
+			"clock#time",
+			"tray"
+		],
 
 
-    // -------------------------------------------------------------------------
-    // Modules
-    // -------------------------------------------------------------------------
+		// -------------------------------------------------------------------------
+		// Modules
+		// -------------------------------------------------------------------------
 
-    "battery": {
-        "interval": 10,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
-        // Not connected to AC
-        "format-discharging": "{icon}  {capacity}%",
-        "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
-        ],
-        "tooltip": true
-    },
+		"battery": {
+			"interval": 10,
+			"states": {
+				"warning": 30,
+				"critical": 15
+			},
+			"format": "󰚥 {icon} ",
+			"format-discharging": " {icon} ",
+			"format-icons": [
+				"",
+				"",
+				"",
+				"",
+				"" 
+			],
+			"tooltip": true,
+			"tooltip-format": "{capacity}% ({timeTo})"
+		},
 
-    "clock#time": {
-        "interval": 1,
-        "format": "{:%H:%M:%S}",
-        "tooltip": false
-    },
+		"clock#time": {
+			"interval": 1,
+			"format": "{:%H:%M:%S}",
+			"tooltip": false
+		},
 
-    "clock#date": {
-      "interval": 10,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
-    },
+		"clock#date": {
+			"interval": 10,
+			"format": "  {:%e %b %Y}", // Icon: calendar-alt
+			"tooltip-format": "{:%e %B %Y}"
+		},
 
-    "cpu": {
-        "interval": 5,
-        "format": "  {usage}% ({load})", // Icon: microchip
-        "states": {
-          "warning": 70,
-          "critical": 90
-        }
-    },
+		"cpu": {
+			"interval": 5,
+			"format": "   {usage}% ({load})", // Icon: microchip
+			"states": {
+				"warning": 70,
+				"critical": 90
+			}
+		},
 
-    // "custom/keyboard-layout": {
-    //   "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
-    //   // Interval set only as a fallback, as the value is updated by signal
-    //   "interval": 30,
-    //   "format": "  {}", // Icon: keyboard
-    //   // Signal sent by Sway key binding (~/.config/sway/key-bindings)
-    //   "signal": 1, // SIGHUP
-    //   "tooltip": false
-    },
+		"memory": {
+			"interval": 5,
+			"format": "  {used} | {total} GiB", // Icon: memory
+			"states": {
+				"warning": 70,
+				"critical": 90
+			}
+		},
 
-    "memory": {
-        "interval": 5,
-        "format": "  {}%", // Icon: memory
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
-    },
+		"hyprland/workspaces": {
+			"all-outputs": true,
+			"disable-scroll": true,
+			"format": "{icon}  {name}",
+			"format-icons": {
+				"1": "", 
+				"2": "󰖟", 
+				"3": "", 
+				"4": "󰓇",
+				"5": " ",
+				"6": "",
+				"7": "",
+				"10": "",
+				"urgent": "",
+				"focused": "",
+				"default": ""
+			}
+		},
 
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 120
-    },
+		"pulseaudio": {
+			 "scroll-step": 2,
+			 "format": "{icon} ",
+			 "format-bluetooth": "{icon} ",
+			 "format-muted": "",
+			 "format-icons": {
+				 "headphones": "",
+				 "handsfree": "",
+				 "headset": "",
+				 "default": ["", ""]
+			 },
+			 "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+			 "on-click-right": "pwvucontrol"
+		},
 
-    "hyprland/workspaces": {
-        "all-outputs": true,
-        "disable-scroll": true,
-        "format": "{icon} {name}",
-        "format-icons": {
-            "1": "龜", // Icon: firefox-browser
-            "2": "", // Icon: mail
-            "3": "", // Icon: code
-            "4": "", // Icon: terminal
-            "5": "", // Icon: terminal
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
-    },
+		"pulseaudio/slider": {
+			"min": 0,
+			"max": 100,
+			"orientation": "horizontal"
+		},
 
-    "pulseaudio": {
-       //"scroll-step": 1,
-       "format": "{icon}  {volume}%",
-       "format-bluetooth": "{icon}  {volume}%",
-       "format-muted": "",
-       "format-icons": {
-           "headphones": "",
-           "handsfree": "",
-           "headset": "",
-           "phone": "",
-           "portable": "",
-           "car": "",
-           "default": ["", ""]
-       },
-       "on-click": "exec pwvucontrol"
-    },
+		"tray": {
+			"icon-size": 18,
+			"spacing": 1
+		},
+		"mpris": {
+			"format": "{status_icon} {artist} - {title}  {position} | {length}  {player_icon} ",
+			"format-paused": "{status_icon} <i>{artist} - {title}  {position} | {length}</i> {player_icon} ",
+			"player-icons": {
+				"default": "",
+				"spotify": "󰓇",
+				"mpv": "🎵"
+			},
+			"status-icons": {
+				"playing": "▶",
+				"paused": "⏸"
+			},
+			"interval": 1,
+			"ignored-players": ["firefox"]
+		},
 
-    "temperature": {
-      "critical-threshold": 80,
-      "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
-      "format-icons": [
-          "", // Icon: temperature-empty
-          "", // Icon: temperature-quarter
-          "", // Icon: temperature-half
-          "", // Icon: temperature-three-quarters
-          ""  // Icon: temperature-full
-      ],
-      "tooltip": true
-    },
-
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    }
-
+		"power-profiles-daemon": {
+			"format": " {icon} ",
+			"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+			"tooltip": true,
+			"format-icons": {
+				"default": "",
+				"performance": "",
+				"balanced": "",
+				"power-saver": ""
+			}
+		},
+		"disk": {
+    "interval": 30,
+    "format": "    {free}",
+    "path": "/"
+}
 }
 
 

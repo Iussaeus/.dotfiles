@@ -40,10 +40,12 @@
 /* Reset all styles */
 * {
     border: none;
-    border-radius: 0;
+    border-radius: 5px;
     min-height: 0;
     margin: 0;
     padding: 0;
+    padding-left: 5;
+    padding-right: 5;
 }
 
 /* The whole bar */
@@ -51,22 +53,18 @@
     background: #323232;
     color: white;
     font-family: Cantarell, Noto Sans, sans-serif;
-    font-size: 13px;
+    font-size: 15px;
+		/* opacity: 0.8; */
 }
 
-/* Each module */
 #battery,
 #clock,
 #cpu,
-#custom-keyboard-layout,
 #memory,
-#mode,
-#network,
 #pulseaudio,
-#temperature,
 #tray {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
@@ -103,7 +101,6 @@
 }
 
 #cpu {
-  /* No styles */
 }
 
 #cpu.warning {
@@ -130,43 +127,13 @@
     animation-duration: 2s;
 }
 
-#mode {
-    background: #64727D;
-    border-top: 2px solid white;
-    /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
-}
-
-#network {
-    /* No styles */
-}
-
-#network.disconnected {
-    color: orange;
-}
-
 #pulseaudio {
-    /* No styles */
 }
 
 #pulseaudio.muted {
-    /* No styles */
-}
-
-#custom-spotify {
-    color: rgb(102, 220, 105);
-}
-
-#temperature {
-    /* No styles */
-}
-
-#temperature.critical {
-    color: red;
 }
 
 #tray {
-    /* No styles */
 }
 
 #window {
@@ -177,20 +144,50 @@
     border-top: 2px solid transparent;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
     color: #888888;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
     border-color: #4c7899;
     color: white;
     background-color: #285577;
 }
 
 #workspaces button.urgent {
-    border-color: #c9545d;
-    color: #c9545d;
+    border-color: #88c0d0;
+    color: #88c0d0;
 }
 
-
+#mpris {
+    border-top: 2px solid transparent;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+		padding-right: 0px;
+		padding-left: 0px;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 80px;
+    border-radius: 5px;
+    background-color: black;
+		padding-right: 0px;
+		padding-left: 0px;
+}
+#pulseaudio-slider highlight {
+    min-width: 10px;
+    border-radius: 5px;
+    background-color: green;
+		padding-right: 0px;
+		padding-left: 0px;
+}
