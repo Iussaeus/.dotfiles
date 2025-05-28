@@ -16,7 +16,7 @@
 
 		"height": 30,
 
-		"modules-left": [ "mpris", "pulseaudio", "pulseaudio/slider" ],
+		"modules-left": [ "mpris", "pulseaudio", "pulseaudio/slider", "privacy" ],
 		"modules-center": [ "hyprland/workspaces" ],
 		"modules-right": [
 			"disk",
@@ -76,7 +76,7 @@
 
 		"memory": {
 			"interval": 5,
-			"format": "  {used} | {total} GiB", // Icon: memory
+			"format": "  {used}GiB", // Icon: memory
 			"states": {
 				"warning": 70,
 				"critical": 90
@@ -90,7 +90,7 @@
 			"format-icons": {
 				"1": "", 
 				"2": "󰖟", 
-				"3": "", 
+				"3": " ", 
 				"4": "󰓇",
 				"5": " ",
 				"6": "",
@@ -103,18 +103,18 @@
 		},
 
 		"pulseaudio": {
-			 "scroll-step": 2,
-			 "format": "{icon} ",
-			 "format-bluetooth": "{icon} ",
-			 "format-muted": "",
-			 "format-icons": {
-				 "headphones": "",
-				 "handsfree": "",
-				 "headset": "",
-				 "default": ["", ""]
-			 },
-			 "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-			 "on-click-right": "pwvucontrol"
+			"scroll-step": 2,
+			"format": "{icon} ",
+			"format-bluetooth": "{icon} ",
+			"format-muted": "",
+			"format-icons": {
+				"headphones": "",
+				"handsfree": "",
+				"headset": "",
+				"default": ["", ""]
+			},
+			"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+			"on-click-right": "pwvucontrol"
 		},
 
 		"pulseaudio/slider": {
@@ -125,11 +125,12 @@
 
 		"tray": {
 			"icon-size": 18,
-			"spacing": 1
+			"spacing": 1,
+			"show-passive-items": true
 		},
 		"mpris": {
-			"format": "{status_icon} {artist} - {title}  {position} | {length}  {player_icon} ",
-			"format-paused": "{status_icon} <i>{artist} - {title}  {position} | {length}</i> {player_icon} ",
+			"format": "{player_icon}    {status_icon} {artist} - {title}  {position} | {length}",
+			"format-paused": "{player_icon}  {status_icon} <i>{artist} - {title}  {position} | {length}</i>",
 			"player-icons": {
 				"default": "",
 				"spotify": "󰓇",
@@ -155,10 +156,32 @@
 			}
 		},
 		"disk": {
-    "interval": 30,
-    "format": "    {free}",
-    "path": "/"
-}
+			"interval": 30,
+			"format": "   {free}",
+			"path": "/"
+		},
+		"privacy": {
+			"icon-spacing": -2,
+			"icon-size": 14,
+			"transition-duration": 250,
+			"modules": [
+				{
+					"type": "screenshare",
+					"tooltip": true,
+					"tooltip-icon-size": 14
+				},
+				{
+					"type": "audio-out",
+					"tooltip": true,
+					"tooltip-icon-size": 14
+				},
+				{
+					"type": "audio-in",
+					"tooltip": true,
+					"tooltip-icon-size": 14
+				}
+			]
+		}
 }
 
 

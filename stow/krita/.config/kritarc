@@ -45,9 +45,9 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="0.0705882385373116" r="0.168627455830574" g="0.0705882385373116" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB r="0.168627455830574" space="sRGB-elle-V2-srgbtrc.icc" b="0.0705882385373116" g="0.0705882385373116"/>\n</LastBackGroundColor>\n
 LastEraser_-1=c) Pencil-2 Custom
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0" r="0" g="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB r="0" space="sRGB-elle-V2-srgbtrc.icc" b="0" g="0"/>\n</LastForeGroundColor>\n
 LastPreset=d) Ink-3 Gpen Copy
 LastPreset_-1=a) Eraser Soft
 LineSmoothingDelayDistance=50
@@ -641,22 +641,6 @@ yPosition=20
 pinControls=true
 
 [RecentFiles]
-File1[$e]=$HOME/MEGA/ART/Random/STD.kra
-File2[$e]=$HOME/MEGA/ART/Painting/SFW/body.kra
-File3[$e]=$HOME/MEGA/ART/Game/CityGame.kra
-File4[$e]=$HOME/MEGA/ART/Drawing/NSFW/construction-site.kra
-File5[$e]=$HOME/MEGA/ART/Drawing/NSFW/drawing_practice.kra
-File6[$e]=$HOME/MEGA/ART/Random/random.kra
-File7[$e]=$HOME/MEGA/ART/Painting/SFW/Paint training.kra
-File8[$e]=$HOME/MEGA/ART/Drawing/SFW/1min studies.kra
-Name1=STD.kra
-Name2=body.kra
-Name3=CityGame.kra
-Name4=construction-site.kra
-Name5=drawing_practice.kra
-Name6=random.kra
-Name7=Paint training.kra
-Name8=1min studies.kra
 maxRecentFileItems=100
 
 [SelectedTags]

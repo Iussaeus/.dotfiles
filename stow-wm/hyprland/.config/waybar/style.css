@@ -57,20 +57,10 @@
 		/* opacity: 0.8; */
 }
 
-#battery,
-#clock,
-#cpu,
-#memory,
-#pulseaudio,
 #tray {
     padding-left: 5px;
     padding-right: 5px;
 }
-
-
-/* -----------------------------------------------------------------------------
- * Module styles
- * -------------------------------------------------------------------------- */
 
 #battery {
     animation-timing-function: linear;
@@ -100,9 +90,6 @@
     font-weight: bold;
 }
 
-#cpu {
-}
-
 #cpu.warning {
     color: orange;
 }
@@ -127,13 +114,8 @@
     animation-duration: 2s;
 }
 
-#pulseaudio {
-}
-
 #pulseaudio.muted {
-}
-
-#tray {
+	color: red;
 }
 
 #window {
@@ -166,6 +148,7 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
 #pulseaudio-slider slider {
     min-height: 0px;
     min-width: 0px;
@@ -176,6 +159,7 @@
     border: none;
     box-shadow: none;
 }
+
 #pulseaudio-slider trough {
     min-height: 10px;
     min-width: 80px;
@@ -184,10 +168,19 @@
 		padding-right: 0px;
 		padding-left: 0px;
 }
+
 #pulseaudio-slider highlight {
     min-width: 10px;
     border-radius: 5px;
     background-color: green;
 		padding-right: 0px;
 		padding-left: 0px;
+}
+
+#privacy-item.screenshare {
+	color: red;
+}
+
+#privacy-item.audio-in {
+	color: red;
 }

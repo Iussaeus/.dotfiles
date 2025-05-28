@@ -79,8 +79,6 @@ post-install() {
 
 	ln -sf $HOME/.dotfiles/Pictures $HOME
 
-	gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-
 	# Get the pc speaker tf out
 	sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
 
@@ -106,6 +104,11 @@ install-hyprland() {
 	install-base-aur-pkgs
 	install-hyprland-pkgs
 	post-install "hyprland"
+
+	systemctl enable --now com.system76.PowerDaemon.service
+	hyprpm reload
+	hyprpm add https://github.com/outfoxxed/hy3
+	hyprpm enable hy3
 }
 
 read -p "What wm (1)i3, (2)hyprland: " choice

@@ -1,6 +1,5 @@
 allow_images=true
 hide_scroll=true
 exec_search=true
-matching=fuzzy
-insesitive=true
+insensitive=true
 mode=drun
