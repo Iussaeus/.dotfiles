@@ -13,7 +13,7 @@ pre-install() {
 		sudo pacman -S --noconfirm --needed git
 	fi
 
-	if pacman -Qi yay 2>/dev/null 1>&2; then
+	if pacman -Q yay &>/dev/null; then
 		echo -e "[${Red}+${Whi}] Found yay, skipping installation..."
 	else 
 		echo -e "[${Red}+${Whi}] Installing yay"
