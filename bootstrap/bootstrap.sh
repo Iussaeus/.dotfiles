@@ -13,10 +13,14 @@ pre-install() {
 		sudo pacman -S --noconfirm --needed git
 	fi
 
-	echo -e "[${Red}+${Whi}] Installing yay"
-	git clone https://aur.archlinux.org/yay.git /tmp/yay-git-cloned
-	cd /tmp/yay-git-cloned/
-	makepkg -sfci --noconfirm --needed
+	if pacman -Qi yay 2>/dev/null 1>&2; then
+		echo -e "[${Red}+${Whi}] Found yay, skipping installation..."
+	else 
+		echo -e "[${Red}+${Whi}] Installing yay"
+		git clone https://aur.archlinux.org/yay.git /tmp/yay-git-cloned
+		cd /tmp/yay-git-cloned/
+		makepkg -sfci --noconfirm --needed
+	fi
 }
 
 
