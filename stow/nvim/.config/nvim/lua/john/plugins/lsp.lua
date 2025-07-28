@@ -73,7 +73,7 @@ return {
 				formatting = lsp_zero.cmp_format({ details = true }),
 				mapping = cmp.mapping.preset.insert({
 					['<C-Space>'] = cmp.mapping.complete(),
-					['<C-y>'] = cmp.mapping.confirm({ select = true }),
+					['<C-y>'] = cmp.mapping.confirm({ select = false, ConfirmBehavior = { Insert = true } }),
 					['<C-n>'] = cmp_action.tab_complete(),
 					['<C-p>'] = cmp_action.select_prev_or_fallback(),
 				}),
@@ -82,7 +82,7 @@ return {
 						require('luasnip').lsp_expand(args.body)
 					end,
 				},
-				performance = { max_view_entries = 15, },
+				performance = { max_view_entries = 25 },
 			})
 		end
 	},
