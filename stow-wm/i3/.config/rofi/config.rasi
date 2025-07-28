@@ -1,1 +1,1 @@
-@theme "/usr/share/rofi/themes/breeze-dark.rasi"
+@theme ".config/rofi/breeze-dark.rasi"

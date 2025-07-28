@@ -40,19 +40,19 @@ return {
 				}
 			})
 
-			cmp.setup.cmdline(':', {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = 'path' }
-				}, {
-					{
-						name = 'cmdline',
-						option = {
-							ignore_cmds = {},
-						}
-					}
-				}),
-			})
+			-- cmp.setup.cmdline(':', {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = 'path' }
+			-- 	}, {
+			-- 		{
+			-- 			name = 'cmdline',
+			-- 			option = {
+			-- 				ignore_cmds = {},
+			-- 			}
+			-- 		}
+			-- 	}),
+			-- })
 
 			cmp.setup.cmdline("@", {
 				mapping = cmp.mapping.preset.cmdline(),
@@ -129,48 +129,6 @@ return {
 
 			local skill = vim.api.nvim_create_augroup("my_group", {});
 
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				group = skill,
-				callback = function()
-					vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-						vim.lsp.diagnostic.on_publish_diagnostics,
-						{
-							virtual_text = true,
-							signs = true,
-							update_in_insert = false,
-							underline = true,
-						})
-				end
-			})
-
-			vim.api.nvim_create_autocmd("TextChanged", {
-				group = skill,
-				callback = function()
-					vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-						vim.lsp.diagnostic.on_publish_diagnostics,
-						{
-							virtual_text = false,
-							signs = false,
-							update_in_insert = false,
-							underline = false,
-						})
-				end,
-			})
-
-			vim.api.nvim_create_autocmd("InsertLeave", {
-				group = skill,
-				callback = function()
-					vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-						vim.lsp.diagnostic.on_publish_diagnostics,
-						{
-							virtual_text = false,
-							signs = false,
-							update_in_insert = false,
-							underline = false,
-						})
-				end,
-			})
-
 			require('mason').setup({})
 			require('mason-lspconfig').setup({
 				ensure_installed = { 'pylsp', 'omnisharp', 'lua_ls', "gopls" },
@@ -185,7 +143,6 @@ return {
 
 			lsp.clangd.setup {
 				filetypes = { "cpp", "cppm" },
-				cmd = {"clangd", "--experimental-modules-support", "--clang-tidy=0"},
 			}
 			lsp.gdscript.setup { filetypes = { "gd", "gdscript", "gdscript3" }, }
 		end,

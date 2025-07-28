@@ -12,6 +12,6 @@ slurp
 grim
 imagemagick
 swappy
+wofi
 wl-clipboard
-power-profiles-daemon
-system76-power
+cliphist

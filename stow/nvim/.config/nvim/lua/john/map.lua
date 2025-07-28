@@ -1,7 +1,7 @@
 -- Leader key
 vim.g.mapleader = " "
 
-vim.keymap.set("i", "<c-bs>", "<c-w>")
+vim.keymap.set("i", "<c-h>", "<esc>vbda")
 
 vim.api.nvim_create_user_command("W", "w", {desc = "write"})
 vim.api.nvim_create_user_command("Wq", "wq", {desc = "write'n'quit"})
@@ -44,7 +44,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- TODO: move to ftplugin
 -- go special
-vim.keymap.set("n", "<leader>en", "iif err != nil {<CR>return err<CR>}<ESC>k_v$h")
+vim.keymap.set("n", "<leader>en", "oif err != nil {<CR>return err<CR>}<ESC>k_v$h")
 
 -- Pane navigation
 -- TODO: keymap for deleting every pane but the focused one
@@ -58,6 +58,3 @@ vim.keymap.set("n", "<leader>H", "<C-W>10<")
 vim.keymap.set("n", "<leader>J", "<C-W>10+")
 vim.keymap.set("n", "<leader>K", "<C-W>10-")
 vim.keymap.set("n", "<leader>L", "<C-W>10>")
-
--- Nvchad inpired one
-vim.keymap.set("i", "jk", "<esc>")

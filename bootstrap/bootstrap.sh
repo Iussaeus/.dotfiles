@@ -12,7 +12,7 @@ pre-install() {
 	if ! pacman -Q git &> /dev/null; then
 		sudo pacman -S --noconfirm --needed git
 	fi
-
+	
 	if pacman -Q yay &>/dev/null; then
 		echo -e "[${Red}+${Whi}] Found yay, skipping installation..."
 	else 
@@ -22,7 +22,6 @@ pre-install() {
 		makepkg -sfci --noconfirm --needed
 	fi
 }
-
 
 install-base-pkgs() {
 	echo -e "[${Red}+${Whi}] Installing repo packages"
@@ -82,6 +81,7 @@ post-install() {
 	sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
 
 	ln -sf $HOME/.dotfiles/Pictures $HOME
+	ln -sf $HOME/.dotfiles/stow-wm/i3/.config/rofi/breeze-dark.rasi
 
 	# Get the pc speaker tf out
 	sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
@@ -109,17 +109,22 @@ install-hyprland() {
 	install-hyprland-pkgs
 	post-install "hyprland"
 
-	systemctl enable --now com.system76.PowerDaemon.service
-	hyprpm reload
+	sudo systemctl enable --now com.system76.PowerDaemon.service
+	hyprpm update -f
+	hyprpm reload -n
 	hyprpm add https://github.com/outfoxxed/hy3
 	hyprpm enable hy3
 }
 
-read -p "What wm (1)i3, (2)hyprland: " choice
+read -p "What wm (1)i3, (2)hyprland, (3)i3 no base pkgs, (4)hyprland no base pkgs: " choice
 
 case $choice in
 	1) install-i3 ;;
 	2) install-hyprland ;;
+	3) install-i3-pkgs
+		post-install "i3" ;;
+	4) install-hyprland-pkgs
+		post-install "hyprland" ;;
 	*)
 		echo "wrong option bucko"
 		exit 1

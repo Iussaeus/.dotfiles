@@ -19,6 +19,7 @@
 		"modules-left": [ "mpris", "pulseaudio", "pulseaudio/slider", "privacy" ],
 		"modules-center": [ "hyprland/workspaces" ],
 		"modules-right": [
+			"idle_inhibitor",
 			"disk",
 			"memory",
 			"cpu",

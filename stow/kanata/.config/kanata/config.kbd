@@ -1,0 +1,9 @@
+(defcfg
+ linux-dev-names-include (
+	 "AT Translated Set 2 keyboard"
+	 )
+ )
+
+(defsrc caps)
+(defalias escctrl (tap-hold 100 150 esc lctl))
+(deflayer base @escctrl)

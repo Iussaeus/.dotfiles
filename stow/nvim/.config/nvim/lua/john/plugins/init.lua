@@ -71,8 +71,7 @@ return {
 		keys = {
 			{ "<leader>ss", function() require 'snacks'.scratch.open({ name = "scratch", icon = "*", ft = "markdown" }) end },
 			{ "<leader>sb", function()
-				require 'snacks'
-				scratch.select()
+				require 'snacks'.scratch.select()
 			end },
 		},
 		opts = {
@@ -127,5 +126,17 @@ return {
 			{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
 			{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
 		},
+	},
+	{
+		'linux-cultist/venv-selector.nvim',
+		dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+		branch = "regexp",
+		keys = {
+			{ '<leader>vs', '<cmd>VenvSelect<cr>' },
+			{ '<leader>vc', '<cmd>VenvSelectCached<cr>' },
+		},
+		config = function()
+			require'venv-selector'.setup()
+		end
 	},
 }

@@ -42,3 +42,5 @@ export PATH=/home/john/.local/bin:$PATH
 export PATH=$PATH:/home/john/.spicetify
 
 complete -C /home/john/go/bin/gocomplete go
+
+complete -C /usr/bin/gocomplete go

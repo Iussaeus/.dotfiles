@@ -34,6 +34,9 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/share/JetBrains/Toolbox/scripts/:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.local/share/flatpack/exports/share:$PATH
+export PATH=/var/lib/flatpak/exports/bin:$PATH
+export XDG_DATA_DIR=/var/lib/flatpak/exports/share:$XDG_DATA_DIR
+export XDG_DATA_DIR=/home/john/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 
 export PATH=/opt/cuda/bin:$PATH
 
@@ -88,7 +91,6 @@ fi
 ###-end-flutter-completion-###
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /home/john/go/bin/gocomplete go
 #compdef gh
 compdef _gh gh
 
@@ -301,3 +303,13 @@ _gh()
 if [ "$funcstack[1]" = "_gh" ]; then
     _gh
 fi
+
+complete -C /usr/bin/syncthing syncthing
+
+autoload -U +X bashcompinit && bashcompinit
+
+eval "$(zoxide init zsh)"
+alias cd=z
+
+complete -o nospace -C /usr/bin/gocomplete go
+
