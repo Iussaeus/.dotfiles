@@ -55,9 +55,6 @@ return {
 			vim.cmd('cd ' .. prev_wd)
 		end
 
-		-- vim.keymap.set("n", "<leader>cm", compile_in_fwd)
-		-- vim.keymap.set("n", "<leader>rc", recompile_in_prev_fwd)
-
 		vim.keymap.set("n", "<leader>cm", compile_in_fwd)
 		vim.keymap.set("n", "<leader>rc", recompile_in_prev_fwd)
 

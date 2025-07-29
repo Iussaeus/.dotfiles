@@ -45,9 +45,9 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="0.0705882385373116" b="0.0705882385373116" r="0.168627455830574" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="0.0705882385373116" b="0.0705882385373116" space="sRGB-elle-V2-srgbtrc.icc" r="0.168627455830574"/>\n</LastBackGroundColor>\n
 LastEraser_-1=d) Ink-3 Gpen Copy
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0" b="0" r="0.137254908680916" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0" b="0" space="sRGB-elle-V2-srgbtrc.icc" r="0.137254908680916"/>\n</LastForeGroundColor>\n
 LastPreset=d) Ink-3 Gpen Copy
 LastPreset_-1=a) Eraser Soft
 LineSmoothingDelayDistance=50

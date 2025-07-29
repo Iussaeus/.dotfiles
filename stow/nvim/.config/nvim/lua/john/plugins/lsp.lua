@@ -73,7 +73,7 @@ return {
 				formatting = lsp_zero.cmp_format({ details = true }),
 				mapping = cmp.mapping.preset.insert({
 					['<C-Space>'] = cmp.mapping.complete(),
-					['<C-y>'] = cmp.mapping.confirm({ select = true, ConfirmBehavior = { Insert = true } }),
+					['<C-y>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
 					['<C-n>'] = cmp_action.tab_complete(),
 					['<C-p>'] = cmp_action.select_prev_or_fallback(),
 				}),
