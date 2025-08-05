@@ -22,15 +22,8 @@ return {
 			})
 			vim.opt.list = true
 			vim.cmd.colorscheme 'vscode'
-<<<<<<< HEAD
-			vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•'--[[ , eol = '↵' ]] }
+			vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•' , eol = '↵' }
 			vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#404040')
-			-- vim.cmd('highlight nontext ctermfg=darkgrey guifg=#909090')
-=======
-			vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•', eol = '↵' }
-			vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#404040')
-			vim.cmd('highlight nontext ctermfg=darkgrey guifg=#909090')
->>>>>>> 3c7a26e (changed the nvim config)
 		end,
 	},
 }
