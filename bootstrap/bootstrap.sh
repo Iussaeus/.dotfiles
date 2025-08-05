@@ -10,7 +10,7 @@ pre-install() {
 	sudo pacman -Syu
 
 	if ! pacman -Q git &> /dev/null; then
-		sudo pacman -S --noconfirm --needed git
+		sudo pacman -Sy --noconfirm --needed git
 	fi
 	
 	if pacman -Q yay &>/dev/null; then
@@ -27,7 +27,7 @@ install-base-pkgs() {
 	echo -e "[${Red}+${Whi}] Installing repo packages"
 	for repo_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/pkg_list)
 	do
-		 sudo pacman -S --noconfirm --needed $repo_pkg
+		 sudo pacman -Sy --noconfirm --needed $repo_pkg
 	done
 }
 
@@ -35,7 +35,7 @@ install-base-aur-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing AUR packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/aur_pkg_list)
 	do
-		yay -S --noconfirm --needed $aur_pkg
+		yay -Sy --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -43,7 +43,7 @@ install-i3-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing i3 packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/i3_aur_pkg_list)
 	do
-		yay -S --noconfirm --needed $aur_pkg
+		yay -Sy --noconfirm --needed $aur_pkg
 	done
 
 	# Copy rofi theme
@@ -55,7 +55,7 @@ install-hyprland-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing hyprland packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/hypr_aur_pkg_list)
 	do
-		yay -S --noconfirm --needed $aur_pkg
+		yay -Sy --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -81,7 +81,6 @@ post-install() {
 	sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
 
 	ln -sf $HOME/.dotfiles/Pictures $HOME
-	ln -sf $HOME/.dotfiles/stow-wm/i3/.config/rofi/breeze-dark.rasi
 
 	# Get the pc speaker tf out
 	sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/

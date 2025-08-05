@@ -1,9 +1,10 @@
 return {
 	{
-		"ido-mode",
-		dir = "/home/john/code/ido-mode.nvim/",
+		"Iussaeus/ido-mode.nvim",
+		-- branch = "features",
+		dir = (function() return os.getenv("HOME").."/code/ido-mode.nvim" end)(),
 		config = function()
-			require 'ido-mode'.setup({ min_chars = 2 })
+			require 'ido-mode'.setup(require'ido-mode.config'.defaults)
 		end
 	},
 }

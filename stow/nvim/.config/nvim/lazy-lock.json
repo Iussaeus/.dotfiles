@@ -11,6 +11,7 @@
   "compile-mode.nvim": { "branch": "main", "commit": "d436d8f11f156de619baba72cd1fbc4216586cd6" },
   "gitsigns.nvim": { "branch": "main", "commit": "1fcaddcc427ff5802b6602f46de37a5352d0f9e0" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
+  "ido-mode.nvim": { "branch": "master", "commit": "cca84734ceeea8159fad05c6b5684b6a67c766c1" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
   "lsp-zero.nvim": { "branch": "v3.x", "commit": "77550f2f6cbf0959ef1583d845661af075f3442b" },

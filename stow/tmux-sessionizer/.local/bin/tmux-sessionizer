@@ -3,7 +3,7 @@
 select_dir() {
     sessions=()
     if ! [[ -z $(pgrep tmux) ]]; then
-        IFS=$'\n' read -d '' -r -a sessions < <(tmux list-sessions -F "#S")    
+        IFS=$'\n' read -d '' -r -a sessions < <(tmux list-sessions -F "#S" | tr _ .)
     fi
 
     paths=()
@@ -14,9 +14,9 @@ select_dir() {
         else
             paths+=("$dir")
         fi
-    done < <(find ~/.dotfiles/stow-wm ~/.dotfiles/stow ~/code -mindepth 1 -maxdepth 1 -type d)
+    done < <(find ~/code -mindepth 1 -maxdepth 1 -type d)
 
-    selected=$(printf "%s\n" "${paths[@]}" | fzf)
+    selected=$(printf "%s\n" "${paths[@]}" | sort -r | fzf)
 
     selected="${selected/"[TMUX]"/}"
     selected="${selected/" "/}"

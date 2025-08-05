@@ -14,8 +14,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.cmd [[ set rtp^="/home/john/.opam/default/share/ocp-indent/vim" ]]
-
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "help", "man" },
 	callback = function()
