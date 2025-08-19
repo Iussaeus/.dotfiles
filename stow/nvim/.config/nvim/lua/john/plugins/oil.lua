@@ -13,6 +13,7 @@ return {
 			"icon",
 			"permissions",
 			"size",
+			"mtime",
 		},
 		constrain_cursor = "name",
 		delete_to_trash = true,

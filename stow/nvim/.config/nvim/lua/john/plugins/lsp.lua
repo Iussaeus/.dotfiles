@@ -102,7 +102,9 @@ return {
 			lsp_zero.extend_lspconfig()
 
 			lsp_zero.on_attach(function(_, bufnr)
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+				vim.keymap.del("n" ,"gb")
+				vim.keymap.set("n", "gd", function() vim.cmd"mark B"; vim.lsp.buf.definition() end)
+				vim.keymap.set("n", "gb", "'Bzz")
 				vim.keymap.set("n", "K", vim.lsp.buf.hover)
 				vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol)
 				vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
@@ -123,7 +125,7 @@ return {
 
 			require('mason').setup({})
 			require('mason-lspconfig').setup({
-				ensure_installed = { 'pylsp', 'omnisharp', 'lua_ls', "gopls" },
+				ensure_installed = { 'pylsp', 'omnisharp', 'lua_ls', "gopls", "ocamllsp" },
 				handlers = {
 					lsp_zero.default_setup,
 					lua_ls = function()

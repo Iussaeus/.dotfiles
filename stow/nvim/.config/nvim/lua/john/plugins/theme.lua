@@ -23,7 +23,7 @@ return {
 			vim.opt.list = true
 			vim.cmd.colorscheme 'vscode'
 			vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•'--[[ , eol = '↵' ]] }
-			vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#505050')
+			vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#404040')
 			-- vim.cmd('highlight nontext ctermfg=darkgrey guifg=#909090')
 		end,
 	},
