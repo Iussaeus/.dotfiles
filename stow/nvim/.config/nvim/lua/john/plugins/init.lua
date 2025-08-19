@@ -27,6 +27,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 <<<<<<< HEAD
+<<<<<<< HEAD
 			local todo = require 'todo-comments'
 
 			todo.setup({
@@ -61,6 +62,42 @@ return {
 =======
 			require 'todo-comments'.setup()
 >>>>>>> 3c7a26e (changed the nvim config)
+=======
+			require 'todo-comments'.setup()
+=======
+			local todo = require 'todo-comments'
+
+			todo.setup({
+				keywords = {
+					FIX = {
+						icon = " ", -- icon used for the sign, and in search results
+						color = "error", -- can be a hex color, or a named color (see below)
+						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+						-- signs = false, -- configure signs for some keywords individually
+					},
+					TODO = { icon = " ", color = "info" },
+					HACK = { icon = " ", color = "warning" },
+					WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+					NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+					TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+					fix = {
+						icon = " ", -- icon used for the sign, and in search results
+						color = "error", -- can be a hex color, or a named color (see below)
+						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+						-- signs = false, -- configure signs for some keywords individually
+					},
+					todo = { icon = " ", color = "info" },
+					hack = { icon = " ", color = "warning" },
+					warn = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					perf = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+					note = { icon = " ", color = "hint", alt = { "INFO" } },
+					test = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+				}
+			})
+
+>>>>>>> 66529a3 (work configs)
+>>>>>>> 3b1aecf (work configs)
 			vim.keymap.set("n", "<leader>tdf", "<cmd>TodoTelescope<cr>")
 			vim.keymap.set("n", "<leader>tdl", "<cmd>TodoLocList<cr>")
 		end
@@ -85,6 +122,10 @@ return {
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 3b1aecf (work configs)
 		"folke/snacks.nvim",
 		keys = {
 			{ "<leader>ss", function() require 'snacks'.scratch.open({ name = "scratch", icon = "*", ft = "markdown" }) end },
@@ -129,8 +170,12 @@ return {
 		end
 	},
 	{
+<<<<<<< HEAD
 =======
 >>>>>>> 3c7a26e (changed the nvim config)
+=======
+>>>>>>> 66529a3 (work configs)
+>>>>>>> 3b1aecf (work configs)
 		"mbbill/undotree",
 		init = function() vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle) end
 	},

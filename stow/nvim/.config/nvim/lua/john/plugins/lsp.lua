@@ -164,19 +164,19 @@ return {
 				}
 			})
 
-			-- cmp.setup.cmdline(':', {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = cmp.config.sources({
-			-- 		{ name = 'path' }
-			-- 	}, {
-			-- 		{
-			-- 			name = 'cmdline',
-			-- 			option = {
-			-- 				ignore_cmds = {},
-			-- 			}
-			-- 		}
-			-- 	}),
-			-- })
+			cmp.setup.cmdline(':', {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = 'path' }
+				}, {
+					{
+						name = 'cmdline',
+						option = {
+							ignore_cmds = {},
+						}
+					}
+				}),
+			})
 
 			cmp.setup.cmdline("@", {
 				mapping = cmp.mapping.preset.cmdline(),
@@ -206,7 +206,7 @@ return {
 						require('luasnip').lsp_expand(args.body)
 					end,
 				},
-				performance = { max_view_entries = 25 },
+
 			})
 		end
 	},

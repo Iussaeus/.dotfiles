@@ -24,7 +24,6 @@ return {
 =======
 	{
 		"Iussaeus/ido-mode.nvim",
-		-- branch = "features",
 		dir = (function() return os.getenv("HOME").."/code/ido-mode.nvim" end)(),
 		config = function()
 <<<<<<< HEAD
