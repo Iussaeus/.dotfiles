@@ -23,7 +23,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-<<<<<<< HEAD
     pattern = { "*" },
     callback = function()
         if vim.fn.expand("%:p"):match(".*tgpt") then
@@ -42,7 +41,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.cmd "wincmd L"
         vim.cmd "wincmd 35<"
     end
-=======
 	pattern = { "*" },
 	callback = function()
 		if vim.fn.expand("%:p"):match(".*tgpt") then
@@ -53,15 +51,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			vim.cmd "wincmd 10-"
 		end
 	end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "copilot-chat" },
-	callback = function()
-		vim.cmd "wincmd L"
-		vim.cmd "wincmd 35<"
-	end
->>>>>>> 3b1aecf (work configs)
 })
 
 

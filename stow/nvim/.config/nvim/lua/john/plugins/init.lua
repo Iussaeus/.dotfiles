@@ -26,8 +26,6 @@ return {
 		'folke/todo-comments.nvim',
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-<<<<<<< HEAD
-<<<<<<< HEAD
 			local todo = require 'todo-comments'
 
 			todo.setup({
@@ -58,16 +56,7 @@ return {
 					test = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 				}
 			})
-
-=======
-			require 'todo-comments'.setup()
->>>>>>> 3c7a26e (changed the nvim config)
-=======
-			require 'todo-comments'.setup()
-=======
-			local todo = require 'todo-comments'
-
-			todo.setup({
+			require 'todo-comments'.setup({
 				keywords = {
 					FIX = {
 						icon = " ", -- icon used for the sign, and in search results
@@ -95,9 +84,6 @@ return {
 					test = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 				}
 			})
-
->>>>>>> 66529a3 (work configs)
->>>>>>> 3b1aecf (work configs)
 			vim.keymap.set("n", "<leader>tdf", "<cmd>TodoTelescope<cr>")
 			vim.keymap.set("n", "<leader>tdl", "<cmd>TodoLocList<cr>")
 		end
@@ -121,61 +107,6 @@ return {
 		end
 	},
 	{
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3b1aecf (work configs)
-		"folke/snacks.nvim",
-		keys = {
-			{ "<leader>ss", function() require 'snacks'.scratch.open({ name = "scratch", icon = "*", ft = "markdown" }) end },
-			{ "<leader>sb", function()
-				require 'snacks'.scratch.select()
-			end },
-		},
-		opts = {
-			{
-				bigfile = { enabled = false },
-				dashboard = { enabled = false },
-				explorer = { enabled = false },
-				indent = { enabled = false },
-				input = { enabled = false },
-				picker = { enabled = false },
-				notifier = { enabled = false },
-				quickfile = { enabled = false },
-				scope = { enabled = false },
-				scroll = { enabled = false },
-				statuscolumn = { enabled = false },
-				words = { enabled = false },
-				scratch = { enabled = true },
-			},
-			styles = {
-				scratch = {
-					width = 0.9,
-					height = 0.9,
-					bo = { buftype = "", buflisted = false, bufhidden = "hide", swapfile = false, filetype = "markdown" },
-					noautocmd = false,
-				},
-			},
-		},
-	},
-	{
-		"chentoast/marks.nvim",
-		event = "VeryLazy",
-		opts = {
-			default_mappings = false,
-		},
-		init = function()
-			vim.keymap.set("n", "<leader>mm", "<cmd>MarksQFListAll<cr>")
-		end
-	},
-	{
-<<<<<<< HEAD
-=======
->>>>>>> 3c7a26e (changed the nvim config)
-=======
->>>>>>> 66529a3 (work configs)
->>>>>>> 3b1aecf (work configs)
 		"mbbill/undotree",
 		init = function() vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle) end
 	},
