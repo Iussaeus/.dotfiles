@@ -1,5 +1,5 @@
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/john/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -14,36 +14,23 @@ neofetch
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-alias yazi=yy
-
 alias vim=nvim
 
 export EDITOR=nvim
-export QT_QPA_PLATFORMTHEME=qt5ct
-
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/share/JetBrains/Toolbox/scripts/:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.local/share/flatpack/exports/share:$PATH
 export PATH=/var/lib/flatpak/exports/bin:$PATH
 export XDG_DATA_DIR=/var/lib/flatpak/exports/share:$XDG_DATA_DIR
-export XDG_DATA_DIR=/home/john/.local/share/flatpak/exports/share:$XDG_DATA_DIR
+export XDG_DATA_DIR=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 
 export PATH=/opt/cuda/bin:$PATH
 
 eval "$(starship init zsh)"
 
 # opam configuration
-[[ ! -r /home/john/.opam/opam-init/init.zsh ]] || source /home/john/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 ###-begin-flutter-completion-###
 
@@ -313,3 +300,4 @@ alias cd=z
 
 complete -o nospace -C /usr/bin/gocomplete go
 
+eval $(opam env)

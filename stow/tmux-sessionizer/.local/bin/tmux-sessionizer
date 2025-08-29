@@ -3,7 +3,7 @@
 select_dir() {
     sessions=()
     if ! [[ -z $(pgrep tmux) ]]; then
-        IFS=$'\n' read -d '' -r -a sessions < <(tmux list-sessions -F "#S" | tr _ .)
+        IFS=$'\n' read -d '' -r -a sessions < <(tmux list-sessions -F "#S")
     fi
 
     paths=()

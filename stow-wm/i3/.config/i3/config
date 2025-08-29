@@ -38,6 +38,8 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # END THE TEARING
 exec --no-startup-id picom
 
+# START THE MUSIC
+exec --no-startup-id easyeffects --gapplication-service
 # GET DEM BORDERS OUT OF HEREc:w
 
 # Thanks Childz
@@ -167,7 +169,7 @@ bindsym $mod+Shift+c exec $HOME/.dotfiles/stow-wm/i3/.config/i3/scripts/lock.sh
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec exit
+bindsym $mod+Shift+e exec i3-msg exit
 
 # screenshots
 bindsym $mod+s exec "flameshot gui"
@@ -218,14 +220,14 @@ exec --no-startup-id i3-msg 'workspace $ws7; layout tabbed; workspace $ws1'
 exec --no-startup-id $terminal
 exec --no-startup-id kanata -c $HOME/.config/kanata/config.kbd
 exec --no-startup-id zen-browser 
-exec --no-startup-id spotify-launcher
+exec --no-startup-id spotify
 exec --no-startup-id 64gram-desktop
 # exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/
 # exec --no-startup-id PureRef
 # exec --no-startup-id krita --nosplash
 exec --no-startup-id dunst
 exec --no-startup-id caffeine
-exec --no-startup-id volumeicon
+exec --no-startup-id sleep 5 && volumeicon
 exec --no-startup-id megasync && megasync
 
 # Attaching apps to workpaces

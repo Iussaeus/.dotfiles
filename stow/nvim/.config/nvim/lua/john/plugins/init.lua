@@ -12,7 +12,7 @@ return {
 		'numToStr/Comment.nvim',
 		config = function()
 			require 'Comment'.setup()
-				vim.keymap.del("n" ,"gbc")
+			vim.keymap.del("n", "gbc")
 		end
 	},
 	{
@@ -33,7 +33,34 @@ return {
 		config = function()
 			local todo = require 'todo-comments'
 
-			todo.setup()
+			todo.setup({
+				keywords = {
+					FIX = {
+						icon = " ", -- icon used for the sign, and in search results
+						color = "error", -- can be a hex color, or a named color (see below)
+						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+						-- signs = false, -- configure signs for some keywords individually
+					},
+					TODO = { icon = " ", color = "info" },
+					HACK = { icon = " ", color = "warning" },
+					WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+					NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+					TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+					fix = {
+						icon = " ", -- icon used for the sign, and in search results
+						color = "error", -- can be a hex color, or a named color (see below)
+						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+						-- signs = false, -- configure signs for some keywords individually
+					},
+					todo = { icon = " ", color = "info" },
+					hack = { icon = " ", color = "warning" },
+					warn = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					perf = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+					note = { icon = " ", color = "hint", alt = { "INFO" } },
+					test = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+				}
+			})
 
 			vim.keymap.set("n", "<leader>tdf", "<cmd>TodoTelescope<cr>")
 			vim.keymap.set("n", "<leader>tdl", "<cmd>TodoLocList<cr>")
@@ -56,16 +83,6 @@ return {
 				end,
 			})
 		end
-	},
-	{
-		'rebelot/terminal.nvim',
-		config = function()
-			require("terminal").setup({ layout = { open_cmd = "botright new" }, })
-
-			local term_map = require("terminal.mappings")
-			vim.keymap.set("n", "<leader>to", term_map.toggle)
-			vim.keymap.set('t', '<esc><esc>', [[<C-\><C-n>]])
-		end,
 	},
 	{
 		"folke/snacks.nvim",
@@ -127,17 +144,5 @@ return {
 			{ "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
 			{ "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
 		},
-	},
-	{
-		'linux-cultist/venv-selector.nvim',
-		dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
-		branch = "regexp",
-		keys = {
-			{ '<leader>vs', '<cmd>VenvSelect<cr>' },
-			{ '<leader>vc', '<cmd>VenvSelectCached<cr>' },
-		},
-		config = function()
-			require'venv-selector'.setup()
-		end
 	},
 }
