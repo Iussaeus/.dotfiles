@@ -6,8 +6,8 @@ return {
 		keymaps = {
 			["<C-h>"] = false,
 			["<C-l>"] = false,
-			["<leader>p"] = "actions.preview",
-			["<c-p"] =false,
+			["<leader>p"] = false,
+			["<c-p"] = false,
 		},
 		columns = {
 			"icon",
@@ -24,7 +24,6 @@ return {
 	},
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 
-	-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 	lazy = false,
 	init = function()
 		vim.keymap.set("n", "<leader>pv", "<cmd>Oil<cr>")

@@ -10,23 +10,28 @@ return {
 			vim.g.VM_default_mappings = 0
 
 			vim.g.VM_maps = {
-				["Visual Cursors"]  = "<C-n>",
-				["Run Normal"]      = "<leader>nn",
-				["Run Visual"]      = "<leader>vv",
-				["Find Next"]       = "<C-n>",
-				["Find Prev"]       = "<C-p>",
+				["Run Normal"] = "<leader>n",
+				["Run Visual"] = "<leader>v",
+				["Run Macro"] = "<leader>m",
+				["Find Subword Under"] = "s",
+				["Find Under"] = "<c-n>",
+				["Find Prev"] = "<c-p>",
+				["Select All"] = "<leader>sa",
 				["Add Cursor Down"] = "<C-Down>",
-				["Add Cursor Up"]   = "<C-Up>",
-				["Align"]           = "<leader>a",
-				["Align Char"]      = "<leader>ac",
+				["Add Cursor Up"] = "<C-Up>",
+				["Start Regex Search"] = "<leader>/",
+				["Align"] = "<leader>a",
+				["Align Char"] = "<leader>ac",
+				["Align Regex"] = "<leader>ar",
+				["Visual Cursors"] = "<C-n>",
+				["Visual Regex"] = '/',
+				["Surround"] = "S",
+				["Tools Menu"] = "<leader>t",
 			}
 		end,
 
 		config = function()
-			vim.api.nvim_set_hl(0, "VM_Mono", { link = "Cursor" })
-			vim.api.nvim_set_hl(0, "VM_Extend", { link = "Visual" })
-			vim.api.nvim_set_hl(0, "VM_Cursor", { link = "Cursor" })
-			vim.api.nvim_set_hl(0, "VM_Insert", { link = "Cursor" })
+			vim.cmd('VMTheme codedark')
 		end,
 	},
 }
