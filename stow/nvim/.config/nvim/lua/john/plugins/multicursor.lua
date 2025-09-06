@@ -9,6 +9,7 @@ return {
             vim.g.VM_silent_exit = 1
             vim.g.VM_default_mappings = 0
 
+<<<<<<< HEAD
             vim.g.VM_maps = {
                 ["Run Normal"] = "<leader>n",
                 ["Run Visual"] = "<leader>v",
@@ -34,4 +35,31 @@ return {
             vim.cmd('VMTheme codedark')
         end,
     },
+=======
+			vim.g.VM_maps = {
+				["Run Normal"] = "<leader>n",
+				["Run Visual"] = "<leader>v",
+				["Run Macro"] = "<leader>m",
+				["Find Subword Under"] = "s",
+				["Find Under"] = "<c-n>",
+				["Find Prev"] = "<c-p>",
+				["Select All"] = "<leader>sa",
+				["Add Cursor Down"] = "<C-Down>",
+				["Add Cursor Up"] = "<C-Up>",
+				["Start Regex Search"] = "<leader>/",
+				["Align"] = "<leader>a",
+				["Align Char"] = "<leader>ac",
+				["Align Regex"] = "<leader>ar",
+				["Visual Cursors"] = "<C-n>",
+				["Visual Regex"] = '/',
+				["Surround"] = "S",
+				["Tools Menu"] = "<leader>t",
+			}
+		end,
+
+		config = function()
+			vim.cmd('VMTheme codedark')
+		end,
+	},
+>>>>>>> 3c7a26e (changed the nvim config)
 }

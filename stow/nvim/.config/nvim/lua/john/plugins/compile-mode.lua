@@ -61,9 +61,6 @@ return {
 		vim.keymap.set("n", "<leader>cn", require 'compile-mode'.next_error)
 		vim.keymap.set("n", "<leader>cp", require 'compile-mode'.prev_error)
 
-		local g = vim.api.nvim_create_augroup("compile_group",{})
-		vim.api.nvim_create_autocmd("VimEnter",{
-			command = "delcommand QuickfixErrors"
-		})
+		vim.api.nvim_create_autocmd("VimEnter", { command = "delcommand QuickfixErrors" })
 	end,
 }

@@ -1,5 +1,4 @@
 return {
-	'nvim-tree/nvim-web-devicons',
 	{
 		'windwp/nvim-autopairs',
 		opts = {
@@ -20,17 +19,14 @@ return {
 		version = "*",
 		event = "VeryLazy",
 		config = function()
-			require("nvim-surround").setup({
-				keymaps = {
-					normal = "s"
-				}
-			})
+			require("nvim-surround").setup({ keymaps = { normal = "s" } })
 		end
 	},
 	{
 		'folke/todo-comments.nvim',
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
+<<<<<<< HEAD
 			local todo = require 'todo-comments'
 
 			todo.setup({
@@ -62,6 +58,9 @@ return {
 				}
 			})
 
+=======
+			require 'todo-comments'.setup()
+>>>>>>> 3c7a26e (changed the nvim config)
 			vim.keymap.set("n", "<leader>tdf", "<cmd>TodoTelescope<cr>")
 			vim.keymap.set("n", "<leader>tdl", "<cmd>TodoLocList<cr>")
 		end
@@ -85,6 +84,7 @@ return {
 		end
 	},
 	{
+<<<<<<< HEAD
 		"folke/snacks.nvim",
 		keys = {
 			{ "<leader>ss", function() require 'snacks'.scratch.open({ name = "scratch", icon = "*", ft = "markdown" }) end },
@@ -129,10 +129,10 @@ return {
 		end
 	},
 	{
+=======
+>>>>>>> 3c7a26e (changed the nvim config)
 		"mbbill/undotree",
-		init = function()
-			vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-		end
+		init = function() vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle) end
 	},
 	{
 		"chrisgrieser/nvim-spider",
