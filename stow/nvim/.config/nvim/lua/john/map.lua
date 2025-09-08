@@ -3,10 +3,10 @@ vim.g.mapleader = " "
 
 vim.keymap.set("i", "<c-h>", "<esc>vbda")
 
-vim.api.nvim_create_user_command("W", "w", {desc = "write"})
-vim.api.nvim_create_user_command("Wq", "wq", {desc = "write'n'quit"})
-vim.api.nvim_create_user_command("WQ", "wq", {desc = "write'n'quit"})
-vim.api.nvim_create_user_command("Q", "q", {desc = "quit"})
+vim.api.nvim_create_user_command("W", "w", { desc = "write" })
+vim.api.nvim_create_user_command("Wq", "wq", { desc = "write'n'quit" })
+vim.api.nvim_create_user_command("WQ", "wq", { desc = "write'n'quit" })
+vim.api.nvim_create_user_command("Q", "q", { desc = "quit" })
 
 -- Go to Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -41,10 +41,6 @@ vim.keymap.set({ "n", "v" }, "_", [[0w]])
 
 -- Change all ocurences of the current word at the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
--- TODO: move to ftplugin
--- go special
-vim.keymap.set("n", "<leader>en", "oif err != nil {<CR>return err<CR>}<ESC>k_v$h")
 
 -- Pane navigation
 -- TODO: keymap for deleting every pane but the focused one

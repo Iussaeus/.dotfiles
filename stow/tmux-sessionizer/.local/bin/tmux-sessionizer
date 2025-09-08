@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+
+# TODO: instead of selecting the path, select the session, maybe add that as a flag or something
+# TODO: use a map to map the session name to the realpath of the session
+# TODO: add id to the session to use them w
+
 select_dir() {
     sessions=()
     if ! [[ -z $(pgrep tmux) ]]; then
