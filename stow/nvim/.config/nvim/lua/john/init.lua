@@ -41,17 +41,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.cmd "wincmd L"
         vim.cmd "wincmd 35<"
     end
-	pattern = { "*" },
-	callback = function()
-		if vim.fn.expand("%:p"):match(".*tgpt") then
-			vim.cmd "wincmd L"
-			vim.cmd "wincmd 35<"
-		else
-			vim.cmd "wincmd J"
-			vim.cmd "wincmd 10-"
-		end
-	end
 })
-
 
 require("lazy").setup('john.plugins')
