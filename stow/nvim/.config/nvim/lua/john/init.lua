@@ -35,12 +35,4 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "copilot-chat" },
-  callback = function()
-    vim.cmd "wincmd L"
-    vim.cmd "wincmd 35<"
-  end
-})
-
 require("lazy").setup('john.plugins')

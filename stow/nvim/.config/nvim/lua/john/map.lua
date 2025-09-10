@@ -37,7 +37,6 @@ vim.keymap.set("n", "G", "Gzz")
 -- Copy stuff to + register(clipboard)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({ "n", "v" }, "_", [[0w]])
 
 -- Change all ocurences of the current word at the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
