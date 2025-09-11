@@ -11,7 +11,6 @@ return {
     'numToStr/Comment.nvim',
     config = function()
       require 'Comment'.setup()
-      vim.keymap.del("n", "gbc")
     end
   },
   {

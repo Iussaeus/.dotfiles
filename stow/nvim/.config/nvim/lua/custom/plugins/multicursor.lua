@@ -9,6 +9,7 @@ return {
       vim.g.VM_silent_exit = 1
       vim.g.VM_default_mappings = 0
       vim.g.VM_maps = {
+        ["Switch Mode"] = "v",
         ["Run Normal"] = "<leader>n",
         ["Run Visual"] = "<leader>v",
         ["Run Macro"] = "<leader>m",

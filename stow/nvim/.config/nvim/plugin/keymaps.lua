@@ -1,15 +1,11 @@
--- Leader key
-vim.g.mapleader = " "
-
-vim.keymap.set("i", "<c-h>", "<esc>vbda")
-
 vim.api.nvim_create_user_command("W", "w", { desc = "write" })
 vim.api.nvim_create_user_command("Wq", "wq", { desc = "write'n'quit" })
 vim.api.nvim_create_user_command("WQ", "wq", { desc = "write'n'quit" })
 vim.api.nvim_create_user_command("Q", "q", { desc = "quit" })
 
--- Go to Explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- Tab navigation, not tha I need it
+vim.keymap.set("n", "<left>", "gT")
+vim.keymap.set("n", "<right>", "gt")
 
 -- Get the hell out
 vim.keymap.set("n", "q:", "<NOP>")
@@ -49,7 +45,7 @@ vim.keymap.set("n", "<leader>h", "<C-W>h_")
 vim.keymap.set("n", "<leader>j", "<C-W>j_")
 vim.keymap.set("n", "<leader>k", "<C-W>k_")
 vim.keymap.set("n", "<leader>l", "<C-W>l_")
-vim.keymap.set("n", "<leader>H", "<C-W>10<")
-vim.keymap.set("n", "<leader>J", "<C-W>10+")
-vim.keymap.set("n", "<leader>K", "<C-W>10-")
-vim.keymap.set("n", "<leader>L", "<C-W>10>")
+vim.keymap.set("n", "<M-n>", "<C-W>5<")
+vim.keymap.set("n", "<M-.>", "<C-W>5>")
+vim.keymap.set("n", "<M-,>", "<C-W>5+")
+vim.keymap.set("n", "<M-m>", "<C-W>5-")
