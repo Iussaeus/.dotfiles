@@ -13,50 +13,50 @@ session_name=$(basename $3 | tr '.' '_')
 tmux_found=false
 
 check_kitty_children() {
-    kitty_pids=$(pgrep kitty)
+	kitty_pids=$(pgrep kitty)
 
-    if [ -z "$kitty_pids" ]; then
-        return
-    fi
+	if [ -z "$kitty_pids" ]; then
+		return
+	fi
 
 
-    for pid in $kitty_pids; do
-        child_processes=$(pgrep -P "$pid")
+	for pid in $kitty_pids; do
+		child_processes=$(pgrep -P "$pid")
 
-        for child_pid in $child_processes; do
-					if ps -p "$child_pid" -o comm= | grep -q "tmux"; then
-						tmux_found=true
-						break
-					fi
-				done
-    done
+		for child_pid in $child_processes; do
+			if ps -p "$child_pid" -o comm= | grep -q "tmux"; then
+				tmux_found=true
+				break
+			fi
+		done
+	done
 }
 
 start_server() {
-		tmux & 
-    tmux new-session -d -s "$session_name" -c "$3"
-		tmux new-window -t "$session_name:1" "$nvim_exec --listen $server_path"
-		tmux select-window -t 1
+	tmux & 
+	tmux new-session -d -s "$session_name" -c "$3"
+	tmux new-window -t "$session_name:1" "$nvim_exec --listen $server_path '$3'"
+	tmux select-window -t 1
+	$nvim_exec --server $server_path --remote-send ":cd $3@<CR>"
+
+	$nvim_exec --server $server_path --remote-send ":e $1@<CR>"
+	$nvim_exec --server $server_path --remote-send ":call cursor($2)@<CR>"
 }
 
 open_file_in_server() {
-    # Escape stuff because nvim will not
-    filename=$(printf %q "$1")
-    
-    line_col="$2"
-    
-		$nvim_exec --server $server_path --remote-send "<C-\\><C-n>:e $filename<CR>:call cursor($line_col)<cr>:cd '$3'<CR>)"
+	$nvim_exec --server $server_path --remote-send ":e $1@<CR>"
+	$nvim_exec --server $server_path --remote-send ":call cursor($2)@<CR>"
 
-		check_kitty_children
+	check_kitty_children
 
-		if  ! $tmux_found; then 
-			$term_exec --title "Godot" -e tmux attach -t "$session_name"
-		fi
+	if  ! $tmux_found; then 
+		$term_exec --title "Godot" -e tmux attach -t "$session_name"
+	fi
 }
 
 if ! [ -e "$server_path" ]; then
-    start_server &
-    sleep $server_startup_delay 
+	start_server "$1" "$2" "$3" &
+	sleep $server_startup_delay 
 fi
 
 open_file_in_server "$1" "$2"

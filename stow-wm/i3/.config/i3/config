@@ -220,9 +220,9 @@ exec --no-startup-id kanata -c $HOME/.config/kanata/config.kbd
 exec --no-startup-id zen-browser 
 exec --no-startup-id spotify-launcher
 exec --no-startup-id 64gram-desktop
-# exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/
-# exec --no-startup-id PureRef
-# exec --no-startup-id krita --nosplash
+exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/
+exec --no-startup-id PureRef
+exec --no-startup-id krita --nosplash
 exec --no-startup-id dunst
 exec --no-startup-id caffeine
 exec --no-startup-id volumeicon
