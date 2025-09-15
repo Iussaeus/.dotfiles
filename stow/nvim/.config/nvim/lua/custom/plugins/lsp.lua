@@ -33,7 +33,7 @@ return {
       vim.opt.completeopt = { "menuone", "popup", "fuzzy" }
 
       vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
-      vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.jump({ count = 1 }) end)
+      vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.jump({ count = 1, severity = "ERROR" }) end)
       vim.keymap.set("n", "<leader>ad", function() vim.diagnostic.setloclist() end)
       vim.keymap.set("n", "<leader>e", function() vim.diagnostic.jump({ count = -1 }) end)
       vim.keymap.set("n", "<leader>pe", function() vim.diagnostic.jump({ count = -1, severity = "ERROR" }) end)
