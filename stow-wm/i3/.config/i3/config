@@ -56,10 +56,10 @@ exec systemctl start bluetooth.service
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls 
-bindsym XF86AudioPlay exec playerctl -p spotify play-pause
-bindsym XF86AudioPause exec playerctl -p spotify pause 
-bindsym XF86AudioNext exec playerctl -p spotify next 
-bindsym XF86AudioPrev exec playerctl -p spotify previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause 
+bindsym XF86AudioNext exec playerctl next 
+bindsym XF86AudioPrev exec playerctl previous
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec brightnessctl set 10%+

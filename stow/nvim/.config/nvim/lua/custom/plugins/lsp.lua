@@ -45,7 +45,18 @@ return {
       vim.keymap.set("n", "K", vim.lsp.buf.hover)
       vim.keymap.set("i", "<C-space>", vim.lsp.completion.get)
 
-      lsp.gopls.setup {}
+      if lsp.gopls ~= nil then
+        lsp.gopls.setup {}
+      end
+
+      if lsp.ols ~= nil then
+        lsp.ols.setup {}
+      end
+
+      if lsp.clangd ~= nil then
+        lsp.clangd.setup {}
+      end
+
       lsp.lua_ls.setup {
         settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } }
     end,
