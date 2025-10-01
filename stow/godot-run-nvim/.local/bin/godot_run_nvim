@@ -37,21 +37,17 @@ start_server() {
 	tmux new-session -d -s "$session_name" -c "$3"
 	tmux new-window -t "$session_name:1" "$nvim_exec --listen $server_path '$3'"
 	tmux select-window -t 1
-	$nvim_exec --server $server_path --remote-send ":cd $3@<CR>"
+	$nvim_exec --server $server_path --remote-send "<esc>:cd $3@<CR>"
 
-	$nvim_exec --server $server_path --remote-send ":e $1@<CR>"
-	$nvim_exec --server $server_path --remote-send ":call cursor($2)@<CR>"
+	$nvim_exec --server $server_path --remote-send "<esc>:e $1@<CR>"
+	$nvim_exec --server $server_path --remote-send "<esc>call cursor($2)@<CR>"
 }
 
 open_file_in_server() {
-	$nvim_exec --server $server_path --remote-send ":e $1@<CR>"
-	$nvim_exec --server $server_path --remote-send ":call cursor($2)@<CR>"
+	$nvim_exec --server $server_path --remote-send "<esc>:e $1@<CR>"
+	$nvim_exec --server $server_path --remote-send "<esc>:call cursor($2)@<CR>"
 
-	check_kitty_children
-
-	if  ! $tmux_found; then 
-		$term_exec --title "Godot" -e tmux attach -t "$session_name"
-	fi
+    tmux attach -t "$session_name"
 }
 
 if ! [ -e "$server_path" ]; then

@@ -57,6 +57,10 @@ return {
         lsp.clangd.setup {}
       end
 
+      if lsp.omnisharp ~= nil then
+        lsp.omnisharp.setup { cmd = { "omnisharp" } }
+      end
+
       lsp.lua_ls.setup {
         settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } } }
     end,
