@@ -25,7 +25,11 @@ return {
           '%.png$',
           '%.svg$',
           '%.glb$',
+          '%.uid$',
+          '%.x86_64$',
+          'vendor/',
           '.git/',
+          '.godot/',
         },
       },
       pickers = {
