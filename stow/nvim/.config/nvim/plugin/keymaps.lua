@@ -49,3 +49,6 @@ vim.keymap.set("n", "<M-n>", "<C-W>5<")
 vim.keymap.set("n", "<M-.>", "<C-W>5>")
 vim.keymap.set("n", "<M-,>", "<C-W>5+")
 vim.keymap.set("n", "<M-m>", "<C-W>5-")
+
+-- Terminal only mappings
+vim.api.nvim_set_keymap('t', '<esc><esc>', '<C-\\><C-n>', { noremap = true, silent = true })

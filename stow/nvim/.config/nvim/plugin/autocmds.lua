@@ -1,6 +1,8 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "man" },
+  pattern = { "help", "man", "fugitive" },
   callback = function()
+    vim.cmd "set winfixheight"
+    vim.cmd "set winfixheight"
     vim.cmd "wincmd L"
     vim.cmd "wincmd 25<"
   end
@@ -9,13 +11,35 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = { "*" },
   callback = function()
-    if vim.fn.expand("%:p"):match(".*tgpt") then
-      vim.cmd "wincmd L"
-      vim.cmd "wincmd 35<"
-    else
-      vim.cmd "wincmd J"
-      vim.cmd "wincmd 10-"
+    if vim.g.terminalbuf ~= nil and vim.api.nvim_buf_is_valid(vim.g.terminalbuf) then
+      vim.api.nvim_buf_delete(vim.g.terminalbuf, { force = true })
     end
+    vim.g.terminalbuf = vim.api.nvim_win_get_buf(0)
+
+    vim.cmd "set winfixheight"
+    vim.cmd "set winfixheight"
+    vim.cmd "wincmd J"
+    vim.cmd "wincmd 10-"
+    vim.keymap.set("n", "q", "<cmd>q!<cr>", { noremap = true, silent = true, buffer = true })
+  end
+})
+
+vim.api.nvim_create_autocmd("BufDelete", {
+  pattern = { "term://*" },
+  callback = function()
+    if vim.g.terminalbuf ~= nil then
+      vim.keymap.del("n", "q", { buffer = vim.g.terminalbuf })
+    end
+  end
+})
+
+vim.api.nvim_create_autocmd("Filetype", {
+  pattern = { "compilation" },
+  callback = function()
+    vim.cmd "set winfixheight"
+    vim.cmd "set winfixheight"
+    vim.cmd "wincmd J"
+    vim.cmd "wincmd 10-"
   end
 })
 
@@ -33,6 +57,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.diagnostic.enable()
   end
 })
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
   callback = function(args)
