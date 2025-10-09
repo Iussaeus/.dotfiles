@@ -8,6 +8,17 @@ vim.api.nvim_create_autocmd("FileType", {
   end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*compilation*" },
+  callback = function()
+    vim.cmd "set winfixheight"
+    vim.cmd "set winfixheight"
+    vim.cmd "wincmd J"
+    vim.cmd "resize 20"
+  end
+})
+
+
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = { "*" },
   callback = function()
@@ -19,7 +30,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd "set winfixheight"
     vim.cmd "set winfixheight"
     vim.cmd "wincmd J"
-    vim.cmd "wincmd 10-"
+    vim.cmd "resize 20"
     vim.keymap.set("n", "q", "<cmd>q!<cr>", { noremap = true, silent = true, buffer = true })
   end
 })
@@ -30,16 +41,6 @@ vim.api.nvim_create_autocmd("BufDelete", {
     if vim.g.terminalbuf ~= nil then
       vim.keymap.del("n", "q", { buffer = vim.g.terminalbuf })
     end
-  end
-})
-
-vim.api.nvim_create_autocmd("Filetype", {
-  pattern = { "compilation" },
-  callback = function()
-    vim.cmd "set winfixheight"
-    vim.cmd "set winfixheight"
-    vim.cmd "wincmd J"
-    vim.cmd "wincmd 10-"
   end
 })
 

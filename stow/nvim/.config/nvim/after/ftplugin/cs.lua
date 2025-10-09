@@ -8,6 +8,7 @@ local scene = {}
 local run_gd_scene = function()
   local filename = vim.fn.expand('%:t') .. ".uid"
   local uid_path = vim.fs.find({ filename }, { limit = math.huge, type = 'file', path = vim.fn.getcwd() })[1]
+
   if not uid_path then
     vim.notify("No uid found.", vim.log.levels.ERROR)
     return
@@ -21,9 +22,10 @@ local run_gd_scene = function()
 
     local cmd = 'grep ' ..
         uid ..
-        ' --recursive --files-with-matches ' ..
+        ' --recursive ' ..
+        '--files-with-matches ' ..
         '--exclude "project.godot" ' ..
-        '--exclude-dir ".git/" --exclude-dir ".godot/" ' ..
+        '--exclude-dir ".git/" --exclude-dir ".godot/" --exclude-dir "bin/" ' ..
         '--exclude "' .. vim.fn.fnamemodify(uid_path, ":t") .. '"'
 
     scene_path = vim.fn.system(cmd):gsub("\n", "")
@@ -57,9 +59,10 @@ local run_gd_project = function()
 
     local cmd = 'grep ' ..
         main_scene_uid ..
-        ' --recursive --files-with-matches ' ..
+        ' --recursive ' ..
+        '--files-with-matches ' ..
         '--exclude "project.godot" ' ..
-        '--exclude-dir ".git/" --exclude-dir ".godot/"'
+        '--exclude-dir ".git/" --exclude-dir ".godot/" --exclude-dir "bin/" '
 
     main_scene_path = vim.fn.system(cmd):gsub("\n", "")
     main_scene_path_cached = main_scene_path
@@ -68,7 +71,7 @@ local run_gd_project = function()
   end
 
   vim.cmd('split')
-  vim.cmd('terminal dotnet build &&  godot-mono -d --path "' .. vim.fn.getcwd() .. '" --scene "' .. main_scene_path .. '"')
+  vim.cmd('terminal dotnet build && godot-mono -d --path "' .. vim.fn.getcwd() .. '" --scene "' .. main_scene_path .. '"')
 end
 
 if vim.uv.fs_stat(vim.fn.getcwd() .. '/project.godot') then
