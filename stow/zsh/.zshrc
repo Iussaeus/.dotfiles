@@ -16,6 +16,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 alias vim=nvim
 
+unsetopt sharehistory
+
 export EDITOR=nvim
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/share/JetBrains/Toolbox/scripts/:$PATH
@@ -513,3 +515,5 @@ _dlv()
 if [ "$funcstack[1]" = "_dlv" ]; then
     _dlv
 fi
+
+ZELLIJ_SESSIONIZER_SEARCH_PATHS="$HOME/code"

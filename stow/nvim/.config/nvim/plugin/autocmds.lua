@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "man", "fugitive" },
+  pattern = { "help", "man",  "git" },
   callback = function()
     vim.cmd "set winfixheight"
     vim.cmd "set winfixheight"

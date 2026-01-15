@@ -1,9 +1,5 @@
 return {
   {
-    'xiyaowong/transparent.nvim',
-    lazy = false,
-  },
-  {
     'Mofiqul/vscode.nvim',
     init = function()
       local c = require 'vscode.colors'.get_colors()
@@ -23,8 +19,8 @@ return {
       vim.opt.list = true
       vim.cmd.colorscheme 'vscode'
       vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•', eol = '↵' }
-      vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#404040')
-      vim.cmd('highlight NonText ctermfg=darkgrey guifg=#606060')
+      vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#303030')
+      vim.cmd('highlight NonText ctermfg=darkgrey guifg=#505050')
     end,
   },
 }

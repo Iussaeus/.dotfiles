@@ -3,7 +3,7 @@ vim.api.nvim_create_user_command("Wq", "wq", { desc = "write'n'quit" })
 vim.api.nvim_create_user_command("WQ", "wq", { desc = "write'n'quit" })
 vim.api.nvim_create_user_command("Q", "q", { desc = "quit" })
 
--- Tab navigation, not tha I need it
+-- Tab navigation, not that I need it
 vim.keymap.set("n", "<left>", "gT")
 vim.keymap.set("n", "<right>", "gt")
 
@@ -52,3 +52,8 @@ vim.keymap.set("n", "<M-m>", "<C-W>5-")
 
 -- Terminal only mappings
 vim.api.nvim_set_keymap('t', '<esc><esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
+
+vim.keymap.set('n', '<up>', ':cnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<down>', ':cprevious<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>qfo', ':copen<CR>', { noremap = true, silent = true })

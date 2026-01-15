@@ -1,5 +1,7 @@
 return {
   'stevearc/oil.nvim',
+  lazy = false,
+  default_file_explorer = true,
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
@@ -24,9 +26,7 @@ return {
     watch_for_changes = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  lazy = false,
-  default_file_explorer = true,
   init = function()
-    vim.keymap.set("n", "<leader>pv", "<cmd>Oil<cr>")
+    vim.keymap.set("n", "<leader>pd", "<cmd>Oil<cr>")
   end,
 }
