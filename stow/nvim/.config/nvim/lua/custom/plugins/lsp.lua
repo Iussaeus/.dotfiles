@@ -43,6 +43,7 @@ return {
       vim.keymap.set("n", "<leader>ad", function() vim.diagnostic.setloclist() end)
       vim.keymap.set("n", "<leader>e", function() vim.diagnostic.jump({ count = -1 }) end)
       vim.keymap.set("n", "<leader>pe", function() vim.diagnostic.jump({ count = -1, severity = "ERROR" }) end)
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition)
       vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
       vim.keymap.set("i", "<C-space>", vim.lsp.completion.get)
 
