@@ -59,6 +59,14 @@ install-hyprland-pkgs() {
 	done
 }
 
+install-sway-pkgs() {
+	echo -e "[${Cya}+${Whi}] Installing sway packages"
+	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/sway_aur_pkg_list)
+	do
+		yay -Sy --noconfirm --needed $aur_pkg
+	done
+}
+
 post-install() {
 	local wm=$1
 	
@@ -70,7 +78,8 @@ post-install() {
 	
 	case $wm in
 		"i3") stow -v -d $stow_wm_dir -t $HOME i3 ;; 
-		"hyprland") stow -v -d $stow_wm_dir -t $HOME hyprland
+		"hyprland") stow -v -d $stow_wm_dir -t $HOME hyprland ;;
+		"hyprland") stow -v -d $stow_wm_dir -t $HOME sway
 	esac
 
 	stow -v -d $stow_dir -t $HOME *
@@ -86,6 +95,7 @@ post-install() {
 	sudo cp $HOME/.dotfiles/nobeep.conf /etc/modprobe.d/
 
 	# enable services
+	sudo systemctl enable --now com.system76.PowerDaemon.service
 	sudo systemctl enable bluetooth.service
 	sudo systemctl enable sddm
 
@@ -108,22 +118,28 @@ install-hyprland() {
 	install-hyprland-pkgs
 	post-install "hyprland"
 
-	sudo systemctl enable --now com.system76.PowerDaemon.service
-	hyprpm update -f
-	hyprpm reload -n
-	hyprpm add https://github.com/outfoxxed/hy3
-	hyprpm enable hy3
 }
 
-read -p "What wm (1)i3, (2)hyprland, (3)i3 no base pkgs, (4)hyprland no base pkgs: " choice
+install-sway() {
+	pre-install
+	install-base-pkgs
+	install-base-aur-pkgs
+	install-sway-pkgs
+	post-install "sway"
+}
+
+read -p "What wm? (1)i3, (2)hyprland, (3)sway, (4)i3 no base pkgs, (5)hyprland no base pkgs, (6)sway no base pkgs: " choice
 
 case $choice in
 	1) install-i3 ;;
 	2) install-hyprland ;;
-	3) install-i3-pkgs
+	3) install-sway ;;
+	4) install-i3-pkgs
 		post-install "i3" ;;
-	4) install-hyprland-pkgs
+	5) install-hyprland-pkgs
 		post-install "hyprland" ;;
+	5) install-sway-pkgs
+		post-install "sway" ;;
 	*)
 		echo "wrong option bucko"
 		exit 1

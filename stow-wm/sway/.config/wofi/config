@@ -1,0 +1,5 @@
+allow_images=true
+hide_scroll=true
+exec_search=true
+insensitive=true
+mode=drun
