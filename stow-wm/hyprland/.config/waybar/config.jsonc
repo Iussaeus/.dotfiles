@@ -17,7 +17,7 @@
 		"height": 30,
 
 		"modules-left": [ "mpris", "pulseaudio", "pulseaudio/slider", "privacy" ],
-		"modules-center": [ "sway/mode", "sway/workspaces" ],
+		"modules-center": [ "hyprland/workspaces" ],
 		"modules-right": [
 			"idle_inhibitor",
 			"disk",
@@ -84,20 +84,21 @@
 			}
 		},
 
-		"sway/workspaces": {
+		"hyprland/workspaces": {
 			"all-outputs": true,
 			"disable-scroll": true,
 			"format": "{icon}  {name}",
 			"format-icons": {
-				"1:Terminal": "", 
-				"2:Firefox": "󰖟", 
-				"3:Krita": " ", 
-				"4:Spotify": "󰓇",
-				"5:Telegram": " ",
-				"6:Steam": "",
-				"7:Code": "",
-				"10:Shadow Realm": "",
+				"1": "", 
+				"2": "󰖟", 
+				"3": " ", 
+				"4": "󰓇",
+				"5": " ",
+				"6": "",
+				"7": "",
+				"10": "",
 				"urgent": "",
+				"focused": "",
 				"default": ""
 			}
 		},
