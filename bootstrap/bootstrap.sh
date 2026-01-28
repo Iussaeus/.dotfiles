@@ -79,7 +79,7 @@ post-install() {
 	case $wm in
 		"i3") stow -v -d $stow_wm_dir -t $HOME i3 ;; 
 		"hyprland") stow -v -d $stow_wm_dir -t $HOME hyprland ;;
-		"hyprland") stow -v -d $stow_wm_dir -t $HOME sway
+		"sway") stow -v -d $stow_wm_dir -t $HOME sway
 	esac
 
 	stow -v -d $stow_dir -t $HOME *
