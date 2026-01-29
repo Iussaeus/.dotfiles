@@ -9,22 +9,22 @@ Aur_Helper="";
 
 pre-install() {
 	echo -e "[${Red}*${Whi}] Updating system.."
-	sudo pacman -Syu
+	sudo pacman -Syu --noconfirm
 
 	if ! pacman -Q git &> /dev/null; then
 		sudo pacman -Sy --noconfirm --needed git
 	fi
 	
 	if pacman -Q yay &>/dev/null; then
-		Aur_Helper = "yay"
+		Aur_Helper="yay"
 
 		echo -e "[${Red}+${Whi}] Found yay, skipping installation..."
 	elif pacman -Q paru &>/dev/null; then
-		Aur_Helper = "paru"
+		Aur_Helper="paru"
 
 		echo -e "[${Red}+${Whi}] Found paru, skipping installation..."
 	else
-		Aur_Helper = "yay"
+		Aur_Helper="yay"
 
 		echo -e "[${Red}+${Whi}] Installing yay"
 		git clone https://aur.archlinux.org/yay.git /tmp/yay-git-cloned
@@ -92,7 +92,12 @@ post-install() {
 	cd $stow_dir
 	
 	case $wm in
-		"i3") stow -v -d $stow_wm_dir -t $HOME i3 ;; 
+		"i3")
+		stow -v -d $stow_wm_dir -t $HOME i3 
+		# Copy touchpad config file
+		sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
+		;; 
+
 		"hyprland") stow -v -d $stow_wm_dir -t $HOME hyprland ;;
 		"sway") stow -v -d $stow_wm_dir -t $HOME sway
 	esac
@@ -100,9 +105,6 @@ post-install() {
 	stow -v -d $stow_dir -t $HOME *
 
 	cd $old_pwd
-
-	# Copy touchpad config file
-	sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
 
 	ln -sf $HOME/.dotfiles/Pictures $HOME
 
