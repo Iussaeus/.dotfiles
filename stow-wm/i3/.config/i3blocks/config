@@ -1,5 +1,5 @@
 [MUSIC]
-command=~/.config/i3blocks/spotify/spotify.sh
+command=[ "$(playerctl -p spotify status)" == "Playing" ] && playerctl -p spotify metadata --format "{{artist}} - {{title}} {{duration(position)}}"
 interval=1
 
 [DISK]
@@ -11,7 +11,7 @@ command=~/.config/i3blocks/battery/battery_info.sh
 interval=3
 
 [CPU]
-command=~/.config/i3blocks/cpu/cpu_info.sh
+command=mpstat 1 1 | awk '/Average:/ {printf("%s\n", $(NF-9))}' | awk '{ printf(" CPU:%6s% \n"), $1}'
 interval=repeat
 
 [USEDMEM]
@@ -23,7 +23,7 @@ command=free -h | awk '/Mem:/ { printf(" F: %5s \n",$7) }'
 interval=1
 
 [VOLUME]
-command=pactl get-sink-volume @DEFAULT_SINK@ | head -1 | awk '{print "V: " $5}'
+command=pactl get-sink-volume @DEFAULT_SINK@ | head -1 | awk '{ printf(" V: %4s\n"), $5}'
 interval=1
 signal=10
 
