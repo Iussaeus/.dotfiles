@@ -89,8 +89,8 @@
 			"disable-scroll": true,
 			"format": "{icon}  {name}",
 			"format-icons": {
-				"1:Terminal": "", 
-				"2:Firefox": "󰖟", 
+				"1:Kitty": "", 
+				"2:Zen": "󰖟", 
 				"3:Krita": " ", 
 				"4:Spotify": "󰓇",
 				"5:Telegram": " ",
