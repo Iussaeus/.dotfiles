@@ -84,6 +84,11 @@ post-install() {
 	local stow_dir="$HOME/.dotfiles/stow"
 	
 	local old_pwd=$(pwd)
+
+	rm $HOME/.bashrc
+	rm $HOME/.zshrc
+	rm $HOME/.bashrc_profile
+
 	cd $stow_dir
 	
 	case $wm in
