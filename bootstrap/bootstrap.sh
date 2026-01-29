@@ -5,6 +5,8 @@ Gre='\e[0;32m';
 Cya='\e[0;36m';
 Whi='\e[0;37m';
 
+Aur_Helper="";
+
 pre-install() {
 	echo -e "[${Red}*${Whi}] Updating system.."
 	sudo pacman -Syu
@@ -14,8 +16,16 @@ pre-install() {
 	fi
 	
 	if pacman -Q yay &>/dev/null; then
+		Aur_Helper = "yay"
+
 		echo -e "[${Red}+${Whi}] Found yay, skipping installation..."
-	else 
+	elif pacman -Q paru &>/dev/null; then
+		Aur_Helper = "paru"
+
+		echo -e "[${Red}+${Whi}] Found paru, skipping installation..."
+	else
+		Aur_Helper = "yay"
+
 		echo -e "[${Red}+${Whi}] Installing yay"
 		git clone https://aur.archlinux.org/yay.git /tmp/yay-git-cloned
 		cd /tmp/yay-git-cloned/
@@ -35,7 +45,7 @@ install-base-aur-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing AUR packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/aur_pkg_list)
 	do
-		yay -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -43,7 +53,7 @@ install-i3-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing i3 packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/i3_aur_pkg_list)
 	do
-		yay -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
 	done
 
 	# Copy rofi theme
@@ -55,7 +65,7 @@ install-hyprland-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing hyprland packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/hypr_aur_pkg_list)
 	do
-		yay -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -63,7 +73,7 @@ install-sway-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing sway packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/sway_aur_pkg_list)
 	do
-		yay -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
 	done
 }
 
