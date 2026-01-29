@@ -11,10 +11,6 @@ pre-install() {
 	echo -e "[${Red}*${Whi}] Updating system.."
 	sudo pacman -Syu --noconfirm
 
-	if ! pacman -Q git &> /dev/null; then
-		sudo pacman -Sy --noconfirm --needed git
-	fi
-	
 	if pacman -Q yay &>/dev/null; then
 		Aur_Helper="yay"
 
@@ -37,7 +33,7 @@ install-base-pkgs() {
 	echo -e "[${Red}+${Whi}] Installing repo packages"
 	for repo_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/pkg_list)
 	do
-		 sudo pacman -Sy --noconfirm --needed $repo_pkg
+		 sudo pacman -S --noconfirm --needed $repo_pkg
 	done
 }
 
@@ -45,7 +41,7 @@ install-base-aur-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing AUR packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/aur_pkg_list)
 	do
-		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -S --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -53,19 +49,15 @@ install-i3-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing i3 packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/i3_aur_pkg_list)
 	do
-		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -S --noconfirm --needed $aur_pkg
 	done
-
-	# Copy rofi theme
-	sudo cp /home/john/.dotfiles/stow/bash/rofi/breeze-dark.rasi /usr/share/rofi/themes/
-
 }
 
 install-hyprland-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing hyprland packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/hypr_aur_pkg_list)
 	do
-		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -S --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -73,7 +65,7 @@ install-sway-pkgs() {
 	echo -e "[${Cya}+${Whi}] Installing sway packages"
 	for aur_pkg in $(cat $HOME/.dotfiles/bootstrap/pkg_lists/sway_aur_pkg_list)
 	do
-		$Aur_Helper -Sy --noconfirm --needed $aur_pkg
+		$Aur_Helper -S --noconfirm --needed $aur_pkg
 	done
 }
 
@@ -87,7 +79,6 @@ post-install() {
 
 	rm $HOME/.bashrc
 	rm $HOME/.zshrc
-	rm $HOME/.bashrc_profile
 
 	cd $stow_dir
 	
