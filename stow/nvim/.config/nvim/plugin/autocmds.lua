@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "man",  "git" },
+  pattern = { "help", "man", "git" },
   callback = function()
     vim.cmd "set winfixheight"
     vim.cmd "set winfixheight"
@@ -56,6 +56,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = disable,
   callback = function()
     vim.diagnostic.enable()
+  end
+})
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = vim.api.nvim_create_augroup('cursor', {}),
+  callback = function()
+    vim.api.nvim_exec2("normal! zz", {})
   end
 })
 
