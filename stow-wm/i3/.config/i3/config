@@ -50,7 +50,7 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status pkill -SIGRTMIN+10 i3blocks
 exec systemctl start bluetooth.service
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id /home/devmadev/.dotfiles/stow-wm/i3/.config/i3/scripts/volume_up.sh && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 # bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -174,7 +174,7 @@ bindsym $mod+Shift+e exec i3-msg exit
 # screenshots
 bindsym $mod+s exec "flameshot gui"
  
-bindsym $mod+Ctrl+k exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/; exec --no-startup-id PureRef; exec --no-startup-id krita --nosplash
+bindsym $mod+Ctrl+k exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/, exec --no-startup-id PureRef, exec --no-startup-id krita --nosplash
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -221,7 +221,7 @@ exec --no-startup-id redshift
 exec --no-startup-id $terminal
 exec --no-startup-id kanata -c $HOME/.config/kanata/config.kbd
 exec --no-startup-id zen-browser 
-exec --no-startup-id spotify-launcher
+exec --no-startup-id spotify
 exec --no-startup-id 64gram-desktop
 exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/
 exec --no-startup-id PureRef

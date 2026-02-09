@@ -21,14 +21,10 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Center the cursor when navigating the code
-vim.keymap.set("n", "k", "k")
-vim.keymap.set("n", "j", "j")
-vim.keymap.set("n", "<C-d>", "<C-d>")
-vim.keymap.set("n", "<C-u>", "<C-u>")
-vim.keymap.set("n", "n", "nzv")
-vim.keymap.set("n", "N", "Nzv")
-vim.keymap.set("n", "gg", "gg")
-vim.keymap.set("n", "G", "G")
+local center_keymaps = { "<C-d>", "<C-u>", "u", "<C-r>", "n", "N", "gg", "G" }
+for _, keymap in ipairs(center_keymaps) do
+  vim.keymap.set("n", keymap, keymap .. "zz")
+end
 
 -- Copy stuff to + register(clipboard)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
