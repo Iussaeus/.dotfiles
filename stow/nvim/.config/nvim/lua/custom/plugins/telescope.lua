@@ -15,6 +15,8 @@ return {
       defaults = {
         file_ignore_patterns = {
           -- '%.log$',
+          '%.zip$',
+          '%.7z$',
           '%.tmp$',
           '%.bak$',
           '%.tscn$',
@@ -33,12 +35,19 @@ return {
       pickers = {
         find_files = {
           find_command = {
-            'rg',
-            '-l',
-            '.*',
-            '-uu',
-            '--color=never',
-            '--smart-case',
+            'find',
+            '.',
+            '-type',
+            'f',
+            '-not',
+            '-executable',
+            -- 'rg',
+            -- '--files',
+            -- -- '-l',
+            -- -- '.*',
+            -- '-uu',
+            -- '--color=never',
+            -- '--smart-case',
           },
         },
         live_grep = {

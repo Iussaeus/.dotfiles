@@ -17,6 +17,9 @@ return {
       "size",
       "mtime",
     },
+    win_options = {
+      winbar = "%{v:lua.require('oil').get_current_dir()}",
+    },
     constrain_cursor = "name",
     delete_to_trash = true,
     view_options = {

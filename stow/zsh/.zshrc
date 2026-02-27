@@ -29,3 +29,40 @@ export XDG_DATA_DIR=/var/lib/flatpak/exports/share:$XDG_DATA_DIR
 export XDG_DATA_DIR=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 
 alias zd=z
+
+calc() {
+    [[ $# -eq 0 ]] && return
+
+    local mode="dec"
+    local expr=""
+    if [ $# -gt 1 ]; then
+        while [[ $# -gt 0 ]]; do
+            case "$1" in
+                -b)     mode="bin"     ;;
+                -o)     mode="oct"     ;;
+                -x| -h) mode="hex"     ;;
+                *)      expr="$expr$1" ;;
+            esac;
+            shift
+        done
+    else
+        expr=$*
+    fi
+
+  case "$mode" in
+    bin) awk "
+      function tobin(n){
+        if(n==0) return \"0\"
+        s=\"\"; if(n<0){ n=-n; neg=1 } else neg=0
+        while(n>0){ s = (n%2) s; n = int(n/2) }
+        if(neg) s = \"-\" s
+        return s
+      }
+      BEGIN{ printf \"%s\n\", tobin($expr) }"
+      ;;
+    oct) awk "BEGIN{ printf \"0%o\n\", ($expr) }"  ;;
+    hex) awk "BEGIN{ printf \"0x%X\n\", ($expr) }" ;;
+    *)   awk "BEGIN{ printf \"%.3f\n\", ($expr) }" ;;
+  esac
+}
+

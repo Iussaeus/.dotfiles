@@ -3,6 +3,9 @@ vim.api.nvim_create_user_command("Wq", "wq", { desc = "write'n'quit" })
 vim.api.nvim_create_user_command("WQ", "wq", { desc = "write'n'quit" })
 vim.api.nvim_create_user_command("Q", "q", { desc = "quit" })
 
+vim.keymap.set("n", "<a-o>", "o<esc>k")
+vim.keymap.set("n", "<a-O>", "O<esc>j")
+
 -- Tab navigation, not that I need it
 vim.keymap.set("n", "<left>", "gT")
 vim.keymap.set("n", "<right>", "gt")
@@ -21,9 +24,10 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Center the cursor when navigating the code
-local center_keymaps = { "<C-d>", "<C-u>", "u", "<C-r>", "n", "N", "gg", "G" }
-for _, keymap in ipairs(center_keymaps) do
-  vim.keymap.set("n", keymap, keymap .. "zz")
+local centered_keymaps = { "<C-d>", "<C-u>", "u", "<C-r>", "n", "N", "gg", "G", "*", "#", "j", "k"}
+for _, keymap in ipairs(centered_keymaps) do
+  vim.keymap.set("n", keymap, keymap .. "zzzv")
+  vim.keymap.set("n", keymap, keymap .. "zzzv")
 end
 
 -- Copy stuff to + register(clipboard)
@@ -53,3 +57,7 @@ vim.api.nvim_set_keymap('t', '<esc><esc>', '<C-\\><C-n>', { noremap = true, sile
 vim.keymap.set('n', '<up>', ':cnext<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<down>', ':cprevious<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>qfo', ':copen<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<m-up>', ':lnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<m-down>', ':lprevious<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>lco', ':lopen<CR>', { noremap = true, silent = true })

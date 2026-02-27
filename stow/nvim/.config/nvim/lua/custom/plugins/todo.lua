@@ -6,30 +6,12 @@ return {
 
     todo.setup({
       keywords = {
-        FIX = {
-          icon = " ", -- icon used for the sign, and in search results
-          color = "error", -- can be a hex color, or a named color (see below)
-          alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-          -- signs = false, -- configure signs for some keywords individually
-        },
-        TODO = { icon = " ", color = "info" },
+        TODO = { icon = " ", color = "info", alt = { "todo", "Todo" }},
         HACK = { icon = " ", color = "warning" },
-        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-        PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-        TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
-        fix = {
-          icon = " ", -- icon used for the sign, and in search results
-          color = "error", -- can be a hex color, or a named color (see below)
-          alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-          -- signs = false, -- configure signs for some keywords individually
-        },
-        todo = { icon = " ", color = "info" },
-        hack = { icon = " ", color = "warning" },
-        warn = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-        perf = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-        note = { icon = " ", color = "hint", alt = { "INFO" } },
-        test = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX", "warn", "warning", "xxx", "Warn", "Warning" }},
+        NOTE = { icon = " ", color = "hint", alt = { "INFO", "info" }},
+        TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED", "testing", "passed", "failed", "Testing", "Passed", "Failed" }},
+        FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "fix", "fixme", "bug", "fixit", "Fix", "Issue", "Fixme", "Bug", "Fixit", "Issue" }},
       }
     })
     vim.keymap.set("n", "<leader>tdf", "<cmd>TodoTelescope<cr>")

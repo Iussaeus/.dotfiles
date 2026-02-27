@@ -59,18 +59,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end
 })
 
-vim.api.nvim_create_autocmd("CursorMoved", {
-  group = vim.api.nvim_create_augroup('cursor', {}),
-  callback = function()
-    local prev_line = vim.w.prev_line or vim.fn.line('.')
-    local curr_line = vim.fn.line('.')
-    vim.w.prev_line = curr_line
-    if math.abs(prev_line - curr_line) == 1 then
-      vim.api.nvim_exec2("normal! zz", {})
-    end
-  end
-})
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
   callback = function(args)
