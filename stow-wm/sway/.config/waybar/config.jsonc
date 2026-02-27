@@ -7,181 +7,175 @@
 // =============================================================================
 
 {
-		// -------------------------------------------------------------------------
-		// Global configuration
+        // -------------------------------------------------------------------------
+        // Global configuration
+        "layer": "top",
+        "position": "bottom",
+        "height": 20,
+        "modules-left": [
+            "sway/mode",
+            "sway/workspaces"
+        ],
+        "modules-center": [
+            // "privacy",
+            "mpris"
+        ],
+        "modules-right": [
+            "idle_inhibitor",
+            "disk",
+            "cpu",
+            "memory",
+            "pulseaudio",
+            "power-profiles-daemon",
+            "battery",
+            "clock",
+            "tray"
+        ],
 
-		"layer": "top",
+        // -------------------------------------------------------------------------
+        // Modules
+        // -------------------------------------------------------------------------
 
-		"position": "bottom",
+        "battery": {
+            "interval": 10,
+            "states": {
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "󰚥 {icon} ",
+            "format-discharging": " {icon} ",
+            "format-icons": [
+                "",
+                "",
+                "",
+                "",
+                "" 
+            ],
+            "tooltip": true,
+            "tooltip-format": "{capacity}% ({timeTo})"
+        },
+        "clock": {
+            "tooltip": false,
+            "interval": 10,
+            "format": "{:%H:%M %A %b %e %Y}"
+        },
+        "cpu": {
+            "interval": 5,
+            "format": "   {usage}%", // Icon: microchip
+            "states": {
+                "warning": 70,
+                "critical": 90
+            }
+        },
 
-		"height": 30,
+        "memory": {
+            "interval": 5,
+            "tooltip-format": "Used {used}GiB out of {total}GiB",
+            "format": "  {used}GiB", // Icon: memory
+            "states": {
+                "warning": 70,
+                "critical": 90
+            }
+        },
 
-		"modules-left": [ "mpris", "pulseaudio", "pulseaudio/slider", "privacy" ],
-		"modules-center": [ "sway/mode", "sway/workspaces" ],
-		"modules-right": [
-			"idle_inhibitor",
-			"disk",
-			"memory",
-			"cpu",
-			"power-profiles-daemon",
-			"battery",
-			"clock#date",
-			"clock#time",
-			"tray"
-		],
+        "sway/workspaces": {
+            "all-outputs": true,
+            "disable-scroll": true,
+            "format": "{icon} ",
+            "format-icons": {
+                "1": "", 
+                "2": "󰖟", 
+                "3": "", 
+                "4": "󰓇",
+                "5": "",
+                "6": "",
+                "7": "",
+                "10": "",
+                "urgent": "",
+                "default": ""
+            }
+        },
 
+        "pulseaudio": {
+            "scroll-step": 2,
+            "max-volume": 100,
+            "format": "{icon} {volume}%",
+            "format-muted": " 0%",
+            "format-icons": {
+                "headphones": "",
+                "handsfree": "",
+                "headset": "",
+                "default": [" ", "  "]
+            },
+            "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+            "on-click-right": "pwvucontrol",
+            "tooltip-format": "{volume}%"
+        },
 
-		// -------------------------------------------------------------------------
-		// Modules
-		// -------------------------------------------------------------------------
+        "tray": {
+            "icon-size": 13,
+            "show-passive-items": true
+        },
+        "mpris": {
+            "max-length": 45,
+            "format": "{player_icon}    {status_icon}  {position} | {length} {artist} - {title}",
+            "format-paused": "{player_icon}  {status_icon}  {position} | {length} <i>{artist} - {title}</i>",
+            "player-icons": {
+                "default": "",
+                "spotify": "󰓇",
+                "mpv": "🎵"
+            },
+            "status-icons": {
+                "playing": "▶",
+                "paused": "⏸"
+            },
+            "interval": 1
+            // "ignored-players": ["firefox"]
+        },
 
-		"battery": {
-			"interval": 10,
-			"states": {
-				"warning": 30,
-				"critical": 15
-			},
-			"format": "󰚥 {icon} ",
-			"format-discharging": " {icon} ",
-			"format-icons": [
-				"",
-				"",
-				"",
-				"",
-				"" 
-			],
-			"tooltip": true,
-			"tooltip-format": "{capacity}% ({timeTo})"
-		},
-
-		"clock#time": {
-			"interval": 1,
-			"format": "{:%H:%M:%S}",
-			"tooltip": false
-		},
-
-		"clock#date": {
-			"interval": 10,
-			"format": "  {:%e %b %Y}", // Icon: calendar-alt
-			"tooltip-format": "{:%e %B %Y}"
-		},
-
-		"cpu": {
-			"interval": 5,
-			"format": "   {usage}% ({load})", // Icon: microchip
-			"states": {
-				"warning": 70,
-				"critical": 90
-			}
-		},
-
-		"memory": {
-			"interval": 5,
-			"format": "  {used}GiB", // Icon: memory
-			"states": {
-				"warning": 70,
-				"critical": 90
-			}
-		},
-
-		"sway/workspaces": {
-			"all-outputs": true,
-			"disable-scroll": true,
-			"format": "{icon}  {name}",
-			"format-icons": {
-				"1:Kitty": "", 
-				"2:Zen": "󰖟", 
-				"3:Krita": " ", 
-				"4:Spotify": "󰓇",
-				"5:Telegram": " ",
-				"6:Steam": "",
-				"7:Code": "",
-				"10:Shadow Realm": "",
-				"urgent": "",
-				"default": ""
-			}
-		},
-
-		"pulseaudio": {
-			"scroll-step": 2,
-			"format": "{icon} ",
-			"format-bluetooth": "{icon} ",
-			"format-muted": "",
-			"format-icons": {
-				"headphones": "",
-				"handsfree": "",
-				"headset": "",
-				"default": ["", ""]
-			},
-			"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-			"on-click-right": "pwvucontrol"
-		},
-
-		"pulseaudio/slider": {
-			"min": 0,
-			"max": 100,
-			"orientation": "horizontal"
-		},
-
-		"tray": {
-			"icon-size": 18,
-			"spacing": 1,
-			"show-passive-items": true
-		},
-		"mpris": {
-			"format": "{player_icon}    {status_icon} {artist} - {title}  {position} | {length}",
-			"format-paused": "{player_icon}  {status_icon} <i>{artist} - {title}  {position} | {length}</i>",
-			"player-icons": {
-				"default": "",
-				"spotify": "󰓇",
-				"mpv": "🎵"
-			},
-			"status-icons": {
-				"playing": "▶",
-				"paused": "⏸"
-			},
-			"interval": 1,
-			"ignored-players": ["firefox"]
-		},
-
-		"power-profiles-daemon": {
-			"format": " {icon} ",
-			"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-			"tooltip": true,
-			"format-icons": {
-				"default": "",
-				"performance": "",
-				"balanced": "",
-				"power-saver": ""
-			}
-		},
-		"disk": {
-			"interval": 30,
-			"format": "   {free}",
-			"path": "/"
-		},
-		"privacy": {
-			"icon-spacing": -2,
-			"icon-size": 14,
-			"transition-duration": 250,
-			"modules": [
-				{
-					"type": "screenshare",
-					"tooltip": true,
-					"tooltip-icon-size": 14
-				},
-				{
-					"type": "audio-out",
-					"tooltip": true,
-					"tooltip-icon-size": 14
-				},
-				{
-					"type": "audio-in",
-					"tooltip": true,
-					"tooltip-icon-size": 14
-				}
-			]
-		}
+        "power-profiles-daemon": {
+            "format": " {icon} ",
+            "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+            "tooltip": true,
+            "format-icons": {
+                "default": "",
+                "performance": "",
+                "balanced": "",
+                "power-saver": ""
+            }
+        },
+        "disk": {
+            "interval": 30,
+            "format": "   {free}",
+            "path": "/"
+        },
+        "privacy": {
+            "icon-spacing": -10,
+            "icon-size": 14,
+            "transition-duration": 250,
+            "modules": [
+                {
+                    "type": "screenshare",
+                    "tooltip": true,
+                    "tooltip-icon-size": 14
+                },
+                {
+                    "type": "audio-out",
+                    "tooltip": true,
+                    "tooltip-icon-size": 14
+                },
+                {
+                    "type": "audio-in",
+                    "tooltip": true,
+                    "tooltip-icon-size": 14
+                }
+            ]
+        },
+        "idle_inhibitor": {
+            "format": "{icon} ",
+            "format-icons": {
+                "activated": "󰅶",
+                "deactivated": "󰾪"
+            }
+        }
 }
-
-
