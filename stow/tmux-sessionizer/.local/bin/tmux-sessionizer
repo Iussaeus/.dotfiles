@@ -21,9 +21,9 @@ done
 
 if [[ $# -eq 0 ]]; then
 	selected_session=$(
-		printf "%s\n" "${!sessions[@]}"                                                                                  |
-		awk ' /^\[TMUX\] /{t[++n]=$0; next} {o[++m]=$0} END{for(i=1;i<=n;i++) print t[i]; for(i=1;i<=m;i++) print o[i]}' |
-		fzf                                                                                                              |
+		printf "%s\n" "${!sessions[@]}"                                                                                              |
+		awk ' /^\[TMUX\] /{start[++n]=$0; next} {end[++m]=$0} END{for(i=1;i<=n;i++) print start[i]; for(i=1;i<=m;i++) print end[i]}' |
+		fzf                                                                                                                          |
 		sed 's/\[TMUX\] //'
 		)
 	printf "%s\n" "${!sessions[@]}" | sort -r > $HOME/log
