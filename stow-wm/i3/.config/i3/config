@@ -251,7 +251,7 @@ for_window [class="zenity"] move to workspace $ws6
 for_window [title="Godot" class="kitty"] move to workspace $ws7
 for_window [class="unityhub"] move to workspace $ws7
 for_window [class="Unity"] move to workspace $ws7
-for_window [title="tmux-sessionizer"] move to workspace $ws7
+for_window [title="^tmux-sessionizer$"] move to workspace $ws7
 
 exec --no-startup-id xrandr --output HDMI-1-0 --auto --right-of eDP
 for_window [class="zen"] move to workspace $ws2
