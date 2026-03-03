@@ -27,8 +27,19 @@ export PATH=$HOME/.local/share/flatpack/exports/share:$PATH
 export PATH=/var/lib/flatpak/exports/bin:$PATH
 export XDG_DATA_DIR=/var/lib/flatpak/exports/share:$XDG_DATA_DIR
 export XDG_DATA_DIR=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIR
+export TMUX_SESSIONIZER_PROJECTS_DIR="$HOME/code"
 
 alias zd=z
+
+# Allow Ctrl-z to toggle between suspend and resume 
+function Resume {  
+    fg
+    zle push-input 
+    BUFFER=""
+    zle accept-line
+} 
+zle -N Resume
+bindkey "^Z" Resume
 
 calc() {
     [[ $# -eq 0 ]] && return
@@ -49,20 +60,34 @@ calc() {
         expr=$*
     fi
 
-  case "$mode" in
-    bin) awk "
-      function tobin(n){
-        if(n==0) return \"0\"
-        s=\"\"; if(n<0){ n=-n; neg=1 } else neg=0
-        while(n>0){ s = (n%2) s; n = int(n/2) }
-        if(neg) s = \"-\" s
-        return s
-      }
-      BEGIN{ printf \"%s\n\", tobin($expr) }"
-      ;;
+    case "$mode" in
+        bin) awk "
+            function tobin(n){
+                if(n==0) return \"0\"
+                s=\"\"; if(n<0){ n=-n; neg=1 } else neg=0
+                while(n>0){ s = (n%2) s; n = int(n/2) }
+                if(neg) s = \"-\" s
+                return s
+            }
+        BEGIN{ printf \"%s\n\", tobin($expr) }"
+        ;;
     oct) awk "BEGIN{ printf \"0%o\n\", ($expr) }"  ;;
     hex) awk "BEGIN{ printf \"0x%X\n\", ($expr) }" ;;
     *)   awk "BEGIN{ printf \"%.3f\n\", ($expr) }" ;;
-  esac
+esac
 }
 
+# tmux-sessionizer completion with children of TMUX_SESSIONIZER_PROJECTS_DIR
+_tmux_sessionizer_dirs() {
+    local -a children
+    local d entry name
+    d=${~TMUX_SESSIONIZER_PROJECTS_DIR}
+    [[ -n $d && -d $d ]] || return 1
+    for entry in "$d"/*(/); do
+        [[ -n $entry ]] || continue
+        name=${entry:t}    # basename
+        children+=("${name%/}")
+    done
+    _describe -t tmux-sessionizer-dirs 'project directories' children
+}
+compdef '_arguments "*:project-dir:_tmux_sessionizer_dirs"' tmux-sessionizer
