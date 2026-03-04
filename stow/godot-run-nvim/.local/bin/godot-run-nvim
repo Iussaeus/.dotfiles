@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# WARN: Dont forget to set the Exec flags to: "{file}" "{line},{col}" "{project}"
+
+file=$1
+pos=$2
+session_name=$(basename $3 | tr '.' '_')
+server_path="/tmp/nvim_godot_$session_name"
+
+echo "f:$file pos:$2 sn:$session_name sp:$server_path" > $HOME/log
+
+if ! tmux has-session -t "$session_name" 2> /dev/null; then
+	tmux new-session -d -s "$session_name" -c "$3"
+	tmux new-window -t "$session_name:1" "nvim --listen $server_path"
+	tmux select-window -t 1
+
+	nvim --server $server_path --remote-send "<esc>:cd $3@<CR>"
+	sleep 0.5
+fi
+
+nvim --server $server_path --remote-send "<esc>:e $1@<CR>"
+nvim --server $server_path --remote-send "<esc>:call cursor($2)@<CR>"

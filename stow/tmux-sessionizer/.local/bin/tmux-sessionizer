@@ -7,7 +7,10 @@ declare -A sessions
 # TODO: fix colliding session names
 # TODO: do we need the -p flag ???
 
+NAME=$(basename "$0")
+
 SEARCH=1
+ATTACH=1
 HELP=0
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do 
 	case $1 in
@@ -31,8 +34,13 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
 			shift
 			break
 			;;
+		-x|--no-switch)
+			ATTACH=0
+			shift
+			break
+			;;
 		*)
-			echo "tmux-sessionizer: unknown flag $1"
+			echo "$NAME: unknown flag $1"
 			exit 1
 			;;
 	esac
@@ -41,24 +49,29 @@ done
 
 if [[ $HELP -eq 1 ]]; then
 	cat <<END
-Usage: tmux-sessionizer [OPTIONS]...
+Usage: ${NAME} [OPTIONS]...
 Manage tmux sessions in TMUX_SESSIONIZER_PROJECTS_DIR enviroment variable.
 
 Flags:
--n, --session-name    set the name of the session, if the directory exists in
-                      TMUX_SESSIONIZER_PROJECTS_DIR opens the session there else it creates directory
-                      with the session name
--p, --session-path    set the path of the session, creates the directory with
-                      all the children if they do not exist
--k, --kill-and-switch kills current session and switches to other if -n is
-                      specified switched to the specified session if no sessions remain exits tmux
--h, --help            print this help message
+-n, --session-name <name> set the name of the session, if the directory exists in
+                          TMUX_SESSIONIZER_PROJECTS_DIR opens the session there else it creates directory
+                          with the session name
+
+-p, --session-path <path> set the path of the session, creates the directory with
+                          all the children if they do not exist
+
+-k, --kill-and-switch     kills current session and switches to other if -n is
+                          specified switched to the specified session if no sessions remain exits tmux
+
+-x, --no-switch           don't switch to the sesssion
+
+-h, --help                print this help message
 END
 	exit 0
 fi
 
 if [[ ! -d "${TMUX_SESSIONIZER_PROJECTS_DIR:-$HOME/code}" ]]; then
-	echo 'tmux-sessionizer: missing ~/code or invalid path in TMUX_SESSIONIZER_PROJECTS_DIR'
+	echo "$NAME: missing ~/code or invalid path in TMUX_SESSIONIZER_PROJECTS_DIR"
 	exit 1
 fi
 
@@ -73,7 +86,7 @@ fi
 
 if [[ $KILL -eq 1 ]]; then
 	if [[ -z $TMUX ]]; then
-		echo 'tmux-sessionizer: not in a tmux session'
+		echo "$NAME: not in a tmux session"
 		exit 1
 	fi
 
@@ -102,9 +115,11 @@ for path in ${PATHS[@]}; do
 done
 
 for session in ${TMUX_SESSIONS[@]}; do
-	if [[ -n $TMUX ]] && [[ "$session" == "$(tmux list-sessions | awk -F: '/attached/{print $1}')" ]]; then
+	if [ "${session["$session"]}" == "default" ]; then
 		unset 'sessions["$session"]'
-	elif [[ $# -eq 0 ]] && [ -n "${sessions["$session"]}" ]; then
+	elif [[ -n $TMUX ]] && [[ "$session" == "$(tmux list-sessions | awk -F: '/attached/{print $1}')" ]]; then
+		unset 'sessions["$session"]'
+	elif [[ $# -eq 0 ]] || [[ $# -eq 1 ]] || [ -n "${sessions["$session"]}" ]; then
 		sessions["[TMUX] $session"]="${sessions["$session"]}"
 		unset 'sessions["$session"]'
 	fi
@@ -120,12 +135,12 @@ if [[ $SEARCH -eq 1 ]]; then
 fi
 
 if [[ -z "$selected_session" ]]; then
-	echo 'tmux-sessionizer: no session specified'
+	echo "$NAME: no session specified"
 	exit 1
 fi
 
 if [ $# -eq 1 ] && [[ -z "${sessions[$selected_session]}" ]] && [[ -z "${sessions[[TMUX] $selected_session]}" ]]; then
-	echo "tmux-sessionizer: can't find session '$selected_session'"
+	echo "$NAME: can't find session '$selected_session'"
 	exit 0
 fi
 
@@ -155,4 +170,6 @@ else
 	sub_cmd="switch-client"
 fi
 
-tmux "$sub_cmd" -t "$selected_session"
+if [ "$ATTACH" -eq 1 ]; then
+	tmux "$sub_cmd" -t "$selected_session"
+fi

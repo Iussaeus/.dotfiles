@@ -31,13 +31,14 @@ export TMUX_SESSIONIZER_PROJECTS_DIR="$HOME/code"
 
 alias zd=z
 
-# Allow Ctrl-z to toggle between suspend and resume 
 function Resume {  
+    [ -z "$(jobs)" ] && return
     fg
-    zle push-input 
-    BUFFER=""
-    zle accept-line
+    # restore position of the cursor
+    printf '\e[G\e[5A\e[0J'
+    zle reset-prompt
 } 
+
 zle -N Resume
 bindkey "^Z" Resume
 
@@ -60,6 +61,8 @@ calc() {
         expr=$*
     fi
 
+    expr=$(($expr))
+
     case "$mode" in
         bin) awk "
             function tobin(n){
@@ -71,9 +74,9 @@ calc() {
             }
         BEGIN{ printf \"%s\n\", tobin($expr) }"
         ;;
-    oct) awk "BEGIN{ printf \"0%o\n\", ($expr) }"  ;;
-    hex) awk "BEGIN{ printf \"0x%X\n\", ($expr) }" ;;
-    *)   awk "BEGIN{ printf \"%.3f\n\", ($expr) }" ;;
+    oct)  printf "0%o\n" $expr ;;
+    hex)  printf "0x%X\n" $expr ;;
+    *)    printf "%.3f\n" $expr ;;
 esac
 }
 
