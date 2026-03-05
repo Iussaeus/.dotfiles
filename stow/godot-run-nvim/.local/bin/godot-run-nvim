@@ -2,6 +2,10 @@
 
 # WARN: Dont forget to set the Exec flags to: "{file}" "{line},{col}" "{project}"
 
+if [ $# -ne 3 ]; then
+	exit 1
+fi
+
 file=$1
 pos=$2
 session_name=$(basename $3 | tr '.' '_')
