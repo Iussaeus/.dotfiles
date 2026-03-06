@@ -4,172 +4,382 @@ set -e
 
 declare -A sessions
 
-# TODO: fix colliding session names
-# TODO: do we need the -p flag ???
+# NOTE: for debbuging
+declare -p > /tmp/_env_before.$$
 
-NAME=$(basename "$0")
+print-help() {
+	cat <<END
+Usage: ${name} [OPTIONS]... <session>
+Manage tmux sessions in TMUX_SESSIONIZER_PROJECTS_DIR enviroment variable.
 
-SEARCH=1
-ATTACH=1
-HELP=0
+Options:
+-n, --session <session> open a new or existing session
+
+--show-session-info     options: session-file, history, server-sock
+
+-s, --save-session      save the current or selected session
+
+-k, --kill-and-switch   kills current or selected session and switch to other one
+
+--no-attach             don't attach to the new sesssion
+
+-h, --help              print this help message
+END
+}
+
+is-managed() {
+	if [ -z "$1" ]; then
+		return 1
+	fi
+
+	if [[ -z ${sessions[$1]} && -z ${sessions["[TMUX] $1"]} ]]; then
+		return 1
+	fi
+
+	if [ -n "$(pgrep tmux)" ]; then
+		if tmux has-session -t "$session" 2>/dev/null && ! tmux show-environment -t "$session" "TMUX_SESSIONIZER" > /dev/null 2>&1; then
+			return 1
+		fi
+	fi
+
+	return 0
+}
+
+debug-dump() {
+	local _session=$session
+	local _session_file="$HOME/.cache/$name/$_session" 
+	local _hist_file="$HOME/.cache/$name/${_session}_history" 
+	local _server_sock="/tmp/$name-$_session"
+	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
+		_session="$TMUX_SESSIONIZER_SESSION_NAME"
+		_session_file="$TMUX_SESSIONIZER_NVIM_SESSION_FILE"
+		_hist_file="$HOME/.cache/$name/${_session}_history" 
+		_server_sock="$TMUX_SESSIONIZER_NVIM_SERVER_SOCK"
+	fi
+
+	if is-managed "$_session"; then
+		local managed=true
+	else
+		local managed=false
+	fi
+
+	echo "search dir: $TMUX_SESSIONIZER_PROJECTS_DIR"
+	echo "name:$name, managed:$managed, session:$session, kill:$kill, search:$search, save:$save, attach:$attach"
+	if [[ -n $TMUX_SESSIONIZER && "$managed" == true ]]; then
+		echo "s:$_session sf:$_session_file, srv:$_server_sock"
+	fi
+
+	declare -p > /tmp/_env_after.$$
+	declare -- search="1"
+	comm -13 <(sort /tmp/_env_before.$$) <(sort /tmp/_env_after.$$) | sed 's/declare\s-. //'
+	rm -f /tmp/_env_before.$$ /tmp/_env_after.$$
+}
+
+kill-session() {
+	local attached_session
+	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
+		attached_session="$TMUX_SESSIONIZER_SESSION_NAME"
+	else
+		attached_session="$session"
+	fi
+
+	local last_session="${session:-$(tmux list-sessions -F '#S' | grep -vF "$attached_session" | head -n1)}"
+	if [ "$(tmux ls | wc -l)" -gt 1 ]; then
+		if [ "$last_session" == "default" ]; then
+			tmux kill-server
+		fi
+
+		if [ "$attach" -eq 1 ]; then
+			tmux switch-client -t "$last_session"
+		fi
+
+		tmux kill-session -t "$attached_session"
+	fi
+}
+
+save-session() {
+	local _session=$session
+	local _session_file="$HOME/.cache/$name/$_session" 
+	local _server_sock="/tmp/$name-$_session"
+	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
+		_session="$TMUX_SESSIONIZER_SESSION_NAME"
+		_session_file="$TMUX_SESSIONIZER_NVIM_SESSION_FILE"
+		_server_sock="$TMUX_SESSIONIZER_NVIM_SERVER_SOCK"
+	fi
+
+	if ! is-managed "$_session"; then
+		echo "$name: cannot save non-managed session"
+		return
+	fi
+
+	if [[ -z $_session || ! -e $_server_sock ]]; then
+		return
+	fi
+
+	if [ ! -d "$_session_file" ]; then
+		mkdir -p "$(dirname "$_session_file")"
+	fi
+
+	nvim --server "$_server_sock" --remote-send "<esc>:mksession! $_session_file<cr>"
+}
+
+find-sessions() {
+	for path in $(find "$project_dir" -mindepth 1 -maxdepth 1 -type d); do
+		sessions[$(basename "${path/./_}")]="$path"
+	done
+
+	if [ -z "$(pgrep tmux)" ]; then
+		return
+	fi
+
+	local attached_session="${TMUX_SESSIONIZER_SESSION_NAME:-$(tmux display-message -p '#S')}"
+	for s in $(tmux list-sessions -F "#S"); do
+		if [[ $s  == "default" ]]; then
+			unset 'sessions["$s"]'
+		elif [[ -n "${sessions[$s]}" ]]; then
+			sessions["[TMUX] $s"]="${sessions[$s]}"
+			unset 'sessions["$s"]'
+		fi
+	done
+}
+
+make-new-session() {
+	local session_file="$HOME/.cache/$name/$session"
+	local hist_file="$HOME/.cache/$name/${session}_history"
+	local server_sock="/tmp/$name-$session"
+	local session_path="${sessions["$session"]:-$(realpath "$project_dir/$session")}"
+
+	if [ -z "$(pgrep tmux)" ]; then
+		tmux -ds default
+	fi
+
+	if tmux has-session -t "$session" 2>/dev/null; then
+		return
+	fi
+
+	if [[ $new -eq 1 ]]; then
+		if [[ ! -d "$session_path" ]]; then
+			mkdir -p "$session_path"
+		fi
+
+		if [[ -e $hist_file ]]; then
+			rm "$hist_file"
+		fi
+
+		if [[ -e $session_file ]]; then
+			rm "$session_file"
+		fi
+
+		if [ ! -e "$hist_file" ]; then
+			touch "$hist_file"
+		fi
+	fi
+
+	tmux new-session -ds $session -c "$session_path"
+	tmux set-environment -t "$session" "TMUX_SESSIONIZER" "1" 
+	tmux set-environment -t "$session" "HISTFILE" "$hist_file" 
+	tmux set-environment -t "$session" "TMUX_SESSIONIZER_SESSION_NAME" "$session" 
+	tmux set-environment -t "$session" "TMUX_SESSIONIZER_NVIM_SESSION_FILE" "$session_file" 
+	tmux set-environment -t "$session" "TMUX_SESSIONIZER_NVIM_SERVER_SOCK" "$server_sock" 
+	tmux new-window -c "$session_path" -t "$session"
+	tmux kill-window -t "$session:0"
+	tmux new-window -c "$session_path" -t "$session"
+	tmux select-window -t "$session:0"
+	if [ ! -e $server_sock ]; then
+		if [ -e "$session_file" ]; then
+			tmux send-keys -t "$session:1" "nvim --listen '$server_sock' -S '$session_file'" C-m
+		else 
+			tmux send-keys -t "$session:1" "nvim --listen '$server_sock' ." C-m
+		fi
+	fi
+}
+
+show-session-info() {
+	local _session=$session
+	local _session_file="$HOME/.cache/$name/$_session" 
+	local _hist_file="$HOME/.cache/$name/${_session}_history" 
+	local _server_sock="/tmp/$name-$_session"
+	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
+		_session="$TMUX_SESSIONIZER_SESSION_NAME"
+		_session_file="$TMUX_SESSIONIZER_NVIM_SESSION_FILE"
+		_hist_file="$HOME/.cache/$name/${_session}_history" 
+		_server_sock="$TMUX_SESSIONIZER_NVIM_SERVER_SOCK"
+	fi
+
+	if ! is-managed "$_session"; then
+		echo "$name: cannot show info of non-managed session"
+		return
+	fi
+
+
+	if [ -z "$_session" ]; then
+		return
+	fi
+
+	case "$show_cmd" in
+		session-file)
+			if [ -e "${_session_file}" ]; then
+				echo $_session_file
+			fi
+			;;
+		history)
+			if [ -e "${_hist_file}" ]; then
+				echo $_hist_file
+			fi
+			;;
+		server-sock)
+			if [ -e "${_server_sock}" ]; then
+				echo $_server_sock
+			fi
+			;;
+		*)
+			echo "$name: invalid option '$show_cmd'"
+			return 1
+	esac
+}
+
+name=$(basename "$0")
+project_dir=${TMUX_SESSIONIZER_PROJECTS_DIR:-$HOME/code}
+
+search=1
+attach=1
+help=0
+debug_dump=0
+save=0
+kill=0
+show=0
+show_cmd=""
+arg=0
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do 
 	case $1 in
 		-h|--help)
-			HELP=1
-			shift
+			help=1
 			break
 			;;
-		-n|--session-name)
-			SEARCH=0
+		-n|--session)
 			shift
-			selected_session=$1
-			;;
-		-p|--session-path)
-			SEARCH=0
-			shift
-			selected_path=$1
+			search=0
+			session=$1
 			;;
 		-k|--kill-and-switch)
-			KILL=1
-			shift
-			break
+			kill=1
 			;;
-		-x|--no-switch)
-			ATTACH=0
+		--no-attach)
+			attach=0
+			;;
+		-s|--save-session)
+			search=0
+			save=1
+			;;
+		--debug-dump)
+			debug_dump=1
+			;;
+		--show-session-info)
 			shift
-			break
+			show=1
+			case "$1" in
+				session-file|history|server-sock)
+					show_cmd=$1
+					;;
+				*)
+					echo "$name: invalid option '$1'"
+					exit 1
+			esac
 			;;
 		*)
-			echo "$NAME: unknown flag $1"
+			echo "$name: unknown flag $1"
 			exit 1
 			;;
 	esac
 	shift
 done
 
-if [[ $HELP -eq 1 ]]; then
-	cat <<END
-Usage: ${NAME} [OPTIONS]...
-Manage tmux sessions in TMUX_SESSIONIZER_PROJECTS_DIR enviroment variable.
+if [ $# -eq 1 ]; then
+	search=0
+	arg=1
+	session=$(tr '.' '_' <<< "$1")
+	shift
+fi
 
-Flags:
--n, --session-name <name> set the name of the session, if the directory exists in
-                          TMUX_SESSIONIZER_PROJECTS_DIR opens the session there else it creates directory
-                          with the session name
+if grep -q "/" <<< "$session"; then
+	echo "$name: invalid session name '$session'"
+	exit 1
+fi			
 
--p, --session-path <path> set the path of the session, creates the directory with
-                          all the children if they do not exist
-
--k, --kill-and-switch     kills current session and switches to other if -n is
-                          specified switched to the specified session if no sessions remain exits tmux
-
--x, --no-switch           don't switch to the sesssion
-
--h, --help                print this help message
-END
+if [ "$help" -eq 1 ]; then
+	print-help
 	exit 0
 fi
 
-if [[ ! -d "${TMUX_SESSIONIZER_PROJECTS_DIR:-$HOME/code}" ]]; then
-	echo "$NAME: missing ~/code or invalid path in TMUX_SESSIONIZER_PROJECTS_DIR"
+if [ ! -d "$project_dir" ]; then
+	echo "$name: missing ~/code or invalid path in TMUX_SESSIONIZER_PROJECTS_DIR"
 	exit 1
 fi
 
-if [[ $# -eq 1 ]]; then
-	SEARCH=0
-	selected_session=${1/./_}
+find-sessions
+
+if [ "$debug_dump" -eq 1 ]; then
+	debug-dump
+	exit 0
+fi
+
+if [ "$show" -eq 1 ]; then
+	show-session-info
+fi
+
+if [ "$kill" -eq 1 ] && [ "$save" -eq 1 ]; then
+	save-session
+	kill-session
+	exit 0
+elif [ "$save" -eq 1 ]; then
+	save-session
+	exit 0
+elif [ "$kill" -eq 1 ]; then
+	kill-session
+	exit 0
 fi
 
 if [[ -z "$(pgrep tmux)" ]]; then
 	tmux new-session -d -s default
 fi
 
-if [[ $KILL -eq 1 ]]; then
-	if [[ -z $TMUX ]]; then
-		echo "$NAME: not in a tmux session"
-		exit 1
+if [ $search -eq 1 ]; then
+	if [ -n "$TMUX_SESSIONIZER" ]; then
+		session=$(
+			printf "%s\n" "${!sessions[@]}"                                                                                                     |
+			awk '!/^\[TMUX\]/{tmux[++n]=$0; next} !/\[TMUX\] '$TMUX_SESSIONIZER_SESSION_NAME'/ {print $0} END{for(i=1;i<=n;i++) print tmux[i]}' |
+			fzf                                                                                                                                 |
+			sed 's/\[TMUX\] //'
+			)
+	else
+		session=$(
+			printf "%s\n" "${!sessions[@]}"                                                        |
+			awk '!/^\[TMUX\]/{tmux[++n]=$0; next} {print $0} END{for(i=1;i<=n;i++) print tmux[i]}' |
+			fzf                                                                                    |
+			sed 's/\[TMUX\] //'
+			)
 	fi
+fi
 
-	TMUX_SESSIONS_FULL=$(tmux list-sessions)
-	attached_session=$(echo "$TMUX_SESSIONS_FULL" | awk -F: '/attached/{print $1}')
-	last_session=$(echo "$TMUX_SESSIONS_FULL" | awk -F: '!/attached/{print $1}' | head -n 1)
-	if [ "$(tmux ls | wc -l)" -gt 1 ]; then
-		if [ -n "$selected_session" ] && [[ "$selected_session" != "$attached_session" ]]; then
-			tmux switch-client -t "$selected_session" && tmux kill-session -t "$attached_session"
-		else
-			if [[ "$last_session" == "default" ]]; then
-				# NOTE: do we exit tmux altogether ???
-				tmux kill-session -t "$attached_session"
-			else
-				tmux switch-client -t "$last_session" && tmux kill-session -t "$attached_session"
-			fi
-		fi
-	fi
+if [ -z $session ]; then
 	exit 0
 fi
 
-PATHS=$(find "${TMUX_SESSIONIZER_PROJECTS_DIR:-$HOME/code}" -mindepth 1 -maxdepth 1 -type d)
-TMUX_SESSIONS=$(tmux list-sessions -F "#S")
-for path in ${PATHS[@]}; do
-	sessions[$(basename "${path/./_}")]="$path"
-done
-
-for session in ${TMUX_SESSIONS[@]}; do
-	if [ "${session["$session"]}" == "default" ]; then
-		unset 'sessions["$session"]'
-	elif [[ -n $TMUX ]] && [[ "$session" == "$(tmux list-sessions | awk -F: '/attached/{print $1}')" ]]; then
-		unset 'sessions["$session"]'
-	elif [[ $# -eq 0 ]] || [[ $# -eq 1 ]] || [ -n "${sessions["$session"]}" ]; then
-		sessions["[TMUX] $session"]="${sessions["$session"]}"
-		unset 'sessions["$session"]'
-	fi
-done
-
-if [[ $SEARCH -eq 1 ]]; then
-	selected_session=$(
-		printf "%s\n" "${!sessions[@]}"                                                                                              |
-		awk ' /^\[TMUX\] /{start[++n]=$0; next} {end[++m]=$0} END{for(i=1;i<=n;i++) print start[i]; for(i=1;i<=m;i++) print end[i]}' |
-		fzf                                                                                                                          |
-		sed 's/\[TMUX\] //'
-		)
-fi
-
-if [[ -z "$selected_session" ]]; then
-	echo "$NAME: no session specified"
-	exit 1
-fi
-
-if [ $# -eq 1 ] && [[ -z "${sessions[$selected_session]}" ]] && [[ -z "${sessions[[TMUX] $selected_session]}" ]]; then
-	echo "$NAME: can't find session '$selected_session'"
+if is-managed "$session" && [ "$search" -eq 1 ]; then
+	new=0
+elif ! is-managed "$session" && [ "$arg" -eq 0 ]; then
+	new=1
+else
+	echo "$name: cannot open session '$session'"
 	exit 0
 fi
 
-if [[ -z "$selected_path" ]]; then 
-	selected_path=${sessions["$selected_session"]}
-	if [ -z "$selected_path" ]; then
-		selected_path="$(realpath "${TMUX_SESSIONIZER_PROJECTS_DIR:-$HOME/code}")"
+make-new-session
+
+if [ "$attach" -eq 1 ]; then
+	if [ -z "$TMUX" ]; then
+		tmux attach -t "$session"
+	else
+		tmux switch-client -t "$session"
 	fi
-else
-	selected_path="$(realpath "$selected_path")"
-fi
-
-if ! tmux has-session -t "$selected_session" 2>/dev/null; then
-	if [[ ! -d "$selected_path" ]]; then
-		mkdir -p "$selected_path/$selected_session"
-	fi
-
-	tmux new-session -ds $selected_session -c "$selected_path"
-	tmux new-window -c $selected_path -t "$selected_session:1"
-	tmux send-keys -t "$selected_session:1" "nvim ." C-m
-	tmux select-window -t 0
-fi
-
-if [[ -z $TMUX ]]; then
-	sub_cmd="attach"
-else
-	sub_cmd="switch-client"
-fi
-
-if [ "$ATTACH" -eq 1 ]; then
-	tmux "$sub_cmd" -t "$selected_session"
 fi
