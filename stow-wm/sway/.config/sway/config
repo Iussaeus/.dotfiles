@@ -1,6 +1,7 @@
 set $terminal kitty
 set $mod Mod4
-set $menu wofi
+set $menu 'wofi --show drun'
+set $menu_scripts '$HOME/.config/sway/scripts/wofi_exec_scripts.sh'
 set $swaylock_command "swaylock  -f"
 
 # Apps that open on system startup
@@ -54,7 +55,8 @@ floating_modifier $mod
 
 bindsym $mod+t exec $terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec wofi
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+d exec $menu_scripts
 
 # change focus
 bindsym $mod+h focus left

@@ -11,7 +11,8 @@ pos=$2
 session=$(basename $3 | tr '.' '_')
 tmux_sessionizer="$HOME/.local/bin/tmux-sessionizer"
 server=$($tmux_sessionizer --show-session-info "server-sock" -n "$session")
-srv_status=$?
+
+echo "f:$file, p:$pos, s:$sesson, srv:$server" > $HOME/log
 
 if [ -z "$server" ]; then
 	$tmux_sessionizer -n "$session" --no-attach >> $HOME/log
