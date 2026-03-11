@@ -4,21 +4,23 @@ zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-# Lines configured by zsh-newuser-install
+
 HISTFILE=${HISTFILE:-"$HOME/.histfile"}
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
-# End of lines configured by zsh-newuser-install
-
-neofetch 2>/dev/null || fastfetch 2>/dev/null
-
-autoload -U +X bashcompinit && bashcompinit
 unsetopt sharehistory
+setopt HIST_IGNORE_SPACE
+setopt APPEND_HISTORY
+autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
+command -v > /dev/null neofetch && neofetch
+command -v > /dev/null fastfetch && fastfetch
+
+command -v zoxide > /dev/null && eval "$(zoxide init zsh)"
+command -v starship > /dev/null && eval "$(starship init zsh)"
+command -v opam > /dev/null && eval "$(opam env)"
 
 export EDITOR=nvim
 export PATH=$HOME/.local/bin:$PATH
@@ -30,6 +32,8 @@ export XDG_DATA_DIR=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 export TMUX_SESSIONIZER_PROJECTS_DIR="$HOME/code"
 
 alias zd=z
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 
 function Resume {  
     [ -z "$(jobs)" ] && return
@@ -38,7 +42,6 @@ function Resume {
     printf '\e[G\e[5A\e[0J'
     zle reset-prompt
 } 
-
 zle -N Resume
 bindkey "^Z" Resume
 
@@ -84,7 +87,7 @@ esac
 _tmux_sessionizer_dirs() {
     local -a children
     local d entry name
-    d=${~TMUX_SESSIONIZER_PROJECTS_DIR}
+    d=${TMUX_SESSIONIZER_PROJECTS_DIR:-"$HOME/code"}
     [[ -n $d && -d $d ]] || return 1
     for entry in "$d"/*(/); do
         [[ -n $entry ]] || continue
