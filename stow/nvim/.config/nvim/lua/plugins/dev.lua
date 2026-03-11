@@ -3,7 +3,7 @@ return {
     "Iussaeus/ido-mode.nvim",
     config = function()
       local ido = require 'ido-mode'.setup()
-      vim.keymap.set("c", "<cr>", function() ido:enter() end)
+      vim.keymap.set("c", "<cr>", function() ido:execute() end)
       vim.keymap.set("c", "<c-t>", function() ido:toggle() end)
       vim.keymap.set("c", "<c-n>", function() ido:next_suggestion() end)
       vim.keymap.set("c", "<c-p>", function() ido:previous_suggestion() end)

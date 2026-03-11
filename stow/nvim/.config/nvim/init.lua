@@ -14,4 +14,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-require "lazy".setup { import = "plugins", change_detection = { notify = false } }
+require "lazy".setup ({
+  import = "plugins", change_detection = { notify = false },
+  dev = {
+    dir = "~/code",
+    fallback = true, -- Fallback to git when local plugin doesn't exist
+  },
+})
