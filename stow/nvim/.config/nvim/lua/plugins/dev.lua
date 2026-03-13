@@ -1,13 +1,12 @@
 return {
   {
     "Iussaeus/ido-mode.nvim",
-    config = function()
-      local ido = require 'ido-mode'.setup()
-      vim.keymap.set("c", "<cr>", function() ido:execute() end)
-      vim.keymap.set("c", "<c-t>", function() ido:toggle() end)
-      vim.keymap.set("c", "<c-n>", function() ido:next_suggestion() end)
-      vim.keymap.set("c", "<c-p>", function() ido:previous_suggestion() end)
-      vim.keymap.set("c", "<c-y>", function() ido:accept_suggestion() end)
+    dir = "~/code/ido-mode.nvim",
+    init = function()
+      vim.keymap.set("c", "<c-t>", function() require 'ido-mode'.toggle() end)
+      vim.keymap.set("c", "<c-n>", function() require 'ido-mode'.next_suggestion() end)
+      vim.keymap.set("c", "<c-p>", function() require 'ido-mode'.previous_suggestion() end)
+      vim.keymap.set("c", "<c-y>", function() require 'ido-mode'.accept_suggestion() end)
     end
   },
   {

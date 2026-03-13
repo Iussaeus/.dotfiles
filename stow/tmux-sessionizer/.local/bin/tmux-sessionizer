@@ -242,7 +242,7 @@ for arg in "$@"; do
 done
 
 name=$(basename "$0")
-search_dir=${TMUX_SESSIONIZER_PROJECTS_DIR:-"$HOME/code"}
+search_dir="$HOME/code"
 
 search=1
 attach=1
@@ -349,7 +349,7 @@ if [ $search -eq 1 ]; then
 	if [ -n "$TMUX_SESSIONIZER" ]; then
 		session=$(
 			printf "%s\n" "${!sessions[@]}"                                                                                                     |
-			awk '!/^\[TMUX\]/{tmux[++n]=$0; next} !/\[TMUX\] '$search_dir'/ {print $0} END{for(i=1;i<=n;i++) print tmux[i]}' |
+			awk '!/^\[TMUX\]/{tmux[++n]=$0; next} !/\[TMUX\] '$TMUX_SESSIONIZER_SESSION_NAME'/ {print $0} END{for(i=1;i<=n;i++) print tmux[i]}' |
 			fzf                                                                                                                                 |
 			sed 's/\[TMUX\] //'
 			)
