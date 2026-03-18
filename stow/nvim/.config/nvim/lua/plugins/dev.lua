@@ -15,4 +15,11 @@ return {
       vim.keymap.set("n", "<leader>gf", require 'goback'.go_forth)
     end
   },
+  {
+    "Iussaeus/compile-term.nvim",
+    dir = '~/code/compile-term.nvim',
+    init = function()
+      vim.keymap.set("n", "<leader>cc", require 'compile-term'.compile)
+    end,
+  },
 }

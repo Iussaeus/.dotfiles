@@ -37,7 +37,7 @@ return {
     config = function()
       local lsp = vim.lsp
       vim.opt.complete:append("w")
-      vim.opt.completeopt = { "menuone", "noinsert", "fuzzy", "noselect", "preview" }
+      vim.opt.completeopt = { "menuone", "noinsert", "fuzzy", "noselect"}
 
       vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
       vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.jump({ count = 1, severity = "ERROR" }) end)
