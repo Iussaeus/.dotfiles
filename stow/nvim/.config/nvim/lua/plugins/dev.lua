@@ -10,7 +10,6 @@ return {
   },
   {
     "Iussaeus/goback.nvim",
-    dir = '~/code/goback.nvim',
     init = function()
       vim.keymap.set("n", "<leader>gb", require 'goback'.go_back)
       vim.keymap.set("n", "<leader>gf", require 'goback'.go_forth)
