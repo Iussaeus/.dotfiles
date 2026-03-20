@@ -1,6 +1,7 @@
 return {
   {
     "Iussaeus/ido-mode.nvim",
+    dir = '~/code/ido-mode.nvim',
     init = function()
       vim.keymap.set("c", "<c-t>", require 'ido-mode'.toggle)
       vim.keymap.set("c", "<c-n>", require 'ido-mode'.next_suggestion)
@@ -16,10 +17,10 @@ return {
     end
   },
   {
-    "Iussaeus/compile-term.nvim",
-    dir = '~/code/compile-term.nvim',
+    "Iussaeus/compile.nvim",
+    dir = '~/code/compile.nvim',
     init = function()
-      vim.keymap.set("n", "<leader>cc", require 'compile-term'.compile)
+      vim.keymap.set("n", "<leader>cc", require 'compile'.compile)
     end,
   },
 }

@@ -37,7 +37,7 @@ return {
     config = function()
       local lsp = vim.lsp
       vim.opt.complete:append("w")
-      vim.opt.completeopt = { "menuone", "noinsert", "fuzzy", "noselect"}
+      vim.opt.completeopt = { "menuone", "noinsert", "fuzzy", "noselect" }
 
       vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
       vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.jump({ count = 1, severity = "ERROR" }) end)
@@ -55,7 +55,14 @@ return {
       lsp.enable('omnisharp')
 
       lsp.config('lua_ls', {
-        settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } }
+        settings = {
+          Lua = {
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            }
+          }
+        }
       })
       lsp.enable('lua_ls')
     end,
