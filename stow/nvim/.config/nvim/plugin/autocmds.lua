@@ -1,20 +1,20 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "man", "git" },
+  pattern = { "help", "man", "fugitive" },
   callback = function()
-    vim.cmd "set winfixheight"
-    vim.cmd "set winfixheight"
     vim.cmd "wincmd L"
     vim.cmd "wincmd 25<"
+    vim.cmd "set winfixheight"
+    vim.cmd "set winfixheight"
   end
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*compilation*" },
   callback = function()
-    vim.cmd "set winfixheight"
-    vim.cmd "set winfixheight"
     vim.cmd "wincmd J"
     vim.cmd "resize 20"
+    vim.cmd "set winfixheight"
+    vim.cmd "set winfixheight"
   end
 })
 

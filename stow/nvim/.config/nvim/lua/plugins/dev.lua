@@ -21,6 +21,10 @@ return {
     dir = '~/code/compile.nvim',
     init = function()
       vim.keymap.set("n", "<leader>cc", require 'compile'.compile)
+      vim.keymap.set("n", "<leader>cn", require 'compile'.jump_to_next)
+      vim.keymap.set("n", "<leader>cp", require 'compile'.jump_to_prev)
+      vim.keymap.set("n", "<leader>cf", require 'compile'.compile_fwd)
+      vim.keymap.set("n", "<leader>rcc", require 'compile'.recompile)
     end,
   },
 }

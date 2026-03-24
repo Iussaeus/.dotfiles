@@ -14,10 +14,10 @@ return {
 
     local split_opts = "botright 15"
 
-    vim.keymap.set("n", "<leader>cm", '<cmd>' .. split_opts .. ' Compile<cr>')
-    vim.keymap.set("n", "<leader>rc", require 'compile-mode'.recompile)
+    vim.keymap.set("n", "<leader>cm", split_opts .. ' Compile<cr>')
+    vim.keymap.set("n", "<leader>rcm", require 'compile-mode'.recompile)
 
-    vim.keymap.set("n", "<leader>cn", require 'compile-mode'.next_error)
-    vim.keymap.set("n", "<leader>cp", require 'compile-mode'.prev_error)
+    vim.keymap.set("n", "<leader>cmn", require 'compile-mode'.next_error)
+    vim.keymap.set("n", "<leader>cmp", require 'compile-mode'.prev_error)
   end,
 }
