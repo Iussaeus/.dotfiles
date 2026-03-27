@@ -20,11 +20,11 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Yank stuff in void register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- Append the tex below the cursor to the current line
+-- Append the text below the cursor to the current line
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- Center the cursor when navigating the code
-local centered_keymaps = { "<C-d>", "<C-u>", "u", "<C-r>", "n", "N", "gg", "G", "*", "#", "j", "k"}
+local centered_keymaps = { "<C-d>", "<C-u>", "u", "<C-r>", "n", "N", "gg", "G", "*", "#", "j", "k" }
 for _, keymap in ipairs(centered_keymaps) do
   vim.keymap.set("n", keymap, keymap .. "zzzv")
   vim.keymap.set("n", keymap, keymap .. "zzzv")
@@ -38,8 +38,16 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Pane navigation
--- TODO: keymap for deleting every pane but the focused one
-vim.keymap.set("n", "<leader>ff", "<C-W>500+<C-W>500>_")
+local close_not_focused_wins = function()
+  vim.iter(vim.api.nvim_tabpage_list_wins(0))
+      :filter(function(w)
+        return w ~= vim.api.nvim_get_current_win()
+      end)
+      :each(function(w)
+        vim.api.nvim_win_close(w, true)
+      end)
+end
+vim.keymap.set("n", "<leader>ff", close_not_focused_wins)
 vim.keymap.set("n", "<leader>vs", "<cmd>vs<cr>")
 vim.keymap.set("n", "<leader>h", "<C-W>h_")
 vim.keymap.set("n", "<leader>j", "<C-W>j_")
@@ -52,7 +60,6 @@ vim.keymap.set("n", "<M-m>", "<C-W>5-")
 
 -- Terminal only mappings
 vim.api.nvim_set_keymap('t', '<esc><esc>', '<C-\\><C-n>', { noremap = true, silent = true })
-
 
 vim.keymap.set('n', '<up>', ':cnext<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<down>', ':cprevious<CR>', { noremap = true, silent = true })

@@ -1,19 +1,20 @@
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "man", "fugitive" },
+local sized_filetypes = { "help", "man", "fugitive" }
+vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    vim.cmd "wincmd L"
-    vim.cmd "wincmd 25<"
-    vim.cmd "set winfixheight"
-    vim.cmd "set winfixheight"
+    local filetype = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+    if vim.tbl_contains(sized_filetypes, filetype) then
+      vim.cmd "wincmd L"
+      vim.cmd "wincmd 25<"
+      vim.cmd "set winfixheight"
+    end
   end
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-  pattern = { "*compilation*" },
+  pattern = { "\\*compilation\\*" },
   callback = function()
     vim.cmd "wincmd J"
     vim.cmd "resize 20"
-    vim.cmd "set winfixheight"
     vim.cmd "set winfixheight"
   end
 })

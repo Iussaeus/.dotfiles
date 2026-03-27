@@ -16,18 +16,18 @@ return {
         ["Find Subword Under"] = "s",
         ["Find Next"] = "<c-n>",
         ["Find Prev"] = "<c-p>",
-        ["Select All"] = "<leader>sa",
         ["Add Cursor Down"] = "<C-Down>",
         ["Add Cursor Up"] = "<C-Up>",
         ["Start Regex Search"] = "<leader>/",
         ["Align"] = "<leader>a",
-        ["Align Char"] = "<leader>ac",
-        ["Align Regex"] = "<leader>ar",
-        ["Visual Cursors"] = "<C-n>",
-        ["Visual Regex"] = "/",
         ["Surround"] = "S",
-        ["Tools Menu"] = "<leader>t",
       }
+
+      vim.keymap.set('n', "<leader>t", "<Plug>(VM-Transpose)")
+      vim.keymap.set('n', "<leader>c", "<Plug>(VM-Case-Conversion-Menu)")
+      vim.keymap.set('n', "<leader>sa", "<Plug>(VM-Select-All)")
+      vim.keymap.set('v', "/", "<Plug>(VM-Visual-Regex)")
+      vim.keymap.set('v', "<c-n>", "<Plug>(VM-Visual-Cursors)")
     end,
 
     config = function()

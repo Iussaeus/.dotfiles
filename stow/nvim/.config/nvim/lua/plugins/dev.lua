@@ -27,4 +27,11 @@ return {
       vim.keymap.set("n", "<leader>rcc", require 'compile'.recompile)
     end,
   },
+  {
+    "Iussaeus/cursors.nvim",
+    dir = '~/code/cursors.nvim',
+    init = function()
+      vim.keymap.set("n", "<leader>nc", require 'cursors'.find_under_cursor)
+    end,
+  },
 }
