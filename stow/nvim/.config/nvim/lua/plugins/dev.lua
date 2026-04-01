@@ -12,8 +12,8 @@ return {
   {
     "Iussaeus/goback.nvim",
     init = function()
-      vim.keymap.set("n", "<leader>gb", require 'goback'.go_back)
-      vim.keymap.set("n", "<leader>gf", require 'goback'.go_forth)
+      vim.keymap.set("n", "<a-b>", require 'goback'.go_back, { remap = true })
+      vim.keymap.set("n", "<a-f>", require 'goback'.go_forth, { remap = true })
     end
   },
   {
@@ -29,9 +29,11 @@ return {
   },
   {
     "Iussaeus/cursors.nvim",
+    event = 'VeryLazy',
     dir = '~/code/cursors.nvim',
     init = function()
       vim.keymap.set("n", "<leader>nc", require 'cursors'.find_under_cursor)
+      vim.keymap.set("n", "<leader>cs", require 'cursors'.stop)
     end,
   },
 }

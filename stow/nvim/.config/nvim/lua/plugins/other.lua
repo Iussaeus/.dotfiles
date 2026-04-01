@@ -3,15 +3,13 @@ return {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
+    init = function()
       vim.keymap.set('n', "s", "<plug>(nvim-surround-normal)")
     end
   },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    opts = {},
     ft = { 'markdown', 'quarto' },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {

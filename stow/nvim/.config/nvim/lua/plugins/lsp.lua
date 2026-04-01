@@ -39,14 +39,11 @@ return {
       vim.opt.complete:append("w")
       vim.opt.completeopt = { "menuone", "noinsert", "fuzzy", "noselect" }
 
-      vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float)
-      vim.keymap.set("n", "<leader>ne", function() vim.diagnostic.jump({ count = 1, severity = "ERROR" }) end)
+      vim.keymap.set("n", "<leader>e", function() vim.diagnostic.jump({ count = 1, severity = "ERROR" }) end)
+      vim.keymap.set("n", "<leader>E", function() vim.diagnostic.jump({ count = -1, severity = "ERROR" }) end)
+      vim.keymap.set("n", "<leader>d", function() vim.diagnostic.jump({ count = 1 }) end)
+      vim.keymap.set("n", "<leader>D", function() vim.diagnostic.jump({ count = -1 }) end)
       vim.keymap.set("n", "<leader>ad", function() vim.diagnostic.setloclist() end)
-      vim.keymap.set("n", "<leader>e", function() vim.diagnostic.jump({ count = -1 }) end)
-      vim.keymap.set("n", "<leader>pe", function() vim.diagnostic.jump({ count = -1, severity = "ERROR" }) end)
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-      vim.keymap.set("i", "<C-space>", vim.lsp.completion.get)
-      vim.keymap.set("n", "<space>f", vim.lsp.buf.format)
 
       lsp.enable('gopls')
       lsp.enable('ols')

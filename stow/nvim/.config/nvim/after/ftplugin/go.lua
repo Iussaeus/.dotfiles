@@ -2,9 +2,10 @@ vim.opt_local.tabstop = 4
 vim.opt_local.softtabstop = 4
 vim.opt_local.shiftwidth = 4
 vim.opt_local.expandtab = false
+vim.opt_local.nobomb = false
 
-vim.keymap.set("n", "<leader>en", "oif err != nil {<CR>return err<CR>}<ESC>k_v$h")
-vim.keymap.set("n", "<leader>enp", "oif err != nil {<CR>fmt.Printf(\"Err: %s\", err)<CR>}<ESC>")
+vim.keymap.set("n", "<leader>en", "oif err != nil {<CR>return err<CR>}<ESC>k_v$h", {nowait = true})
+vim.keymap.set("n", "<leader>enp", "oif err != nil {<CR>fmt.Printf(\"Err: %s\", err)<CR>}<ESC>", {nowait = true})
 
 vim.api.nvim_create_user_command('Go', function(opts)
   local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, false)
