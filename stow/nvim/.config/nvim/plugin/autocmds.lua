@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-  pattern = { "\\*compilation\\*" },
+  pattern = { [[\*compilation\*]] },
   callback = function()
     vim.cmd "wincmd J"
     vim.cmd "resize 20"
