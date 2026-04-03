@@ -1,32 +1,35 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
-    config = function()
-      require('lualine').setup {
-        options = {
-          icons_enabled = true,
-          -- theme = 'vscode',
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
-          refresh = {
-            statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
-          }
-        },
-        sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { { 'branch', 'diff', 'diagnostics' } },
-          lualine_c = { 'diagnostics', 'filename' },
-          lualine_x = { 'encoding', 'fileformat', 'filetype' },
-          lualine_y = { 'progress' },
-          lualine_z = { 'location' }
-        },
-        inactive_sections = {
-          lualine_c = { 'filename' },
-          lualine_x = { 'location' },
-        },
-      }
-    end
+    opts = {
+      options = {
+        globalstatus = true,
+        icons_enabled = true,
+        section_separators = { left = '|', right = '|' },
+        component_separators = { left = '|', right = '|' },
+        refresh = { statusline = 100, tabline = 100, winbar = 100, }
+      },
+      sections = {
+        lualine_a = { {
+          'mode',
+          fmt = function(str)
+            if vim.b.visual_multi then
+              return 'V-MULTI'
+            end
+            return str
+          end,
+          color = function()
+            if vim.b.visual_multi then
+              return { bg = '#FF5555' }
+            end
+          end,
+          separator = { right = '' },
+        } },
+        lualine_b = { 'branch', 'diff'},
+        lualine_c = { 'diagnostics', 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_z = { { 'location', separator = { left = '' } } }
+      },
+    }
   }
 }

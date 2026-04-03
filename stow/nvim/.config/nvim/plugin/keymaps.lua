@@ -9,21 +9,11 @@ vim.keymap.set('n', 'q:', '<nop>')
 vim.keymap.set('v', 'J', [[:m '>+1<CR>gv=gv]])
 vim.keymap.set('v', 'K', [[:m '<-2<CR>gv=gv]])
 
--- Yank stuff in void register
-vim.keymap.set('x', '<leader>p', [['_dP]])
-
--- Append the text below the cursor to the current line
-vim.keymap.set('n', 'J', 'mzJ`z')
-
--- Center the cursor when navigating the code
-local centered_keymaps = { '<C-d>', '<C-u>', 'u', '<C-r>', 'n', 'N', 'gg', 'G', '*', '#', 'j', 'k' }
-for _, keymap in ipairs(centered_keymaps) do
-  vim.keymap.set('n', keymap, keymap .. 'zzzv')
-  vim.keymap.set('n', keymap, keymap .. 'zzzv')
-end
+-- Paste stuff and not add anything to " register
+vim.keymap.set({ 'n', 'v' }, '<leader>p', [["_dP]])
 
 -- Copy stuff to + register(clipboard)
-vim.keymap.set({ 'n', 'v' }, '<leader>y', [['+y]])
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 
 -- Pane navigation
 local close_not_focused_wins = function()
