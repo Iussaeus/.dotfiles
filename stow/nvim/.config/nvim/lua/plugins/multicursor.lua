@@ -24,14 +24,14 @@ return {
         ["Add Cursor Up"] = "<C-Up>",
         ["Align"] = "<c-a>",
         ["Align Regex"] = "<c-r>",
-        ["Surround"] = "<c-s>",
+        ["Surround"] = "S",
       }
 
       vim.keymap.set('n', "<leader>sa", "<Plug>(VM-Select-All)")
       vim.keymap.set('n', "<c-t>", "<Plug>(VM-Transpose)")
       vim.keymap.set('n', "<c-c>", "<Plug>(VM-Case-Conversion-Menu)")
       vim.keymap.set('v', "/", "<Plug>(VM-Visual-Regex)")
-      vim.keymap.set('n', "<c-/>", "<Plug>(VM-Start-Regex-Search)")
+      vim.keymap.set({'n', 'v'}, "<c-/>", "<Plug>(VM-Start-Regex-Search)")
       vim.keymap.set('n', '<esc>', function()
         if not vim.b.visual_multi then
           return '<esc>'

@@ -14,13 +14,17 @@ return {
           'mode',
           fmt = function(str)
             if vim.b.visual_multi then
-              return 'V-MULTI'
+              if vim.g.Vm.extend_mode == 0  then
+                return 'VM-CURSOR'
+              else
+                return 'VM-EXTEND'
+              end
             end
             return str
           end,
           color = function()
             if vim.b.visual_multi then
-              return { bg = '#FF5555' }
+              return { bg = '#FF0100', fg = '#FFFFFF' }
             end
           end,
           separator = { right = '' },
