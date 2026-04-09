@@ -1,23 +1,7 @@
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
+vim.loader.enable()
+vim.cmd.packadd 'nvim.undotree'
+vim.keymap.set({ 'n', 'x' }, '<leader>u', vim.cmd.Undotree)
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-
-require "lazy".setup ({
-  import = "plugins", change_detection = { notify = false },
-  dev = {
-    dir = "~/code",
-    fallback = true, -- Fallback to git when local plugin doesn't exist
-  },
-})
+vim.pack.add({ 'https://github.com/nvim-lua/plenary.nvim' })
+vim.pack.add({ 'https://github.com/nvim-tree/nvim-web-devicons' })

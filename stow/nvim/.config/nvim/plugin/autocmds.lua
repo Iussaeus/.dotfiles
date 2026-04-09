@@ -39,21 +39,21 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 vim.api.nvim_create_autocmd('CursorMoved', {
   group = disable,
   callback = function()
-    vim.cmd.normal 'zzzv'
+    vim.diagnostic.enable()
   end
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('my.lsp', {}),
-  callback = function(args)
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    if client:supports_method('textDocument/completion') then
-      local chars = {}
-      for i = 32, 126 do
-        table.insert(chars, string.char(i))
-      end
-      client.server_capabilities.completionProvider.triggerCharacters = chars
-      vim.lsp.completion.enable(true, client.id, args.buf)
+vim.api.nvim_create_autocmd('CursorMoved', {
+  group = disable,
+  callback = function()
+    if #vim.api.nvim_buf_get_lines(0, 0, -1, false) - vim.fn.line '.' < vim.o.scrolloff then
+      vim.cmd 'normal! zzzv'
     end
   end,
+})
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.hl.on_yank { higroup = 'CurSearch', timeout = 300 }
+  end
 })
