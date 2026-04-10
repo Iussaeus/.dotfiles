@@ -16,14 +16,12 @@ vim.g.VM_maps = {
   ["Find Prev"] = "<c-p>",
   ["Add Cursor Down"] = "<C-Down>",
   ["Add Cursor Up"] = "<C-Up>",
-  ["Align"] = "<c-a>",
+  ["Align"] = "<m-a>",
   ["Align Regex"] = "<c-r>",
   ["Surround"] = "S",
 }
 
-vim.pack.add({ {
-  src = 'https://github.com/mg979/vim-visual-multi', version = 'master'
-} })
+vim.pack.add({ 'https://github.com/mg979/vim-visual-multi' })
 
 vim.keymap.set('n', "<leader>sa", "<Plug>(VM-Select-All)")
 vim.keymap.set('n', "<c-t>", "<Plug>(VM-Transpose)")

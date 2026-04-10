@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 local disable = vim.api.nvim_create_augroup('no_more_D', {})
-vim.api.nvim_create_autocmd({'InsertEnter', 'TextChanged'}, {
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'TextChanged' }, {
   group = disable,
   callback = function()
     vim.diagnostic.enable(false)
@@ -36,24 +36,23 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end
 })
 
-vim.api.nvim_create_autocmd('CursorMoved', {
-  group = disable,
+vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    vim.diagnostic.enable()
+    local _, err = vim.treesitter.get_parser()
+    if not err then
+      vim.treesitter.start()
+    end
   end
 })
 
 vim.api.nvim_create_autocmd('CursorMoved', {
-  group = disable,
   callback = function()
-    if #vim.api.nvim_buf_get_lines(0, 0, -1, false) - vim.fn.line '.' < vim.o.scrolloff then
       vim.cmd 'normal! zzzv'
-    end
   end,
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.hl.on_yank { higroup = 'CurSearch', timeout = 300 }
+    vim.hl.on_yank { higroup = 'CurSearch', timeout = 200 }
   end
 })

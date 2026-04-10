@@ -1,6 +1,7 @@
 vim.pack.add({ 'https://github.com/nvim-tree/nvim-web-devicons' })
-vim.pack.add({'https://github.com/stevearc/oil.nvim'})
-require'oil'.setup {
+vim.pack.add({ 'https://github.com/stevearc/oil.nvim' })
+
+require 'oil'.setup {
   keymaps = {
     ['<C-h>'] = false,
     ['<C-l>'] = false,
@@ -23,7 +24,7 @@ require'oil'.setup {
     natural_order = 'fast',
   },
   watch_for_changes = true,
-  dependencies = {  },
+  dependencies = {},
 }
 
 vim.keymap.set('n', '<leader>pd', vim.cmd.Oil)
