@@ -14,6 +14,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>p', [["_dP]])
 
 -- Copy stuff to + register(clipboard)
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+-- todo: make it work on non-focused buffers
+vim.keymap.set('n', '<scrollwheelup>', '3k')
+vim.keymap.set('n', '<scrollwheeldown>', '3j')
 
 -- Pane navigation
 local close_not_focused_wins = function()

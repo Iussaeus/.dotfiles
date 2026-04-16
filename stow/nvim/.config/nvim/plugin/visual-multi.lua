@@ -24,10 +24,17 @@ vim.g.VM_maps = {
 vim.pack.add({ 'https://github.com/mg979/vim-visual-multi' })
 
 vim.keymap.set('n', "<leader>sa", "<Plug>(VM-Select-All)")
-vim.keymap.set('n', "<c-t>", "<Plug>(VM-Transpose)")
 vim.keymap.set('n', "<c-c>", "<Plug>(VM-Case-Conversion-Menu)")
 vim.keymap.set('v', "/", "<Plug>(VM-Visual-Regex)")
 vim.keymap.set({ 'n', 'v' }, "<c-/>", "<Plug>(VM-Start-Regex-Search)")
+
+vim.keymap.set('n', "<c-t>", function()
+  if not vim.b.visual_multi then
+    return '<c-t>'
+  end
+
+  return "<Plug>(VM-Transpose)"
+end, { expr = true})
 vim.keymap.set('n', '<esc>', function()
   if not vim.b.visual_multi then
     return '<esc>'

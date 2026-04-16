@@ -3,6 +3,7 @@ vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.smartindent = true
+vim.o.showmode = false
 
 vim.o.smartcase = true
 vim.o.ignorecase = true
