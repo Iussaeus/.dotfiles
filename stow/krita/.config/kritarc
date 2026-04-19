@@ -45,11 +45,12 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="0.0705882385373116" b="0.0705882385373116" r="0.168627455830574" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="0.0705882385373116" g="0.0705882385373116" r="0.168627455830574" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastColorHistory=<!DOCTYPE LastColorHistory>\n<colors/>\n
 LastEraser_-1=d) Ink-3 Gpen Copy
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0" b="0" r="0.137254908680916" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0" g="0" r="0.137254908680916" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
 LastPreset=d) Ink-3 Gpen Copy
-LastPreset_-1=d) Ink-3 Gpen Copy
+LastPreset_-1=b) Basic-5 Size Opacity
 LineSmoothingDelayDistance=50
 LineSmoothingDistance=16.8
 LineSmoothingFinishStabilizedCurve=true
@@ -246,6 +247,7 @@ popuppalette/useDynamicSlotCount=true
 popuppalette/usevisualcolorselector=false
 presetChooserViewMode=0
 presetIconSize=63
+presetStripVisible=true
 presethistory=f) Bristles-1 Details,f) Charcoal Rock Soft,b) Airbrush Soft,a) Eraser Soft,b) Basic-5 Size Opacity,d) Ink-3 Gpen Copy,e) Marker Dry,f) Bristles-4 Glaze ,a) Eraser Small,b) Basic-6 Details
 renameMergedLayers=true
 renamePastedLayers=true
@@ -272,6 +274,7 @@ toolbarslider_1=size
 toolbarslider_2=flow
 toolbarslider_3=flow
 toolbarslider_4=flow
+toolbarslider_5=flow
 undoStackLimit=200
 useAnimationCacheFrameSizeLimit=true
 useAnimationCacheRegionOfInterest=true
@@ -659,11 +662,14 @@ workspaces=All
 
 [SvgSymbolCollection]
 currentCollection=0
+displayThumbnails=false
+iconSize=20
 
 [advancedColorSelector]
 colorSelectorConfiguration=1|0|6|0
 customSelectorBackgroundColor=160,160,164
 gamma=2.2
+lastUsedColorsPerDocument=false
 lumaG=0.7152
 lumaR=0.2126
 minimalShadeSelectorLineConfig=0|0.2|0|0|0|0|0;1|0|1|1|0|0|0;2|0|-1|1|0|0|0

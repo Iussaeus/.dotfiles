@@ -31,8 +31,8 @@ exec --no-startup-id xss-lock $HOME/.config/i3/scripts/lock.sh
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet &
-exec --no-startup-id /usr/lib/gaomontablet/gaomontablet $
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY
 
 # END THE TEARING
 exec --no-startup-id picom

@@ -11,6 +11,7 @@ exec --no-startup-id swaync
 exec --no-startup-id blueman-applet
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY
 
 exec --no-startup-id $terminal
 exec --no-startup-id kanata -c $HOME/.config/kanata/config.kbd

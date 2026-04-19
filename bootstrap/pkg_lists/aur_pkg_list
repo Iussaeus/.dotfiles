@@ -11,6 +11,9 @@ thunar-vcs-plugin
 thunar-vcs-plugin-debug
 thunar-volman
 gvfs
+gvfs-mtp
+brightnessctl
+nwg-lok
 tumbler
 tumbler-extra-thumbnailers
 fastfetch

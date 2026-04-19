@@ -7,13 +7,9 @@ perl-anyevent-i3
 xorg-server-devel
 feh
 dunst
-lxappearance
-lxinput
 xclip
 xss-lock
-caffeine-ng
+xssproxy
 ttf-segoe-ui-variable
 picom
-brightnessctl
 i3lock-color
-redshift
