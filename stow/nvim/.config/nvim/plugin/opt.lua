@@ -27,12 +27,11 @@ vim.o.incsearch = true
 
 vim.o.termguicolors = true
 
-vim.o.scrolloff = 15
 vim.o.sidescrolloff = 25
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.o.updatetime = 50
+vim.o.updatetime = 100
 vim.o.autoread = true
 
 vim.o.colorcolumn = "90"

@@ -50,8 +50,9 @@ require 'telescope'.setup {
   },
 }
 
-vim.keymap.set({ 'n', 'v' }, '<leader>tf', '<cmd>Telescope find_files<cr>')
-vim.keymap.set({ 'n', 'v' }, '<leader>tg', '<cmd>Telescope live_grep<cr>')
+vim.keymap.set({ 'n', 'v' }, '<leader>ff', '<cmd>Telescope find_files<cr>')
+vim.keymap.set({ 'n', 'v' }, '<leader>gr', '<cmd>Telescope live_grep<cr>')
+vim.keymap.set({ 'n', 'v' }, '<leader>gf', '<cmd>Telescope git_files<cr>')
 vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>Telescope help_tags<cr>')
 vim.keymap.set({ 'n', 'v' }, '<leader>tc', '<cmd>Telescope commands<cr>')
 vim.keymap.set({ 'n', 'v' }, '<leader>tb', '<cmd>Telescope builtin<cr>')

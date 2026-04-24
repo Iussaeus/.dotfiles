@@ -22,11 +22,12 @@ vim.g.VM_maps = {
 }
 
 vim.pack.add({ 'https://github.com/mg979/vim-visual-multi' })
+vim.cmd('VMTheme codedark')
 
 vim.keymap.set('n', "<leader>sa", "<Plug>(VM-Select-All)")
 vim.keymap.set('n', "<c-c>", "<Plug>(VM-Case-Conversion-Menu)")
 vim.keymap.set('v', "/", "<Plug>(VM-Visual-Regex)")
-vim.keymap.set({ 'n', 'v' }, "<c-/>", "<Plug>(VM-Start-Regex-Search)")
+vim.keymap.set({ 'n', 'v' }, "<c-f>", "<Plug>(VM-Start-Regex-Search)")
 
 vim.keymap.set('n', "<c-t>", function()
   if not vim.b.visual_multi then
@@ -57,5 +58,3 @@ vim.keymap.set({ 'n', 'v' }, "<c-n>", function()
     return "<Plug>(VM-Visual-Cursors)"
   end
 end, { expr = true, silent = true })
-
-vim.cmd('VMTheme codedark')

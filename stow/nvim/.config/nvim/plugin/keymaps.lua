@@ -1,10 +1,3 @@
--- Tab navigation, not that I need it
-vim.keymap.set('n', '<left>', 'gT')
-vim.keymap.set('n', '<right>', 'gt')
-
--- Get the hell out
-vim.keymap.set('n', 'q:', '<nop>')
-
 -- Move code in visual mode
 vim.keymap.set('v', 'J', [[:m '>+1<CR>gv=gv]])
 vim.keymap.set('v', 'K', [[:m '<-2<CR>gv=gv]])
@@ -14,32 +7,12 @@ vim.keymap.set({ 'n', 'v' }, '<leader>p', [["_dP]])
 
 -- Copy stuff to + register(clipboard)
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
--- todo: make it work on non-focused buffers
-vim.keymap.set('n', '<scrollwheelup>', '3k')
-vim.keymap.set('n', '<scrollwheeldown>', '3j')
 
--- Pane navigation
-local close_not_focused_wins = function()
-  vim.iter(vim.api.nvim_tabpage_list_wins(0))
-      :filter(function(w)
-        return w ~= vim.api.nvim_get_current_win()
-      end)
-      :each(function(w)
-        vim.api.nvim_win_close(w, true)
-      end)
-end
-
-vim.keymap.set('n', 'gd', '<c-]>')
-
-vim.keymap.set('n', '<leader>ff', close_not_focused_wins)
-vim.keymap.set('n', '<leader>h', '<C-W>h_')
-vim.keymap.set('n', '<leader>j', '<C-W>j_')
-vim.keymap.set('n', '<leader>k', '<C-W>k_')
-vim.keymap.set('n', '<leader>l', '<C-W>l_')
-vim.keymap.set('n', '<a-n>', '<C-W>3<')
-vim.keymap.set('n', '<a-.>', '<C-W>3>')
-vim.keymap.set('n', '<a-,>', '<C-W>3+')
-vim.keymap.set('n', '<a-m>', '<C-W>3-')
+-- Pane navigation and resizing
+vim.keymap.set('n', '<a-n>', function() return string.format('<C-W>%d<', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-.>', function() return string.format('<C-W>%d>', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-,>', function() return string.format('<C-W>%d+', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-m>', function() return string.format('<C-W>%d-', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
 
 -- Terminal only mappings
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
