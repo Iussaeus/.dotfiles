@@ -208,6 +208,25 @@ local function format_signature(sig)
     return sig_hi
   end
 
+ if #sig.label > 100 then
+    local str = "..."
+    local param = sig.label:sub(active_start, active_end)
+    local pre_param, post_param
+    if activeIdx == 0 then
+      pre_param = function_name
+      post_param = str .. ")"
+    elseif activeIdx == #sig.parameters - 1 then
+      pre_param = string.format("%s%s",function_name, str)
+      post_param = ")"
+    else
+      pre_param = string.format("%s%s",function_name, str)
+      post_param = str .. ")"
+    end
+    sig.label = pre_param..param..post_param
+    active_start = #pre_param + 1
+    active_end = active_start + #param - 1
+  end
+
   return apply_ts_highlights(sig.label, active_start, active_end)
 end
 
