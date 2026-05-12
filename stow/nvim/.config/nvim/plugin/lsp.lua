@@ -3,34 +3,29 @@ vim.pack.add({'https://github.com/neovim/nvim-lspconfig'})
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my.lsp', {}),
   callback = function(args)
+    vim.keymap.set("n", "<leader>e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end, {buf = 0})
+    vim.keymap.set("n", "<leader>E", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end, {buf = 0})
+    vim.keymap.set("n", "<leader>d", function() vim.diagnostic.jump({ count = 1 }) end, {buf = 0})
+    vim.keymap.set("n", "<leader>D", function() vim.diagnostic.jump({ count = -1 }) end, {buf = 0})
+    vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {buf = 0})
+    vim.keymap.set("n", "<leader>ad", vim.diagnostic.setloclist, {buf = 0})
+
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {buf = 0})
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {buf = 0})
 
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     if client:supports_method('textDocument/completion') then
-      local chars = {}
-      for i = 32, 126 do
-        table.insert(chars, string.char(i))
-      end
-      client.server_capabilities.completionProvider.triggerCharacters = chars
       vim.lsp.completion.enable(true, client.id, args.buf)
     end
   end,
 })
 
-vim.opt.complete:append("w")
-vim.opt.complete:append("k")
 vim.opt.complete:append("b")
-vim.opt.complete:append("o")
+vim.opt.complete:append("w")
 vim.opt.complete:append("i")
 vim.opt.complete:append("t")
+vim.opt.complete:append("o")
 vim.opt.completeopt = { "menuone", "fuzzy", "noselect" }
-
-vim.keymap.set("n", "<leader>e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end)
-vim.keymap.set("n", "<leader>E", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end)
-vim.keymap.set("n", "<leader>d", function() vim.diagnostic.jump({ count = 1 }) end)
-vim.keymap.set("n", "<leader>D", function() vim.diagnostic.jump({ count = -1 }) end)
-vim.keymap.set("n", "<leader>ad", vim.diagnostic.setloclist)
 
 vim.lsp.config('omnisharp', { settings = { cmd = { "omnisharp" } } })
 vim.lsp.config('lua_ls', {

@@ -16,5 +16,7 @@ require('vscode').setup({
 vim.opt.list = true
 vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•', eol = '↵' }
 vim.cmd.colorscheme 'vscode'
-vim.cmd('highlight whitespace ctermfg=darkgrey guifg=#303030')
-vim.cmd('highlight NonText ctermfg=darkgrey guifg=#505050')
+
+vim.cmd "highlight clear Pmenu"
+vim.cmd 'highlight whitespace ctermfg=darkgrey guifg=#303030'
+vim.cmd 'highlight NonText ctermfg=darkgrey guifg=#505050'
