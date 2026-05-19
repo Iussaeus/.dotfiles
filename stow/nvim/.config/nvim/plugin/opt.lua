@@ -13,7 +13,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.o.wrap = true
+vim.o.wrap = false
 vim.o.showbreak = "->"
 vim.o.foldenable = false
 vim.o.foldmethod = 'manual'
@@ -34,6 +34,14 @@ vim.opt.isfname:append("@-@")
 vim.o.autocomplete = true
 vim.o.pumheight = 10
 vim.o.pumborder = 'rounded'
+vim.opt.complete:append("b")
+vim.opt.complete:append("w")
+vim.opt.complete:append("i")
+vim.opt.complete:append("t")
+vim.opt.complete:append("o")
+vim.opt.complete:append("")
+vim.opt.complete:append("i")
+vim.opt.completeopt = { "menuone", "fuzzy", "noselect" }
 
 vim.o.updatetime = 100
 vim.o.autoread = true

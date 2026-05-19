@@ -16,9 +16,24 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 vim.api.nvim_create_autocmd('InsertEnter', {
-  callback = function ()
+  callback = function()
     if vim.bo.filetype == 'TelescopePrompt' then vim.bo.autocomplete = false end
   end
+})
+
+vim.api.nvim_create_autocmd('WinScrolled', {
+  callback = function()
+    local first = vim.fn.line('w0')
+    local height = vim.api.nvim_win_get_height(0)
+    local middle_row = first + math.floor((height) / 2)
+    local cursor = vim.api.nvim_win_get_cursor(0)
+
+    if cursor[1] == middle_row or (cursor[1] > 0 and cursor[1] <= height / 2) then
+      return
+    end
+
+    pcall(vim.api.nvim_win_set_cursor, 0, { middle_row, cursor[2] })
+  end,
 })
 
 vim.api.nvim_create_autocmd('CursorMoved', {
@@ -29,13 +44,12 @@ vim.api.nvim_create_autocmd('CursorMoved', {
     local cursor = vim.api.nvim_win_get_cursor(0)
     local topline = math.max(1, cursor[1] - math.floor(height / 2))
 
-    -- todo: underline the current word under cursor
     if cursor[1] == middle_row or (cursor[1] > 0 and cursor[1] < height / 2) then
       return
     end
 
     -- todo: handle errors
-    pcall(vim.fn.winrestview, {topline = topline, cursor = {cursor[1], cursor[2]}})
+    pcall(vim.fn.winrestview, { topline = topline, cursor = { cursor[1], cursor[2] } })
   end,
 })
 
@@ -51,10 +65,10 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
     if vim.tbl_contains({ 'help', 'man', 'fugitive' }, vim.bo.filetype) then
       vim.api.nvim_win_set_config(0, {
-          width = 85,
-          split = 'right',
-          vertical = true,
-        })
+        width = 85,
+        split = 'right',
+        vertical = true,
+      })
 
       vim.wo.winfixheight = true
       vim.wo.winfixwidth = true

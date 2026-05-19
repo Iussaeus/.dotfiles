@@ -11,6 +11,9 @@ vim.keymap.set("c", "<c-y>", require 'ido-mode'.accept_suggestion)
 vim.keymap.set("n", "<a-b>", require 'goback'.go_back, { remap = true })
 vim.keymap.set("n", "<a-f>", require 'goback'.go_forth, { remap = true })
 
+-- vim.pack.add({'https://github.com/Iussaeus/sessman.nvim'})
+vim.keymap.set("n", "<a-s>", require 'sessman'.show_sessions, { remap = true })
+
 -- vim.pack.add({'https://github.com/Iussaeus/compile.nvim'})
 vim.keymap.set("n", "<leader>cc", require 'compile'.compile)
 vim.keymap.set("n", "<leader>cn", require 'compile'.jump_to_next)

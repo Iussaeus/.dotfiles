@@ -20,13 +20,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.opt.complete:append("b")
-vim.opt.complete:append("w")
-vim.opt.complete:append("i")
-vim.opt.complete:append("t")
-vim.opt.complete:append("o")
-vim.opt.completeopt = { "menuone", "fuzzy", "noselect" }
-
 vim.lsp.config('omnisharp', { settings = { cmd = { "omnisharp" } } })
 vim.lsp.config('lua_ls', {
   settings = {
