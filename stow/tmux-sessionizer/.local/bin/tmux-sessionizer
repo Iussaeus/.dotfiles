@@ -11,13 +11,12 @@ Usage: ${name} [OPTIONS]... <session>
 Manage tmux sessions in TMUX_SESSIONIZER_PROJECTS_DIR enviroment variable.
 
 Options:
---debug                 print debug information after the execution
--h, --help              print this help message
--n, --session <session> open a new or existing session
---show-session-info     options: session-file, history, server-sock
--s, --save-session      save the current or selected session
--k, --kill-and-switch   kills current or selected session and switch to other one
---no-attach             don't attach to the new sesssion
+    --debug                 print debug information after the execution
+    -h, --help              print this help message
+    -n, --session <session> open a new or existing session
+    --show-session-info     options: history
+    -k, --kill-and-switch   kills current or selected session and switch to other one
+    --no-attach             don't attach to the new sesssion
 END
 }
 
@@ -35,14 +34,10 @@ is-managed() {
 
 debug-dump() {
 	local _session=$session
-	[ -e "$HOME/.cache/$name/$_session" ] && local _session_file="$HOME/.cache/$name/$_session.vim" 
 	[ -e "$HOME/.cache/$name/${_session}_history" ] && local _hist_file="$HOME/.cache/$name/${_session}_history" 
-	[ -e "/tmp/$name-$_session"local ] && _server_sock="/tmp/$name-$_session"
 	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
 		_session="$TMUX_SESSIONIZER_SESSION_NAME"
-		_session_file="$TMUX_SESSIONIZER_NVIM_SESSION_FILE"
 		_hist_file="$HISTFILE" 
-		_server_sock="$TMUX_SESSIONIZER_NVIM_SERVER_SOCK"
 	fi
 
 	if is-managed "$_session"; then
@@ -52,9 +47,9 @@ debug-dump() {
 	fi
 
 	echo "search dir: $search_dir"
-	echo "name:$name, managed:$managed, session:$session, kill:$kill, search:$search, save:$save, attach:$attach"
+	echo "name:$name, managed:$managed, session:$session, kill:$kill, search:$search, attach:$attach"
 	if [[ -n $TMUX_SESSIONIZER && "$managed" == true ]]; then
-		echo "s:$_session sf:$_session_file, srv:$_server_sock"
+		echo "s:$_session"
 	fi
 
 	echo "env:"
@@ -80,32 +75,6 @@ kill-session() {
 	tmux kill-session -t "$attached_session"
 }
 
-save-session() {
-	local _session="${session:-$(tmux display-message -p '#S')}"
-	local _session_file="$HOME/.cache/$name/$_session.vim" 
-	local _server_sock="/tmp/$name-$_session"
-	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
-		_session="$TMUX_SESSIONIZER_SESSION_NAME"
-		_session_file="$TMUX_SESSIONIZER_NVIM_SESSION_FILE"
-		_server_sock="$TMUX_SESSIONIZER_NVIM_SERVER_SOCK"
-	fi
-
-	if ! is-managed "$_session"; then
-		echo "$name: cannot save non-managed session"
-		return
-	fi
-
-	if [[ -z $_session || ! -e $_server_sock ]]; then
-		return
-	fi
-
-	if [ ! -d "$_session_file" ]; then
-		mkdir -p "$(dirname "$_session_file")"
-	fi
-
-	nvim --server "$_server_sock" --remote-send "<esc>:mksession! $_session_file<cr>"
-}
-
 find-sessions() {
 	for path in $(find "$search_dir" -mindepth 1 -maxdepth 1 -type d); do
 		sessions[$(basename "${path/./_}")]="$path"
@@ -127,9 +96,7 @@ find-sessions() {
 }
 
 make-new-session() {
-	local session_file="$HOME/.cache/$name/$session.vim"
 	local hist_file="$HOME/.cache/$name/${session}_history"
-	local server_sock="/tmp/$name-$session"
 	local session_path="${sessions["$session"]:-$(realpath "$search_dir/$session")}"
 
 	if [ -z "$(pgrep tmux)" ]; then
@@ -145,8 +112,6 @@ make-new-session() {
 	tmux set-environment -t "$session" "TMUX_SESSIONIZER" "1" 
 	tmux set-environment -t "$session" "TMUX_SESSIONIZER_PROJECTS_DIR" "$search_dir" 
 	tmux set-environment -t "$session" "TMUX_SESSIONIZER_SESSION_NAME" "$session" 
-	tmux set-environment -t "$session" "TMUX_SESSIONIZER_NVIM_SESSION_FILE" "$session_file" 
-	tmux set-environment -t "$session" "TMUX_SESSIONIZER_NVIM_SERVER_SOCK" "$server_sock" 
 	tmux set-hook -t "$session" after-new-window 'send-keys " HISTFILE=\"\$HISTFILE:\$(tmux display-message -p \#I_\#P)\";fc -p \$HISTFILE;clear;source \$HOME/.zshrc" C-m'
 
 	tmux new-window -t "$session:1" -c "$session_path"
@@ -155,13 +120,7 @@ make-new-session() {
 	# don't know if this is right but if we sleep the histfile gets the correct window index
 	sleep "0.5"
 	tmux new-window -t "$session:1" -c "$session_path"
-	if [ ! -e $server_sock ]; then
-		if [ -e "$session_file" ]; then
-			tmux send-keys -t "$session:1" "nvim --listen '$server_sock' -S '$session_file'" C-m
-		else 
-			tmux send-keys -t "$session:1" "nvim --listen '$server_sock' ." C-m
-		fi
-	fi
+	tmux send-keys -t "$session:1" "nvim ." C-m
 }
 
 make-session-files() {
@@ -175,22 +134,13 @@ make-session-files() {
 		[ -e "$f" ] || continue
 		rm -- "$f"
 	done
-
-	local session_file="$HOME/.cache/$name/$session.vim"
-	if [ -e "$session_file" ]; then
-		rm "$session_file"
-	fi
 }
 
 show-session-info() {
 	local _session="$session"
-	local _session_file="$HOME/.cache/$name/$_session.vim" 
 	local _hist_file="$HOME/.cache/$name/${_session}_history" 
-	local _server_sock="/tmp/$name-$_session"
 	if [[ -n $TMUX_SESSIONIZER && -z $session ]]; then 
 		_session="$TMUX_SESSIONIZER_SESSION_NAME"
-		_session_file="$TMUX_SESSIONIZER_NVIM_SESSION_FILE"
-		_server_sock="$TMUX_SESSIONIZER_NVIM_SERVER_SOCK"
 	fi
 
 	if [ -z "$_session" ]; then
@@ -209,18 +159,8 @@ show-session-info() {
 	fi
 
 	case "$show_cmd" in
-		session-file)
-			if [ -e "${_session_file}" ]; then
-				echo $_session_file
-			fi
-			;;
 		history)
 			find "$(dirname "$_hist_file")" -iwholename "$_hist_file*" | sort
-			;;
-		server-sock)
-			if [ -e "${_server_sock}" ]; then
-				echo $_server_sock
-			fi
 			;;
 		*)
 			echo "$name: invalid option '$show_cmd'"
@@ -271,9 +211,6 @@ while [[ $# -ge 1 ]]; do
 		--no-attach)
 			attach=0
 			;;
-		-s|--save-session)
-			save=1
-			;;
 		--debug)
 			debug=1
 			;;
@@ -281,12 +218,12 @@ while [[ $# -ge 1 ]]; do
 			shift
 			show=1
 			case "$1" in
-				session-file|history|server-sock)
+				history)
 					show_cmd=$1
 					;;
 
 				'')
-					echo "$name: options: session-file|history|server-sock"
+					echo "$name: options: history"
 					exit 1
 					;;
 				*)
@@ -329,14 +266,7 @@ if [ "$show" -eq 1 ]; then
 	exit $?
 fi
 
-if [ "$kill" -eq 1 ] && [ "$save" -eq 1 ]; then
-	save-session
-	kill-session
-	exit 0
-elif [ "$save" -eq 1 ]; then
-	save-session
-	exit 0
-elif [ "$kill" -eq 1 ]; then
+if [ "$kill" -eq 1 ]; then
 	kill-session
 	exit 0
 fi
