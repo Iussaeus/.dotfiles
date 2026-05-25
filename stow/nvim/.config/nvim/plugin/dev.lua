@@ -48,7 +48,6 @@ local function add_local_package(pkg)
       if pcall(vim.pack.get, { pkg_name }) then
         vim.pack.del({ pkg_name }, { force = true })
       end
-      vim.print(package.loaded)
 
       vim.cmd.packadd(pkg_name)
     else
