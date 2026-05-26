@@ -1,7 +1,9 @@
 local dev_directory = '~/code'
 local remote = 'https://github.com/'
 
--- todo: more sophisitcated url parsing validation
+-- todo: parse url instead of author/package
+-- todo: REFACTOR: same signature as vim.pack.add + a opts table{dev = <directory>, prefer_remote},
+-- instead of linking the packages add them to the packpath
 local function add_local_package(pkg)
   dev_directory = vim.fs.abspath(dev_directory)
   if not dev_directory then
@@ -73,15 +75,17 @@ vim.keymap.set("n", "<a-b>", require 'goback'.go_back)
 vim.keymap.set("n", "<a-f>", require 'goback'.go_forth)
 
 add_local_package('Iussaeus/sessman.nvim')
-vim.keymap.set("n", "<a-s>", require 'sessman'.show_sessions)
+vim.keymap.set("n", "<a-s>", require 'sessman'.open_session_buf)
+vim.keymap.set("n", "<leader>ss", require 'sessman'.start_session)
+vim.keymap.set("n", "<leader>so", require 'sessman'.stop_session)
 
 add_local_package('Iussaeus/compile.nvim')
 vim.keymap.set("n", "<leader>cc", require 'compile'.compile)
 vim.keymap.set("n", "<leader>cn", require 'compile'.jump_to_next)
 vim.keymap.set("n", "<leader>cp", require 'compile'.jump_to_prev)
 vim.keymap.set("n", "<leader>rcc", require 'compile'.recompile)
-vim.keymap.set('n', '<leader>co', require 'compile'.open_win)
-vim.keymap.set('n', '<a-c>', require 'compile'.menu)
+vim.keymap.set('n', '<leader>co', require 'compile'.open_job_buf)
+vim.keymap.set('n', '<a-c>', require 'compile'.open_compile_buf)
 
 -- packadd('Iussaeus/cursors.nvim')
 -- vim.keymap.set("n", "<leader>nc", require 'cursors'.find_under_cursor)

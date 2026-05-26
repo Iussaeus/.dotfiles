@@ -23,6 +23,8 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 
 vim.api.nvim_create_autocmd('WinScrolled', {
   callback = function()
+    if vim.bo.filetype == 'nvim_undotree' then return end
+
     local first = vim.fn.line('w0')
     local height = vim.api.nvim_win_get_height(0)
     local middle_row = first + math.floor((height) / 2)
@@ -38,6 +40,8 @@ vim.api.nvim_create_autocmd('WinScrolled', {
 
 vim.api.nvim_create_autocmd('CursorMoved', {
   callback = function()
+    if vim.bo.filetype == 'nvim_undotree' then return end
+
     local first = vim.fn.line('w0')
     local height = vim.api.nvim_win_get_height(0)
     local middle_row = first + math.floor((height) / 2)
@@ -72,6 +76,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 
       vim.wo.winfixheight = true
       vim.wo.winfixwidth = true
+      vim.wo.sidescrolloff = 0
     end
   end
 })
