@@ -1,24 +1,21 @@
 local dev_directory = '~/code'
 local remote = 'https://github.com/'
 
--- todo: parse url instead of author/package
--- todo: REFACTOR: same signature as vim.pack.add + a opts table{dev = <directory>, prefer_remote},
--- instead of linking the packages add them to the packpath
 local function add_local_package(pkg)
   dev_directory = vim.fs.abspath(dev_directory)
   if not dev_directory then
-    error(string.format('add_local_package: %s is not a valid dev directory', dev_directory))
+    error(('add_local_package: %s is not a valid dev directory'):format(dev_directory))
   end
 
   local stat = vim.uv.fs_stat(dev_directory)
   if not stat or stat.type ~= 'directory' then
-    error(string.format('add_local_package: %s is not a valid dev directory', dev_directory))
+    error(('add_local_package: %s is not a valid dev directory'):format(dev_directory))
   end
 
   local pkg_split = vim.split(pkg, '/', { trimempty = true, plain = true })
   local pkg_name
   if #pkg_split ~= 2 then
-    error(string.format('add_local_package: package should have the next form "author/package", but got %q', pkg))
+    error(('add_local_package: package should have the next form "author/package", but got %q'):format(pkg))
   else
     pkg_name = pkg_split[2]
   end
@@ -28,32 +25,28 @@ local function add_local_package(pkg)
   if stat then
     if stat.type == 'directory' then
       local pkg_vim_dir = vim.fs.joinpath(vim.fn.stdpath('data'), 'site', 'pack', 'dev', 'opt')
-      stat = vim.uv.fs_stat(pkg_vim_dir)
-      if not stat then
+      if not vim.uv.fs_stat(pkg_vim_dir) then
         local ok, err = pcall(vim.fn.mkdir, pkg_vim_dir, 'p')
         if not ok then
-          error(string.format('add_local_package: err while mkdir %q: %s', pkg_vim_dir, err))
+          error(('add_local_package: err while mkdir %q: %s'):format(pkg_vim_dir, err))
         end
       end
       local pkg_vim_path = vim.fs.joinpath(pkg_vim_dir, pkg_name)
-      stat = vim.uv.fs_stat(pkg_vim_path)
-      if not stat then
+      if not vim.uv.fs_stat(pkg_vim_path) then
         local ok, err, err_name = vim.uv.fs_symlink(pkg_dev_path, pkg_vim_path)
         if not ok then
-          error(string.format('add_local_package: err %s while linking %q to %q: %s', err_name, pkg_dev_path,
+          error(('add_local_package: err %s while linking %q to %q: %s'):format(err_name, pkg_dev_path,
             pkg_vim_path, err))
         end
 
-        vim.notify(string.format('add_local_package: linked %q to %q', pkg_dev_path, pkg_vim_path), vim.log.levels.INFO)
+        vim.notify(('add_local_package: linked %q to %q'):format(pkg_dev_path, pkg_vim_path), vim.log.levels.INFO)
       end
 
-      if pcall(vim.pack.get, { pkg_name }) then
-        vim.pack.del({ pkg_name }, { force = true })
-      end
+      if pcall(vim.pack.get, { pkg_name }) then vim.pack.del({ pkg_name }, { force = true }) end
 
       vim.cmd.packadd(pkg_name)
     else
-      error(string.format('packadd: %q is not a directory', pkg_dev_path))
+      error(('add_local_package: %q is not a directory'):format(pkg_dev_path))
     end
   else
     if remote:sub(-1) ~= '/' then

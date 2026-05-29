@@ -9,10 +9,10 @@ vim.keymap.set({ 'n', 'v' }, '<leader>p', [["_dP]])
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 
 -- Pane navigation and resizing
-vim.keymap.set('n', '<a-n>', function() return string.format('<C-W>%d<', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
-vim.keymap.set('n', '<a-.>', function() return string.format('<C-W>%d>', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
-vim.keymap.set('n', '<a-,>', function() return string.format('<C-W>%d+', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
-vim.keymap.set('n', '<a-m>', function() return string.format('<C-W>%d-', vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-n>', function() return ('<C-W>%d<'):format(vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-.>', function() return ('<C-W>%d>'):format(vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-,>', function() return ('<C-W>%d+'):format(vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
+vim.keymap.set('n', '<a-m>', function() return ('<C-W>%d-'):format(vim.v.count1 == 1 and 3 or vim.v.count1) end, {expr = true})
 
 -- Terminal only mappings
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
