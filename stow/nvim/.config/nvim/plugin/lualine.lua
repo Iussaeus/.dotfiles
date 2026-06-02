@@ -1,6 +1,6 @@
 vim.pack.add({ 'https://github.com/nvim-lualine/lualine.nvim' })
 
-local hover_cache = ""
+local hover_cache = ''
 
 require 'lualine'.setup {
   options = {
@@ -34,12 +34,7 @@ require 'lualine'.setup {
     lualine_c = {
       'diagnostics',
       'filename',
-      {
-        'custom',
-        fmt = function()
-          return hover_cache
-        end,
-      },
+      { 'custom', fmt = function() return hover_cache end },
     },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_z = { {
@@ -62,7 +57,7 @@ local function get_treesitter_captures(text, bufnr, lang, query_name)
   end
 
   lang = lang or vim.bo[bufnr].filetype
-  query_name = query_name or "highlights"
+  query_name = query_name or 'highlights'
 
   local parser = vim.treesitter.get_parser(bufnr, lang)
   if not parser then return {} end
@@ -98,29 +93,27 @@ local function apply_ts_highlights(str, param_start, param_end)
   local highlights = {}
   for i = 1, #str do
     local char = str:sub(i, i)
-    if char == "\t" then 
-      char = "    "
-    end
+    if char == '\t' then char = '    ' end
     table.insert(highlights, { text = char, pos = i })
   end
 
   for _, cap in ipairs(captures) do
     local scol = cap.start_col + 1
     if param_end and param_start and ((scol >= param_start and scol <= param_end) or
-      (cap.end_col >= param_start and cap.end_col <= param_end)) then
+          (cap.end_col >= param_start and cap.end_col <= param_end)) then
       goto continue
     end
 
     for i, h in ipairs(highlights) do
       if h.pos == scol then
-        table.insert(highlights, i, { text = "%#@" .. cap.capture .. "#" })
+        table.insert(highlights, i, { text = '%#@' .. cap.capture .. '#' })
         break
       end
     end
 
     for i, h in ipairs(highlights) do
       if h.pos == cap.end_col then
-        table.insert(highlights, i + 1, { text = "%*" })
+        table.insert(highlights, i + 1, { text = '%*' })
         break
       end
     end
@@ -131,42 +124,42 @@ local function apply_ts_highlights(str, param_start, param_end)
   if param_start and param_end then
     for i, h in ipairs(highlights) do
       if h.pos == param_start then
-        table.insert(highlights, i, { text = "%#LspSignatureActiveParameter#" })
+        table.insert(highlights, i, { text = '%#LspSignatureActiveParameter#' })
         break
       end
     end
 
     for i, h in ipairs(highlights) do
       if h.pos == param_end then
-        table.insert(highlights, i + 1, { text = "%*" })
+        table.insert(highlights, i + 1, { text = '%*' })
         break
       end
     end
   end
 
-  return vim.iter(highlights):map(function(x) return x.text end):join("")
+  return vim.iter(highlights):map(function(x) return x.text end):join('')
 end
 
 local function first_hover_line(contents)
   local lines = vim.lsp.util.convert_input_to_markdown_lines(contents or {})
-  if not lines then return "" end
+  if not lines then return '' end
 
   for _, line in ipairs(lines) do
     -- TODO: concat lines after matched line untill the line that divides return values and description
     -- though not sure how well it will work with different language servers
-    if not line:match("```") and line:match("%S") then
+    if not line:match('```') and line:match('%S') then
       return apply_ts_highlights(line, get_treesitter_captures())
     end
   end
 
-  return ""
+  return ''
 end
 
 local function pick_signature(sig)
   if not sig or not sig.signatures then return nil end
 
   local idx = sig.activeSignature
-  if type(idx) ~= "number" then idx = 0 end
+  if type(idx) ~= 'number' then idx = 0 end
 
   return sig.signatures[idx + 1] or sig.signatures[1]
 end
@@ -190,7 +183,7 @@ local function format_signature(sig)
 
   local active_start, active_end
   local first_start, first_end
-  if type(active.label) == "table" then
+  if type(active.label) == 'table' then
     first_start, first_end = first.label[1], first.label[2]
     active_start, active_end = active.label[1] + 1, active.label[2]
   else
@@ -208,21 +201,21 @@ local function format_signature(sig)
     return sig_hi
   end
 
- if #sig.label > 100 then
-    local str = "..."
+  if #sig.label > 100 then
+    local str = '...'
     local param = sig.label:sub(active_start, active_end)
     local pre_param, post_param
     if activeIdx == 0 then
-      pre_param = function_name
-      post_param = str .. ")"
+      pre_param = function_name .. '('
+      post_param = str .. ')'
     elseif activeIdx == #sig.parameters - 1 then
-      pre_param = string.format("%s%s",function_name, str)
-      post_param = ")"
+      pre_param = string.format('%s(%s', function_name, str)
+      post_param = ')'
     else
-      pre_param = string.format("%s%s",function_name, str)
-      post_param = str .. ")"
+      pre_param = string.format('%s(%s', function_name, str)
+      post_param = str .. ')'
     end
-    sig.label = pre_param..param..post_param
+    sig.label = pre_param .. param .. post_param
     active_start = #pre_param + 1
     active_end = active_start + #param - 1
   end
@@ -233,28 +226,32 @@ end
 local function request_lsp_info()
   local params = vim.lsp.util.make_position_params(0, 'utf-8')
 
-  vim.lsp.buf_request(0, "textDocument/signatureHelp", params, function(_, sig)
-    local s = pick_signature(sig)
-    if not s then
-      vim.lsp.buf_request(0, "textDocument/hover", params, function(_, hover)
-        if hover and hover.contents then
-          hover_cache = first_hover_line(hover.contents)
-        else
-          hover_cache = ""
+  if #vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() }) ~= 0 then
+    vim.lsp.buf_request(0, 'textDocument/signatureHelp', params, function(_, sig)
+      local s = pick_signature(sig)
+      if not s then
+        vim.lsp.buf_request(0, 'textDocument/hover', params, function(_, hover)
+          if hover and hover.contents then
+            hover_cache = first_hover_line(hover.contents)
+          else
+            hover_cache = ''
+          end
+        end)
+      else
+        local formatted = format_signature(s)
+        if formatted then
+          hover_cache = formatted
         end
-        vim.cmd("redrawstatus")
-      end)
-      return
-    end
+      end
 
-    local formatted = format_signature(s)
-    if formatted then
-      hover_cache = formatted
-      vim.cmd("redrawstatus")
-    end
-  end)
+      vim.cmd('redrawstatus')
+    end)
+  else
+    hover_cache = ''
+    vim.cmd('redrawstatus')
+  end
 end
 
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorMovedI' }, {
   callback = request_lsp_info,
 })
