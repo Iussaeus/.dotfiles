@@ -202,17 +202,18 @@ local function format_signature(sig)
   end
 
   if #sig.label > 100 then
+    function_name = function_name:sub(-1) == '(' and function_name or function_name .. '('
     local str = '...'
     local param = sig.label:sub(active_start, active_end)
     local pre_param, post_param
     if activeIdx == 0 then
-      pre_param = function_name .. '('
+      pre_param = function_name
       post_param = str .. ')'
     elseif activeIdx == #sig.parameters - 1 then
-      pre_param = string.format('%s(%s', function_name, str)
+      pre_param = string.format('%s%s', function_name, str)
       post_param = ')'
     else
-      pre_param = string.format('%s(%s', function_name, str)
+      pre_param = string.format('%s%s', function_name, str)
       post_param = str .. ')'
     end
     sig.label = pre_param .. param .. post_param
@@ -243,15 +244,10 @@ local function request_lsp_info()
           hover_cache = formatted
         end
       end
-
-      vim.cmd('redrawstatus')
     end)
   else
     hover_cache = ''
-    vim.cmd('redrawstatus')
   end
 end
 
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorMovedI' }, {
-  callback = request_lsp_info,
-})
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorMovedI' }, { callback = request_lsp_info })
