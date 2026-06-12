@@ -1,8 +1,8 @@
-local dev_directory = '~/code'
-local remote = 'https://github.com/'
-
-local function add_local_package(pkg)
-  dev_directory = vim.fs.abspath(dev_directory)
+local function add_local_package(pkg, opts)
+  opts = opts or {}
+  opts.dev_directory = opts.dev_directory or '~/code'
+  opts.remote = opts.remote or 'https://github.com/'
+  local dev_directory = vim.fs.abspath(opts.dev_directory)
   if not dev_directory then
     error(('add_local_package: %s is not a valid dev directory'):format(dev_directory))
   end
@@ -49,11 +49,11 @@ local function add_local_package(pkg)
       error(('add_local_package: %q is not a directory'):format(pkg_dev_path))
     end
   else
-    if remote:sub(-1) ~= '/' then
-      remote = remote .. '/'
+    if opts.remote:sub(-1) ~= '/' then
+      opts.remote = opts.remote .. '/'
     end
 
-    vim.pack.add({ remote .. pkg })
+    vim.pack.add({ opts.remote .. pkg })
   end
 end
 

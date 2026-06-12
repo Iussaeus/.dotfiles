@@ -5,8 +5,13 @@ vim.opt_local.expandtab = false
 
 vim.lsp.enable('gopls')
 
-vim.keymap.set("n", "<leader>en", "oif err != nil {<CR>return err<CR>}<ESC>k_v$h", {nowait = true})
-vim.keymap.set("n", "<leader>enp", "oif err != nil {<CR>fmt.Printf(\"Err: %s\", err)<CR>}<ESC>", {nowait = true})
+local keymap_opts = { nowait = true, noremap = true }
+vim.keymap.set('n', '<leader>ef', 'yiw%oif <C-R>" != nil {<CR>return fmt.Errorf("unexpected error: %w", <C-R>")<CR>}<ESC>k_f"lvee<C-G>', keymap_opts)
+vim.keymap.set('n', '<leader>er', 'yiw%oif <C-R>" != nil {<CR>return <C-R>"<CR>}<ESC>', keymap_opts)
+vim.keymap.set('n', '<leader>ep', 'yiw%oif err != nil {<CR>fmt.Printf("Err: %s", <C-R>")<CR>}<ESC>', keymap_opts)
+vim.keymap.set('n', '<leader>eir', 'yiw_iif <ESC>%a; <C-R>" != nil {<CR>return <C-R>"<CR>}<ESC>', keymap_opts)
+vim.keymap.set('n', '<leader>eif', 'yiw_iif <ESC>%a; <C-R>" != nil {<CR>return fmt.Errorf("unexpected error: %w", <C-R>")<CR>}<ESC>k_f"lvee<C-G>', keymap_opts)
+vim.keymap.set('n', '<leader>eip', 'yiw_iif <ESC>%a; <C-R>" != nil {<CR>fmt.Printf("Err: %s", <C-R>")<CR>}<ESC>', keymap_opts)
 
 vim.api.nvim_create_user_command('Go', function(opts)
   local lines = vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, false)
@@ -34,6 +39,6 @@ vim.api.nvim_create_user_command('Go', function(opts)
     end
   })
 end, {
-  desc = "Run go code",
+  desc = 'Run go code',
   range = true,
 })
