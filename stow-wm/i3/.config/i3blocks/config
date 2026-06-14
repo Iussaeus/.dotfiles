@@ -1,5 +1,5 @@
 [MUSIC]
-command=[ "$(playerctl -p spotify status)" == "Playing" ] && playerctl -p spotify metadata --format "{{artist}} - {{title}} {{duration(position)}}"
+command=[ "$(playerctl -p spotify,Feishin status)" == "Playing" ] && playerctl -p spotify,Feishin metadata --format "{{artist}} - {{title}} {{duration(position)}}"
 interval=1
 
 [DISK]

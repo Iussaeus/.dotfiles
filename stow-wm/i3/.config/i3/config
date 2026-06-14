@@ -32,7 +32,14 @@ exec --no-startup-id xss-lock $HOME/.config/i3/scripts/lock.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+<<<<<<< Updated upstream
 exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY
+=======
+exec --no-startup-id input-leapc --disable-crypto 192.168.100.89
+
+bindsym $mod+Shift+F1 exec --no-startup-id xrandr --output eDP --off
+bindsym $mod+F1 exec --no-startup-id xrandr --output eDP --auto
+>>>>>>> Stashed changes
 
 # END THE TEARING
 exec --no-startup-id picom
@@ -55,10 +62,10 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 # bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls 
-bindsym XF86AudioPlay exec playerctl -p spotify play-pause && $refresh_i3status
-bindsym XF86AudioPause exec playerctl -p spotify pause && $refresh_i3status
-bindsym XF86AudioNext exec playerctl -p spotify next && $refresh_i3status
-bindsym XF86AudioPrev exec playerctl -p spotify previous && $refresh_i3status
+bindsym XF86AudioPlay exec playerctl -p spotify -p Feishin play-pause && $refresh_i3status
+bindsym XF86AudioPause exec playerctl -p spotify -p Feishin pause && $refresh_i3status
+bindsym XF86AudioNext exec playerctl -p spotify -p Feishin next && $refresh_i3status
+bindsym XF86AudioPrev exec playerctl -p spotify -p Feishin previous && $refresh_i3status
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec brightnessctl set 10%+

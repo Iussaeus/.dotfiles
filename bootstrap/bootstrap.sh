@@ -84,13 +84,18 @@ post-install() {
 	
 	case $wm in
 		"i3")
-		stow -v -d $stow_wm_dir -t $HOME i3 
-		# Copy touchpad config file
-		sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
-		;; 
+			stow -v -d $stow_wm_dir -t $HOME i3 
+			# Copy touchpad config file
+			sudo cp $HOME/.dotfiles/30-touchpad.conf.back /etc/X11/xorg.conf.d/30-touchpad.conf
+			;; 
 
-		"hyprland") stow -v -d $stow_wm_dir -t $HOME hyprland ;;
-		"sway") stow -v -d $stow_wm_dir -t $HOME sway
+		"hyprland")
+			stow -v -d $stow_wm_dir -t $HOME hyprland 
+			;;
+		"sway")
+			sudo sed -i 's/Exec=.*/Exec=sway --unsupported-gpu/' /usr/share/wayland-sessions/sway.desktop
+			stow -v -d $stow_wm_dir -t $HOME sway
+			;;
 	esac
 
 	stow -v -d $stow_dir -t $HOME *
@@ -106,6 +111,7 @@ post-install() {
 	sudo systemctl enable --now com.system76.PowerDaemon.service
 	sudo systemctl enable bluetooth.service
 	sudo systemctl enable sddm
+	sudo usermod -a -G input $USER
 
 	# Change the shell to zsh
 	chsh -s $(which zsh)
