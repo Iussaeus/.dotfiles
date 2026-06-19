@@ -61,7 +61,7 @@ add_local_package('Iussaeus/ido-mode.nvim')
 vim.keymap.set("c", "<c-t>", require 'ido-mode'.toggle)
 vim.keymap.set("c", "<c-n>", require 'ido-mode'.next_suggestion)
 vim.keymap.set("c", "<c-p>", require 'ido-mode'.previous_suggestion)
-vim.keymap.set("c", "<c-y>", require 'ido-mode'.accept_suggestion)
+vim.keymap.set("c", "<c-y>", require 'ido-mode'.insert_current_suggestion)
 
 add_local_package('Iussaeus/goback.nvim')
 vim.keymap.set("n", "<a-b>", require 'goback'.go_back)
