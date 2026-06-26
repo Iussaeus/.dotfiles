@@ -1,4 +1,4 @@
-vim.pack.add( {
+vim.pack.add({
   'https://github.com/nvim-neotest/nvim-nio',
   'https://github.com/leoluz/nvim-dap-go',
   'https://github.com/rcarriga/nvim-dap-ui',
