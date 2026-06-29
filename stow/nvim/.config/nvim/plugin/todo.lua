@@ -1,7 +1,14 @@
 vim.pack.add({ 'https://github.com/folke/todo-comments.nvim' })
 
 require 'todo-comments'.setup({
-  highlight = { pattern = [[\s((KEYWORDS)(\(.+\))?):]] },
+  highlight = {
+    multiline = true,                       -- enable multine todo comments
+    multiline_pattern = "^.",               -- lua pattern to match the next multiline from the start of the matched keyword
+    multiline_context = 10,                 -- extra lines that will be re-evaluated when changing a line
+    after = "fg",                             -- "fg" or "bg" or empty
+    pattern = [[\s((KEYWORDS)(\(.+\))?):]], -- pattern or table of patterns, used for highlighting (vim regex)
+    comments_only = true,                   -- uses treesitter to match keywords in comments only
+  },
   keywords = {
     TODO = { icon = ' ', color = 'info', alt = { 'todo', 'Todo' } },
     WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX', 'warn', 'warning', 'xxx', 'Warn', 'Warning', 'HACK', 'Hack', 'hack' } },

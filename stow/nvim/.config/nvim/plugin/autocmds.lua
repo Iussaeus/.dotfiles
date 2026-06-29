@@ -15,6 +15,12 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   end
 })
 
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  callback = function()
+    if vim.fs.ext(vim.api.nvim_buf_get_name(0)) == 'log' then vim.cmd [[set filetype=log]] end
+  end
+})
+
 vim.api.nvim_create_autocmd('InsertEnter', {
   callback = function()
     if vim.bo.filetype == 'TelescopePrompt' then vim.bo.autocomplete = false end

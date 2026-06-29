@@ -17,6 +17,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•', eol = '↵' }
 vim.cmd.colorscheme 'vscode'
 
-vim.cmd "highlight clear Pmenu"
-vim.cmd 'highlight whitespace ctermfg=darkgrey guifg=#303030'
-vim.cmd 'highlight NonText ctermfg=darkgrey guifg=#505050'
+vim.api.nvim_set_hl(0, "Pmenu", {})
+vim.api.nvim_set_hl(0, "whitespace", { ctermfg = "darkgrey", fg = "#303030" })
+vim.api.nvim_set_hl(0, "NonText", { ctermfg = "darkgrey", fg = "#505050" })
+vim.api.nvim_set_hl(0, "@character.printf", { fg = "#FAAB50" })
