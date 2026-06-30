@@ -10,12 +10,12 @@ file=$1
 pos=$2
 session=$(basename $3 | tr '.' '_')
 tmux_sessionizer="$HOME/.local/bin/tmux-sessionizer"
-server=$($tmux_sessionizer --show-session-info "server-sock" -n "$session")
+server='/tmp/godot-nvim-server'
 
 echo "f:$file, p:$pos, s:$sesson, srv:$server" > $HOME/log
 
 if [ -z "$server" ]; then
-	$tmux_sessionizer -n "$session" --no-attach >> $HOME/log
+	nvim --listen "$server"
 	sleep "0.2"
 
 	nvim --server "$server" --remote-send "<esc>:e $file<CR>" >> $HOME/log
