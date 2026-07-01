@@ -40,6 +40,7 @@ vim.cmd("colorscheme rose-pine-moon")
 vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword" })
 vim.api.nvim_set_hl(0, "@type", { link = "@constant" })
 vim.api.nvim_set_hl(0, "@module", { link = "@function" })
+vim.api.nvim_set_hl(0, "@markup.heading", { link = "@function" })
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•', eol = '↵' }

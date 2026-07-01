@@ -21,14 +21,26 @@
 ((raw_string_literal
    (raw_string_literal_content) @injection.content)
  (#match? @injection.content
-  "\\c(SET|TRUNCATE|SELECT|CREATE|DELETE|ALTER|UPDATE|DROP|INSERT|WITH)")
+  "\\c(SET|TRUNCATE|SELECT|CREATE|DELETE|ALTER|UPDATE|DROP|INSERT)")
+ (#set! injection.language "sql"))
+
+((raw_string_literal
+   (raw_string_literal_content) @injection.content)
+ (#match? @injection.content
+  "\\%(.)?([0-9]|[a-z])")
+ (#set! injection.language "printf"))
+
+((interpreted_string_literal
+   (interpreted_string_literal_content) @injection.content)
+ (#match? @injection.content
+  "\\c(SET|TRUNCATE|SELECT|CREATE|DELETE|ALTER|UPDATE|DROP|INSERT)")
  (#set! injection.language "sql"))
 
 ((interpreted_string_literal
    (interpreted_string_literal_content) @injection.content)
  (#match? @injection.content
-  "\\c(SET|TRUNCATE|SELECT|CREATE|DELETE|ALTER|UPDATE|DROP|INSERT|WITH)")
- (#set! injection.language "sql"))
+  "\\%(.)?([0-9]|[a-z])")
+ (#set! injection.language "printf"))
 
 ((interpreted_string_literal
    (interpreted_string_literal_content) @injection.content)
