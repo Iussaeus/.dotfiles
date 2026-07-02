@@ -37,15 +37,19 @@ require("rose-pine").setup({
   },
 })
 vim.cmd("colorscheme rose-pine-moon")
-vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword" })
-vim.api.nvim_set_hl(0, "@type", { link = "@constant" })
-vim.api.nvim_set_hl(0, "@module", { link = "@function" })
-vim.api.nvim_set_hl(0, "@markup.heading", { link = "@function" })
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '▸ ', lead = '•', trail = '•', eol = '↵' }
-
-vim.api.nvim_set_hl(0, "Pmenu", {})
 vim.api.nvim_set_hl(0, "whitespace", { ctermfg = "darkgrey", fg = "#505050" })
 vim.api.nvim_set_hl(0, "NonText", { ctermfg = "darkgrey", fg = "#707070" })
 vim.api.nvim_set_hl(0, "@character.printf", { link = "@string.escape" })
+
+vim.api.nvim_set_hl(0, "Pmenu", {})
+
+vim.api.nvim_set_hl(0, "@type.builtin", { link = "Keyword" })
+vim.api.nvim_set_hl(0, "@constant.builtin", { link = "Keyword" })
+vim.api.nvim_set_hl(0, "@boolean", { link = "Keyword" })
+vim.api.nvim_set_hl(0, "@type", { link = "@constant" })
+vim.api.nvim_set_hl(0, "@module", { link = "@function" })
+vim.api.nvim_set_hl(0, "@markup.heading", { link = "@function" })
+vim.api.nvim_set_hl(0, "Number", { link = "@field" })
