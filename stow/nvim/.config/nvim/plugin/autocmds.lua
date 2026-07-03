@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 
 vim.api.nvim_create_autocmd('WinScrolled', {
   callback = function()
-    if vim.bo.filetype == 'nvim_undotree' then return end
+    if vim.bo.filetype == 'nvim-undotree' then return end
 
     local first = vim.fn.line('w0')
     local height = vim.api.nvim_win_get_height(0)
@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd('WinScrolled', {
 
 vim.api.nvim_create_autocmd('CursorMoved', {
   callback = function()
-    if vim.bo.filetype == 'nvim_undotree' then return end
+    if vim.bo.filetype == 'nvim-undotree' then return end
 
     local first = vim.fn.line('w0')
     local height = vim.api.nvim_win_get_height(0)
