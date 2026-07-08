@@ -50,21 +50,21 @@ for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4
 set $refresh_i3status pkill -SIGRTMIN+10 i3blocks
 exec systemctl start bluetooth.service
 bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.dotfiles/stow-wm/i3/.config/i3/scripts/volume_up.sh && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%                  && $refresh_i3status
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle                  && $refresh_i3status
 # bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls 
-bindsym XF86AudioPlay exec playerctl -p spotify -p Feishin play-pause && $refresh_i3status
-bindsym XF86AudioPause exec playerctl -p spotify -p Feishin pause && $refresh_i3status
-bindsym XF86AudioNext exec playerctl -p spotify -p Feishin next && $refresh_i3status
-bindsym XF86AudioPrev exec playerctl -p spotify -p Feishin previous && $refresh_i3status
+bindsym XF86AudioPlay  exec playerctl -p spotify play-pause ||  playerctl -p Feishin play-pause && $refresh_i3status
+bindsym XF86AudioPause exec playerctl -p spotify pause      ||  playerctl -p Feishin pause      && $refresh_i3status
+bindsym XF86AudioNext  exec playerctl -p spotify next       ||  playerctl -p Feishin next       && $refresh_i3status
+bindsym XF86AudioPrev  exec playerctl -p spotify previous   ||  playerctl -p Feishin previous   && $refresh_i3status
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 # bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --min-val=2 -q set 10%-
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q set 10%+
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl -q set 10%+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -230,28 +230,28 @@ exec --no-startup-id caffeine
 exec --no-startup-id megasync && megasync
 
 # Attaching apps to workpaces
-for_window [class="kitty"] move to workspace $ws1
-for_window [class="qimgv"] move to workspace $ws3
-for_window [class="krita"] move to workspace $ws3
-for_window [class="PureRef"] move to workspace $ws3
+for_window [class="kitty"]                        move to workspace $ws1
+for_window [class="qimgv"]                        move to workspace $ws3
+for_window [class="krita"]                        move to workspace $ws3
+for_window [class="PureRef"]                      move to workspace $ws3
 for_window [title="Line of Action — Zen Browser"] move to workspace $ws3,
-for_window [title="Artstation — Zen Browser"] move to workspace $ws3,
-for_window [class="Spotify"] move to workspace $ws4
-for_window [class="64Gram"] move to workspace $ws5
-for_window [class="discord"] move to workspace $ws5
-for_window [class="steam"] move to workspace $ws6
-for_window [class="Lutris"] move to workspace $ws6
-for_window [class="dota2"] move to workspace $ws6
-for_window [class="jetbrains-rider"] move to workspace $ws7
-for_window [class="jetbrains-clion"] move to workspace $ws7
-for_window [class="VSCodium"] move to workspace $ws7
-for_window [class="Godot"] move to workspace $ws7
-for_window [class="GDScript-test"] move to workspace $ws7
-for_window [class="zenity"] move to workspace $ws6
-for_window [title="Godot" class="kitty"] move to workspace $ws7
-for_window [class="unityhub"] move to workspace $ws7
-for_window [class="Unity"] move to workspace $ws7
-for_window [title="^tmux-sessionizer$"] move to workspace $ws7
+for_window [title="Artstation — Zen Browser"]     move to workspace $ws3,
+for_window [class="Spotify"]                      move to workspace $ws4
+for_window [class="64Gram"]                       move to workspace $ws5
+for_window [class="discord"]                      move to workspace $ws5
+for_window [class="steam"]                        move to workspace $ws6
+for_window [class="Lutris"]                       move to workspace $ws6
+for_window [class="dota2"]                        move to workspace $ws6
+for_window [class="jetbrains-rider"]              move to workspace $ws7
+for_window [class="jetbrains-clion"]              move to workspace $ws7
+for_window [class="VSCodium"]                     move to workspace $ws7
+for_window [class="Godot"]                        move to workspace $ws7
+for_window [class="GDScript-test"]                move to workspace $ws7
+for_window [class="zenity"]                       move to workspace $ws6
+for_window [title="Godot" class="kitty"]          move to workspace $ws7
+for_window [class="unityhub"]                     move to workspace $ws7
+for_window [class="Unity"]                        move to workspace $ws7
+for_window [title="^tmux-sessionizer$"]           move to workspace $ws7
 
 exec --no-startup-id xrandr --output HDMI-1-0 --auto --right-of eDP
 for_window [class="zen"] move to workspace $ws2
@@ -261,17 +261,17 @@ for_window [window_role="PictureInPicture"] floating enable
 for_window [window_role="PictureInPicture"] sticky enable
 
 # Some rules for floating windows that should stay floating
-for_window [window_role="About"] floating enable
-for_window [window_role="Organizer"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="page-info"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="toolbox"] floating enable
-for_window [window_role="webconsole"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
+for_window [window_role="About"]          floating enable
+for_window [window_role="Organizer"]      floating enable
+for_window [window_role="Preferences"]    floating enable
+for_window [window_role="bubble"]         floating enable
+for_window [window_role="page-info"]      floating enable
+for_window [window_role="pop-up"]         floating enable
+for_window [window_role="task_dialog"]    floating enable
+for_window [window_role="toolbox"]        floating enable
+for_window [window_role="webconsole"]     floating enable
+for_window [window_type="dialog"]         floating enable
+for_window [window_type="menu"]           floating enable
 
 for_window [class="SimpleScreenRecorder"] floating enable
-for_window [class="MEGAsync"] floating enable
+for_window [class="MEGAsync"]             floating enable
