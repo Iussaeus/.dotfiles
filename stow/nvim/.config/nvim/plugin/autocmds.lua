@@ -27,41 +27,41 @@ vim.api.nvim_create_autocmd('InsertEnter', {
   end
 })
 
-vim.api.nvim_create_autocmd('WinScrolled', {
-  callback = function()
-    if vim.bo.filetype == 'nvim-undotree' then return end
+-- vim.api.nvim_create_autocmd('WinScrolled', {
+--   callback = function()
+--     if vim.bo.filetype == 'nvim-undotree' then return end
+--
+--     local first = vim.fn.line('w0')
+--     local height = vim.api.nvim_win_get_height(0)
+--     local middle_row = first + math.floor((height) / 2)
+--     local cursor = vim.api.nvim_win_get_cursor(0)
+--
+--     if cursor[1] == middle_row or (cursor[1] > 0 and cursor[1] <= height / 2) then
+--       return
+--     end
+--
+--     pcall(vim.api.nvim_win_set_cursor, 0, { middle_row, cursor[2] })
+--   end,
+-- })
 
-    local first = vim.fn.line('w0')
-    local height = vim.api.nvim_win_get_height(0)
-    local middle_row = first + math.floor((height) / 2)
-    local cursor = vim.api.nvim_win_get_cursor(0)
-
-    if cursor[1] == middle_row or (cursor[1] > 0 and cursor[1] <= height / 2) then
-      return
-    end
-
-    pcall(vim.api.nvim_win_set_cursor, 0, { middle_row, cursor[2] })
-  end,
-})
-
-vim.api.nvim_create_autocmd('CursorMoved', {
-  callback = function()
-    if vim.bo.filetype == 'nvim-undotree' then return end
-
-    local first = vim.fn.line('w0')
-    local height = vim.api.nvim_win_get_height(0)
-    local middle_row = first + math.floor((height) / 2)
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    local topline = math.max(1, cursor[1] - math.floor(height / 2))
-
-    if cursor[1] == middle_row or (cursor[1] > 0 and cursor[1] < height / 2) then
-      return
-    end
-
-    -- todo: handle errors
-    pcall(vim.fn.winrestview, { topline = topline, cursor = { cursor[1], cursor[2] } })
-  end,
-})
+-- vim.api.nvim_create_autocmd('CursorMoved', {
+--   callback = function()
+--     if vim.bo.filetype == 'nvim-undotree' then return end
+--
+--     local first = vim.fn.line('w0')
+--     local height = vim.api.nvim_win_get_height(0)
+--     local middle_row = first + math.floor((height) / 2)
+--     local cursor = vim.api.nvim_win_get_cursor(0)
+--     local topline = math.max(1, cursor[1] - math.floor(height / 2))
+--
+--     if cursor[1] == middle_row or (cursor[1] > 0 and cursor[1] < height / 2) then
+--       return
+--     end
+--
+--     -- todo: handle errors
+--     pcall(vim.fn.winrestview, { topline = topline, cursor = { cursor[1], cursor[2] } })
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
