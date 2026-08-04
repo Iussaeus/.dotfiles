@@ -56,3 +56,8 @@ vim.keymap.set({ 'n', 'v' }, '<leader>gf', '<cmd>Telescope git_files<cr>')
 vim.keymap.set({ 'n', 'v' }, '<leader>th', '<cmd>Telescope help_tags<cr>')
 vim.keymap.set({ 'n', 'v' }, '<leader>tc', '<cmd>Telescope commands<cr>')
 vim.keymap.set({ 'n', 'v' }, '<leader>tb', '<cmd>Telescope builtin<cr>')
+
+
+vim.pack.add {"https://github.com/pwntester/octo.nvim" }
+
+require 'octo'.setup()

@@ -37,9 +37,6 @@ exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY
 # END THE TEARING
 exec --no-startup-id picom
 
-# START THE MUSIC
-exec --no-startup-id easyeffects --service-mode
-
 # GET DEM BORDERS OUT OF HERE
 # Thanks Childz
 for_window [class="^.*"] border pixel 1
