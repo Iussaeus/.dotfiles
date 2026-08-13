@@ -6,5 +6,5 @@ col=$(echo $row | awk '{printf $5}')
 vol=$(echo $col | tr -d %)
 
 if [[ (( $vol -le 90 )) ]]; then
- pactl set-sink-volume @DEFAULT_SINK@ +10%
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
 fi
