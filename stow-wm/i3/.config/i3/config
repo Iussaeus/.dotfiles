@@ -169,7 +169,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec i3-msg exit
 
 # screenshots
-bindsym $mod+s exec "flameshot gui"
+bindsym $mod+s exec "maim -s | xclip -selection clipboard -t image/png"
  
 bindsym $mod+Ctrl+k exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/, exec --no-startup-id PureRef, exec --no-startup-id krita --nosplash
 
