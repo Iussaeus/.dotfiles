@@ -7,4 +7,6 @@ vol=$(echo $col | tr -d %)
 
 if [[ (( $vol -le 90 )) ]]; then
 	pactl set-sink-volume @DEFAULT_SINK@ +5%
+else
+	pactl set-sink-volume @DEFAULT_SINK@ 100%
 fi
