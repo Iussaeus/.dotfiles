@@ -30,6 +30,7 @@ export PATH=/var/lib/flatpak/exports/bin:$PATH
 export XDG_DATA_DIR=/var/lib/flatpak/exports/share:$XDG_DATA_DIR
 export XDG_DATA_DIR=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 export TMUX_SESSIONIZER_PROJECTS_DIR="$HOME/code"
+export npm_config_prefix="$HOME/.local"
 
 alias zd=z
 alias ls='ls --color=auto'
