@@ -3,31 +3,38 @@ vim.g.VM_skip_empty_lines = 1
 vim.g.VM_silent_exit = 1
 vim.g.VM_default_mappings = 0
 vim.g.VM_maps = {
-  ["Find Under"] = "",
+  ["Find Under"]         = "",
   ["Find Subword Under"] = "",
-  ["Exit"] = "q",
-  ["Switch Mode"] = "v",
-  ["Toggle Multiline"] = "V",
-  ["Run Normal"] = "gn",
-  ["Run Visual"] = "gv",
-  ["Run Macro"] = "gm",
-  ["Seek Next"] = "n",
-  ["Find Next"] = "<c-n>",
-  ["Find Prev"] = "<c-p>",
-  ["Add Cursor Down"] = "<C-Down>",
-  ["Add Cursor Up"] = "<C-Up>",
-  ["Align"] = "<m-a>",
-  ["Align Regex"] = "<c-r>",
-  ["Surround"] = "S",
+  ["Align Regex"]        = "",
+  ["Exit"]               = "q",
+  ["Switch Mode"]        = "v",
+  ["Toggle Multiline"]   = "V",
+  ["Run Normal"]         = "gn",
+  ["Run Visual"]         = "gv",
+  ["Run Macro"]          = "gm",
+  ["Seek Next"]          = "n",
+  ["Find Next"]          = "<c-n>",
+  ["Find Prev"]          = "<c-p>",
+  ["Add Cursor Down"]    = "<C-Down>",
+  ["Add Cursor Up"]      = "<C-Up>",
+  ["Align"]              = "<m-a>",
+  ["Surround"]           = "S",
 }
 
 vim.pack.add({ 'https://github.com/mg979/vim-visual-multi' })
 vim.cmd('VMTheme codedark')
 
 vim.keymap.set('n', "<leader>sa", "<Plug>(VM-Select-All)")
-vim.keymap.set('n', "<c-c>", "<Plug>(VM-Case-Conversion-Menu)")
 vim.keymap.set('v', "/", "<Plug>(VM-Visual-Regex)")
 vim.keymap.set({ 'n', 'v' }, "<c-f>", "<Plug>(VM-Start-Regex-Search)")
+
+vim.keymap.set('n', "<c-c>", function()
+  if not vim.b.visual_multi then
+    return '<c-c>'
+  end
+
+  return "<Plug>(VM-Case-Conversion-Menu)"
+end, { expr = true, silent = true })
 
 vim.keymap.set('n', "<c-t>", function()
   if not vim.b.visual_multi then
@@ -35,7 +42,7 @@ vim.keymap.set('n', "<c-t>", function()
   end
 
   return "<Plug>(VM-Transpose)"
-end, { expr = true})
+end, { expr = true })
 vim.keymap.set('n', '<esc>', function()
   if not vim.b.visual_multi then
     return '<esc>'

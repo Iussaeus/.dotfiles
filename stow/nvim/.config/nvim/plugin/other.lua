@@ -1,8 +1,10 @@
+-- random dependencies
 vim.pack.add { 'https://github.com/nvim-treesitter/nvim-treesitter' }
 vim.pack.add { 'https://github.com/kylechui/nvim-surround' }
 vim.pack.add { 'https://github.com/nvim-treesitter/nvim-treesitter-context' }
 vim.pack.add { 'https://github.com/MunifTanjim/nui.nvim' }
 
+-- firenvim
 vim.pack.add { 'https://github.com/glacambre/firenvim' }
 vim.cmd [[ :call firenvim#install(0) ]]
 if vim.g.started_by_firenvim then
@@ -38,5 +40,10 @@ if vim.g.started_by_firenvim then
   vim.o.guifont = 'CaskaydiaCove Nerd Font Mono:h9'
 end
 
+-- undo
 vim.cmd.packadd 'nvim.undotree'
 vim.keymap.set({ 'n', 'x' }, '<m-u>', vim.cmd.Undotree)
+
+-- align
+vim.pack.add({ 'https://github.com/nvim-mini/mini.align' })
+require 'mini.align'.setup { mappings = { start = nil, start_with_preview = 'ga', }, }
