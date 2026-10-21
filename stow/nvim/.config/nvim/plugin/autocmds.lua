@@ -12,35 +12,31 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    if vim.treesitter.get_parser() then vim.treesitter.start() end
-  end
-})
-
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  callback = function()
     if vim.fs.ext(vim.api.nvim_buf_get_name(0)) == 'log' then vim.cmd [[set filetype=log]] end
   end
 })
 
--- disable autocomplete in telescope prompt
-vim.api.nvim_create_autocmd('InsertEnter', {
+-- start treesitter if parser is available
+vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    if vim.bo.filetype == 'TelescopePrompt' then vim.bo.autocomplete = false end
+    local parser = vim.treesitter.get_parser()
+    if parser then vim.treesitter.highlighter.new(parser) end
   end
 })
 
 -- add quit keymap to selected filetypes
 vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    if vim.tbl_contains({ 'help', 'man', 'fugitive', 'qf' }, vim.bo.filetype) then
-      vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(0, true) end, { buffer = 0, nowait = true })
-    end
   end
 })
 
 -- add window rules selected filetypes
 vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
+    if vim.tbl_contains({ 'help', 'man', 'fugitive', 'qf' }, vim.bo.filetype) then
+      vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(0, true) end, { buffer = 0, nowait = true })
+    end
+
     if vim.tbl_contains({ 'help', 'man', 'fugitive' }, vim.bo.filetype) then
       vim.api.nvim_win_set_config(0, {
         width = 85,

@@ -24,5 +24,3 @@ vim.keymap.set('n', '<leader>qfo', '<cmd>:copen<cr>')
 vim.keymap.set('n', '<m-up>', '<cmd>:lnext<cr>')
 vim.keymap.set('n', '<m-down>', '<cmd>:lprevious<cr>')
 vim.keymap.set('n', '<leader>lco', '<cmd>:lopen<cr>')
-
-vim.keymap.set({ 'n', 'v' }, '_', '^')

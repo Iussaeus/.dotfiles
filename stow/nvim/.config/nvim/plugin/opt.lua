@@ -28,11 +28,9 @@ vim.o.incsearch = true
 vim.o.termguicolors = true
 
 vim.o.sidescrolloff = 25
--- vim.o.scrolloff = 999
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
--- vim.o.autocomplete = true
 vim.o.pumheight = 10
 vim.o.pumborder = 'rounded'
 vim.opt.complete:append("b")

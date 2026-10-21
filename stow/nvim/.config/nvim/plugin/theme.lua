@@ -1,4 +1,3 @@
--- note: rose-pine colorscheme
 vim.pack.add({ { src = "https://github.com/rose-pine/neovim", name = "rose-pine", } })
 require("rose-pine").setup({
   variant = "moon",      -- auto, main, moon, or dawn

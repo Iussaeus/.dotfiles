@@ -5,7 +5,7 @@ require 'todo-comments'.setup({
     multiline = true,                       -- enable multine todo comments
     multiline_pattern = "^.",               -- lua pattern to match the next multiline from the start of the matched keyword
     multiline_context = 10,                 -- extra lines that will be re-evaluated when changing a line
-    after = "fg",                             -- "fg" or "bg" or empty
+    after = "fg",                           -- "fg" or "bg" or empty
     pattern = [[\s((KEYWORDS)(\(.+\))?):]], -- pattern or table of patterns, used for highlighting (vim regex)
     comments_only = true,                   -- uses treesitter to match keywords in comments only
   },
@@ -17,6 +17,3 @@ require 'todo-comments'.setup({
     FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'fix', 'fixme', 'bug', 'fixit', 'Fix', 'Issue', 'Fixme', 'Bug', 'Fixit', 'Issue' } },
   }
 })
-
-vim.keymap.set('n', '<leader>tdf', '<cmd>TodoTelescope<cr>')
-vim.keymap.set('n', '<leader>tdl', '<cmd>TodoLocList<cr>')

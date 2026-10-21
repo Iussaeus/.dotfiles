@@ -89,7 +89,3 @@ vim.keymap.set("n", "<leader>cp", require 'compile'.jump_to_prev)
 vim.keymap.set("n", "<leader>rcc", require 'compile'.recompile)
 vim.keymap.set('n', '<leader>co', require 'compile'.open_job_buf)
 vim.keymap.set('n', '<a-c>', require 'compile'.open_compile_buf)
-
--- packadd('Iussaeus/cursors.nvim')
--- vim.keymap.set("n", "<leader>nc", require 'cursors'.find_under_cursor)
--- vim.keymap.set("n", "<leader>cs", require 'cursors'.stop)
