@@ -1,8 +1,6 @@
 -- random dependencies
 vim.pack.add { 'https://github.com/nvim-treesitter/nvim-treesitter' }
 vim.pack.add { 'https://github.com/kylechui/nvim-surround' }
-vim.pack.add { 'https://github.com/nvim-treesitter/nvim-treesitter-context' }
-vim.pack.add { 'https://github.com/MunifTanjim/nui.nvim' }
 vim.pack.add({ "https://github.com/tpope/vim-fugitive" })
 
 -- undo
