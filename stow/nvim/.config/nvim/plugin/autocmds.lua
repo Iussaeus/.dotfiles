@@ -33,11 +33,11 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 -- add window rules selected filetypes
 vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function()
-    if vim.tbl_contains({ 'help', 'man', 'fugitive', 'qf' }, vim.bo.filetype) then
+    if vim.tbl_contains({ 'help', 'man', 'fugitive', 'qf', 'git' }, vim.bo.filetype) then
       vim.keymap.set('n', 'q', function() vim.api.nvim_win_close(0, true) end, { buffer = 0, nowait = true })
     end
 
-    if vim.tbl_contains({ 'help', 'man', 'fugitive' }, vim.bo.filetype) then
+    if vim.tbl_contains({ 'help', 'man', 'fugitive', 'git' }, vim.bo.filetype) then
       vim.api.nvim_win_set_config(0, {
         width = 85,
         split = 'right',

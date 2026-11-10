@@ -41,6 +41,7 @@ vim.opt.complete:append("o")
 vim.opt.complete:append("")
 vim.opt.complete:append("i")
 vim.opt.completeopt = { "menuone", "fuzzy", "noselect" }
+vim.opt.hlsearch = false
 
 vim.o.updatetime = 100
 vim.o.autoread = true

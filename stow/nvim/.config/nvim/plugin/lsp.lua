@@ -20,6 +20,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.lsp.config('omnisharp', { settings = { cmd = { "omnisharp" } } })
+vim.lsp.config('gopls', {
+  settings = {
+    gopls = {
+      buildFlags = { "-tags=mytag,integration" },
+    },
+  },
+})
 vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
