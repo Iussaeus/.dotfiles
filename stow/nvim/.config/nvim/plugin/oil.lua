@@ -22,4 +22,4 @@ require 'oil'.setup {
   },
 }
 
-vim.keymap.set('n', '<leader>pd', vim.cmd.Oil)
+vim.keymap.set('n', '-', vim.cmd.Oil)

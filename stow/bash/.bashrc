@@ -1,4 +1,3 @@
-set -o vi
 bind -s 'set completion-ignore-case on'
 
 command -v starship > /dev/null && eval "$(starship init bash)"

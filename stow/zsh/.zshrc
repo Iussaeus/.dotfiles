@@ -31,6 +31,11 @@ export XDG_DATA_DIR=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIR
 export TMUX_SESSIONIZER_PROJECTS_DIR="$HOME/code"
 export npm_config_prefix="$HOME/.local"
 
+# Better vi-mode
+if [ -e /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+fi
+
 alias zd=z
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'

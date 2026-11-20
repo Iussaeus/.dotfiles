@@ -8,13 +8,11 @@ declare -A sessions
 print-help() {
 	cat <<END
 Usage: ${name} [OPTIONS]... <session>
-Manage tmux sessions in TMUX_SESSIONIZER_PROJECTS_DIR enviroment variable.
+Manage tmux sessions in \$TMUX_SESSIONIZER_PROJECTS_DIR($TMUX_SESSIONIZER_PROJECTS_DIR).
 
 Options:
-    --debug                 print debug information after the execution
     -h, --help              print this help message
-    -n, --session <session> open a new or existing session
-    --show-session-info     options: history
+    -n, --session <session> open a session, creates a new one if needed
     -k, --kill-and-switch   kills current or selected session and switch to other one
     --no-attach             don't attach to the new sesssion
 END
@@ -260,11 +258,6 @@ if [ ! -d "$search_dir" ]; then
 fi
 
 find-sessions
-
-if [ "$show" -eq 1 ]; then
-	show-session-info
-	exit $?
-fi
 
 if [ "$kill" -eq 1 ]; then
 	kill-session
