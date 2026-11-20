@@ -1,5 +1,5 @@
 [MUSIC]
-command=[ "$(playerctl -p spotify,Feishin status)" == "Playing" ] && playerctl -p spotify,Feishin metadata --format "{{artist}} - {{title}} {{duration(position)}}"
+command=./player.sh
 interval=1
 
 [DISK]
@@ -7,7 +7,7 @@ command=df -h / | awk '/\//{ printf(" /: %4s \n", $4, $2) }'
 interval=2
 
 [BATTERY]
-command=~/.config/i3blocks/battery/battery_info.sh
+command=./battery_info.sh
 interval=3
 
 [CPU]

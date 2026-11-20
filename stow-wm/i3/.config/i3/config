@@ -40,22 +40,24 @@ exec --no-startup-id picom
 # GET DEM BORDERS OUT OF HERE
 # Thanks Childz
 for_window [class="^.*"] border pixel 1
-                          # class                 border  backgr. text    indicator child_border
+                         # class                 border  backgr. text    indicator child_border
 for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status pkill -SIGRTMIN+10 i3blocks
 exec systemctl start bluetooth.service
 bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.dotfiles/stow-wm/i3/.config/i3/scripts/volume_up.sh && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%                  && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%                   && $refresh_i3status
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle                  && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle                  && $refresh_i3status
+
+set $priority_playerctl $HOME/.config/i3/scripts/priority-playerctl.sh
 
 # Media player controls 
-bindsym XF86AudioPlay  exec playerctl -p spotify play-pause ||  playerctl -p Feishin play-pause && $refresh_i3status
-bindsym XF86AudioPause exec playerctl -p spotify pause      ||  playerctl -p Feishin pause      && $refresh_i3status
-bindsym XF86AudioNext  exec playerctl -p spotify next       ||  playerctl -p Feishin next       && $refresh_i3status
-bindsym XF86AudioPrev  exec playerctl -p spotify previous   ||  playerctl -p Feishin previous   && $refresh_i3status
+bindsym XF86AudioPlay  exec $priority_playerctl play-pause
+bindsym XF86AudioPause exec $priority_playerctl pause
+bindsym XF86AudioNext  exec $priority_playerctl next
+bindsym XF86AudioPrev  exec $priority_playerctl previous
 
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
@@ -213,17 +215,17 @@ exec_always setxkbmap -layout ro,ru;setxkbmap -option grp:alt_shift_toggle
 exec --no-startup-id i3-msg 'workspace $ws7; layout tabbed; workspace $ws1'
 
 # Apps that open on system startup
-exec --no-startup-id redshift
 exec --no-startup-id $terminal
+exec --no-startup-id playerctld daemon
 exec --no-startup-id kanata -c $HOME/.config/kanata/config.kbd
 exec --no-startup-id zen-browser 
-exec --no-startup-id spotify
 exec --no-startup-id 64gram-desktop
 exec --no-startup-id qimgv $HOME/MEGA/NSFW-REF/
 exec --no-startup-id PureRef
 exec --no-startup-id krita --nosplash
 exec --no-startup-id dunst
 exec --no-startup-id caffeine
+exec --no-startup-id tauon
 exec --no-startup-id megasync && megasync
 
 # Attaching apps to workpaces
